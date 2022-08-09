@@ -1,3 +1,9 @@
+quick-system-info-gui (22.08.02mx21) mx; urgency=medium
+
+  * hide code tags 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 08 Aug 2022 23:36:29 -0400
+
 quick-system-info-gui (22.08.01mx21) mx; urgency=medium
 
   * initial build 
