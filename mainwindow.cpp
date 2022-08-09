@@ -122,12 +122,16 @@ void MainWindow::on_ButtonCopy_clicked()
 {
     QClipboard *clipboard = QApplication::clipboard();
     QString text2 = ui->textBrowser->toPlainText();
+    text2.append("[/code]");
+    text2.prepend("[code]");
     clipboard->setText(text2);
 }
 
 void MainWindow::systeminfo()
 {
     QString text = runCmd("/usr/bin/quick-system-info-mx -g").output;
+    text.remove("[code]");
+    text.remove("[/code]");
     ui->textBrowser->setText(text);
 
 }
