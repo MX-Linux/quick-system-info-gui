@@ -34,6 +34,7 @@
 #include "ui_mainwindow.h"
 #include "version.h"
 #include "QClipboard"
+#include "about.h"
 
 MainWindow::MainWindow(const QCommandLineParser& arg_parser, QWidget* parent)
     : QDialog(parent)
@@ -137,3 +138,10 @@ void MainWindow::systeminfo()
 }
 
 
+
+void MainWindow::on_ButtonHelp_clicked()
+{
+    QString url = QStringLiteral("file:///usr/share/doc/quick-system-info-gui/quick-system-info-gui.html");
+
+    displayDoc(url, tr("%1 Help").arg(tr("Quick System Info (gui)")));
+}

@@ -66,6 +66,8 @@ private slots:
     void on_buttonAbout_clicked();
     void systeminfo();
 
+    void on_ButtonHelp_clicked();
+
 private:
     Ui::MainWindow *ui;
     QSettings user_settings;
