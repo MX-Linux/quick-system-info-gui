@@ -28,6 +28,7 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QTextEdit>
+#include <QScreen>
 
 #include "flatbutton.h"
 #include "mainwindow.h"
@@ -59,10 +60,9 @@ void MainWindow::setup()
     this->setWindowTitle(tr("Quick System Info"));
     this->setWindowIcon(QIcon::fromTheme("mx-qsi"));
     systeminfo();
-    this->adjustSize();
+    ui->textBrowser->setWordWrapMode(QTextOption::NoWrap);
+    resize(QGuiApplication::primaryScreen()->availableGeometry().size() * 0.7);
 }
-
-
 
 // Util function for getting bash command output and error code
 Result MainWindow::runCmd(QString cmd)
@@ -124,14 +124,14 @@ void MainWindow::on_ButtonCopy_clicked()
     QClipboard *clipboard = QApplication::clipboard();
     QString text2 = ui->textBrowser->toPlainText();
     text2.append("[/code]");
-    text2.prepend("[code]");
+    text2.prepend("[code]\n");
     clipboard->setText(text2);
 }
 
 void MainWindow::systeminfo()
 {
     QString text = runCmd("/usr/bin/quick-system-info-mx -g").output;
-    text.remove("[code]");
+    text.remove("[code]\n");
     text.remove("[/code]");
     ui->textBrowser->setText(text);
 
