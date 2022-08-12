@@ -61,7 +61,7 @@ void MainWindow::setup()
     this->setWindowIcon(QIcon::fromTheme("mx-qsi"));
     systeminfo();
     ui->textBrowser->setWordWrapMode(QTextOption::NoWrap);
-    resize(QGuiApplication::primaryScreen()->availableGeometry().size() * 0.7);
+    resize(QGuiApplication::primaryScreen()->availableGeometry().size() * 0.6);
 }
 
 // Util function for getting bash command output and error code
