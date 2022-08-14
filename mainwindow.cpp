@@ -142,9 +142,11 @@ void MainWindow::on_ButtonCopy_clicked()
 
 void MainWindow::systeminfo()
 {
-    QString text = runCmd("/usr/bin/quick-system-info-mx -g").output;
+    QString text = runCmd(QStringLiteral("/usr/bin/quick-system-info-mx -g")).output;
     text.remove("[code]\n");
     text.remove("[/code]");
+    text.replace("http: /","http:/");
+    text.replace("https: /","https:/");
     ui->textBrowser->setText(text);
 
 }
