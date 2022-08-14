@@ -72,6 +72,8 @@ void MainWindow::setup()
     copyreport2->setShortcut((Qt::Key_C | Qt::ALT));
     connect(copyreport2, SIGNAL(triggered()), this, SLOT(on_ButtonCopy_clicked()));
     this->addAction(copyreport2);
+
+    ui->ButtonCopy->setDefault(true);
 }
 
 // Util function for getting bash command output and error code
