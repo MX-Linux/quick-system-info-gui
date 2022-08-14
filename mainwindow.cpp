@@ -29,6 +29,7 @@
 #include <QFileInfo>
 #include <QTextEdit>
 #include <QScreen>
+#include <QAction>
 
 #include "flatbutton.h"
 #include "mainwindow.h"
@@ -62,6 +63,15 @@ void MainWindow::setup()
     systeminfo();
     ui->textBrowser->setWordWrapMode(QTextOption::NoWrap);
     resize(QGuiApplication::primaryScreen()->availableGeometry().size() * 0.6);
+    QAction *copyreport = new QAction(this);
+    copyreport->setShortcut(Qt::Key_C | Qt::CTRL);
+    connect(copyreport, SIGNAL(triggered()), this, SLOT(on_ButtonCopy_clicked()));
+    this->addAction(copyreport);
+
+    QAction *copyreport2 = new QAction(this);
+    copyreport2->setShortcut((Qt::Key_C | Qt::ALT));
+    connect(copyreport2, SIGNAL(triggered()), this, SLOT(on_ButtonCopy_clicked()));
+    this->addAction(copyreport2);
 }
 
 // Util function for getting bash command output and error code
