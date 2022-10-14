@@ -30,6 +30,7 @@
 #include <QTextEdit>
 #include <QScreen>
 #include <QAction>
+#include <QFileDialog>
 
 #include "flatbutton.h"
 #include "mainwindow.h"
@@ -129,6 +130,26 @@ void MainWindow::on_buttonAbout_clicked()
         changelog->exec();
     }
     this->show();
+}
+
+void MainWindow::on_pushSave_clicked()
+{
+    QFileDialog dialog(this, tr("Save System Information"));
+    dialog.setDefaultSuffix("txt");
+    dialog.setNameFilters({"*.txt"});
+    dialog.selectFile("sysinfo.txt");
+    dialog.setAcceptMode(QFileDialog::AcceptSave);
+    if(dialog.exec()) {
+        QFile file(dialog.selectedFiles().at(0));
+        bool ok = false;
+        if (file.open(QFile::Truncate|QFile::WriteOnly)) {
+            const QByteArray &text = ui->textBrowser->toPlainText().toUtf8();
+            ok = (file.write(text) == text.size());
+            file.close();
+        }
+        if (ok) QMessageBox::information(this, windowTitle(), tr("System information saved."));
+        else QMessageBox::critical(this, windowTitle(), tr("Could not save system information."));
+    }
 }
 
 void MainWindow::on_ButtonCopy_clicked()

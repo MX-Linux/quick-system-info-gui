@@ -62,6 +62,7 @@ public:
     void setup();
 
 private slots:
+    void on_pushSave_clicked();
     void on_ButtonCopy_clicked();
     void on_buttonAbout_clicked();
     void systeminfo();
