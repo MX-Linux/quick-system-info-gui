@@ -32,7 +32,6 @@
 #include <QAction>
 #include <QFileDialog>
 
-#include "flatbutton.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "version.h"
