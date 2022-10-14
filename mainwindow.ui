@@ -150,6 +150,9 @@
             <property name="contextMenuPolicy">
              <enum>Qt::DefaultContextMenu</enum>
             </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
          </layout>
