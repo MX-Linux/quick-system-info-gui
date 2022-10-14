@@ -62,7 +62,7 @@ void MainWindow::setup()
     this->setWindowTitle(tr("Quick System Info"));
     this->setWindowIcon(QIcon::fromTheme("mx-qsi"));
     systeminfo();
-    ui->textBrowser->setWordWrapMode(QTextOption::NoWrap);
+    ui->textSysInfo->setWordWrapMode(QTextOption::NoWrap);
     resize(QGuiApplication::primaryScreen()->availableGeometry().size() * 0.6);
     QAction *copyreport = new QAction(this);
     copyreport->setShortcut(Qt::Key_C | Qt::CTRL);
@@ -143,7 +143,7 @@ void MainWindow::on_pushSave_clicked()
         QFile file(dialog.selectedFiles().at(0));
         bool ok = false;
         if (file.open(QFile::Truncate|QFile::WriteOnly)) {
-            const QByteArray &text = ui->textBrowser->toPlainText().toUtf8();
+            const QByteArray &text = ui->textSysInfo->toPlainText().toUtf8();
             ok = (file.write(text) == text.size());
             file.close();
         }
@@ -155,21 +155,20 @@ void MainWindow::on_pushSave_clicked()
 void MainWindow::on_ButtonCopy_clicked()
 {
     QClipboard *clipboard = QApplication::clipboard();
-    QString text2 = ui->textBrowser->toPlainText();
+    QString text2 = ui->textSysInfo->toPlainText();
     text2.append("[/code]");
-    text2.prepend("[code]\n");
+    text2.prepend("[code]");
     clipboard->setText(text2);
 }
 
 void MainWindow::systeminfo()
 {
     QString text = runCmd(QStringLiteral("/usr/bin/quick-system-info-mx -g")).output;
-    text.remove("[code]\n");
+    text.remove("[code]");
     text.remove("[/code]");
     text.replace("http: /","http:/");
     text.replace("https: /","https:/");
-    ui->textBrowser->setText(text);
-
+    ui->textSysInfo->setPlainText(text.trimmed());
 }
 
 
