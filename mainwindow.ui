@@ -90,6 +90,9 @@
          <layout class="QGridLayout" name="gridLayout">
           <item row="1" column="1">
            <widget class="QPushButton" name="ButtonCopy">
+            <property name="toolTip">
+             <string>Copy the system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</string>
+            </property>
             <property name="text">
              <string>&amp;Copy for forum</string>
             </property>
@@ -107,6 +110,9 @@
           </item>
           <item row="1" column="0">
            <widget class="QPushButton" name="pushSave">
+            <property name="toolTip">
+             <string>Save the system information to a text file.</string>
+            </property>
             <property name="text">
              <string>&amp;Save</string>
             </property>
