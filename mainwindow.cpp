@@ -25,6 +25,7 @@
  **********************************************************************/
 
 #include <QDebug>
+#include <QTimer>
 #include <QDir>
 #include <QFileInfo>
 #include <QTextEdit>
@@ -45,8 +46,14 @@ MainWindow::MainWindow(const QCommandLineParser& arg_parser, QWidget* parent)
     qDebug().noquote() << QCoreApplication::applicationName() << "version:" << VERSION;
     ui->setupUi(this);
     setWindowFlags(Qt::Window); // for the close, min and max buttons
-    setup();
-
+    this->setWindowTitle(tr("Quick System Info"));
+    this->setWindowIcon(QIcon::fromTheme("mx-qsi"));
+    ui->widget->setEnabled(false);
+    ui->textSysInfo->setWordWrapMode(QTextOption::NoWrap);
+    ui->textSysInfo->setPlainText(tr("Loading..."));
+    resize(QGuiApplication::primaryScreen()->availableGeometry().size() * 0.6);
+    // This fires the lengthy setup routine after the window is displayed.
+    QTimer::singleShot(0, this, &MainWindow::setup);
 }
 
 MainWindow::~MainWindow()
@@ -58,22 +65,14 @@ MainWindow::~MainWindow()
 void MainWindow::setup()
 {
     version = getVersion("quick-system-info-gui");
-    this->setWindowTitle(tr("Quick System Info"));
-    this->setWindowIcon(QIcon::fromTheme("mx-qsi"));
     systeminfo();
-    ui->textSysInfo->setWordWrapMode(QTextOption::NoWrap);
-    resize(QGuiApplication::primaryScreen()->availableGeometry().size() * 0.6);
     QAction *copyreport = new QAction(this);
-    copyreport->setShortcut(Qt::Key_C | Qt::CTRL);
-    connect(copyreport, SIGNAL(triggered()), this, SLOT(on_ButtonCopy_clicked()));
+    copyreport->setShortcut(Qt::Key_C | Qt::ALT);
+    connect(copyreport, &QAction::triggered, this, &MainWindow::on_ButtonCopy_clicked);
     this->addAction(copyreport);
 
-    QAction *copyreport2 = new QAction(this);
-    copyreport2->setShortcut((Qt::Key_C | Qt::ALT));
-    connect(copyreport2, SIGNAL(triggered()), this, SLOT(on_ButtonCopy_clicked()));
-    this->addAction(copyreport2);
-
     ui->ButtonCopy->setDefault(true);
+    ui->widget->setEnabled(true);
 }
 
 // Util function for getting bash command output and error code
@@ -154,10 +153,7 @@ void MainWindow::on_pushSave_clicked()
 void MainWindow::on_ButtonCopy_clicked()
 {
     QClipboard *clipboard = QApplication::clipboard();
-    QString text2 = ui->textSysInfo->toPlainText();
-    text2.append("[/code]");
-    text2.prepend("[code]");
-    clipboard->setText(text2);
+    clipboard->setText("[CODE]" + ui->textSysInfo->toPlainText() + "[/CODE]");
 }
 
 void MainWindow::systeminfo()
