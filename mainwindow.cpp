@@ -45,6 +45,7 @@ MainWindow::MainWindow(const QCommandLineParser& arg_parser, QWidget* parent)
 {
     qDebug().noquote() << QCoreApplication::applicationName() << "version:" << VERSION;
     ui->setupUi(this);
+    QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
     setWindowFlags(Qt::Window); // for the close, min and max buttons
     this->setWindowTitle(tr("Quick System Info"));
     this->setWindowIcon(QIcon::fromTheme("mx-qsi"));
@@ -73,6 +74,7 @@ void MainWindow::setup()
 
     ui->ButtonCopy->setDefault(true);
     ui->widget->setEnabled(true);
+    QApplication::setOverrideCursor(QCursor());
 }
 
 // Util function for getting bash command output and error code
