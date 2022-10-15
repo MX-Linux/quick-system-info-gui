@@ -52,6 +52,7 @@ TRANSLATIONS += translations/quick-system-info-gui_af.ts \
                 translations/quick-system-info-gui_de.ts \
                 translations/quick-system-info-gui_el.ts \
                 translations/quick-system-info-gui_en_GB.ts \
+                translations/quick-system-info-gui_en.ts \
                 translations/quick-system-info-gui_eo.ts \
                 translations/quick-system-info-gui_es.ts \
                 translations/quick-system-info-gui_es_ES.ts \
