@@ -39,13 +39,9 @@ int main(int argc, char *argv[])
     app.setOrganizationName("MX-Linux");
 
     QCommandLineParser parser;
-    parser.setApplicationDescription(QObject::tr("This tool displays a welcome screen with two tabs."));
+    parser.setApplicationDescription(QObject::tr("This tool displays a the quick system info report in a gui."));
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.addOption({{"a", "about"}, QObject::tr("Start with About tab selected. "
-                      "The About tab provides basic information about the current "
-                      "MX Linux version, the user's hardware, and access to a full system report.")});
-    parser.addOption({{"t", "test"}, QObject::tr("Run a test mode.")});
     parser.process(app);
 
     QTranslator qtTran;
