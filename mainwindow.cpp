@@ -25,13 +25,14 @@
  **********************************************************************/
 
 #include <QDebug>
+#include <QTimer>
 #include <QDir>
 #include <QFileInfo>
 #include <QTextEdit>
 #include <QScreen>
 #include <QAction>
+#include <QFileDialog>
 
-#include "flatbutton.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "version.h"
@@ -45,8 +46,14 @@ MainWindow::MainWindow(const QCommandLineParser& arg_parser, QWidget* parent)
     qDebug().noquote() << QCoreApplication::applicationName() << "version:" << VERSION;
     ui->setupUi(this);
     setWindowFlags(Qt::Window); // for the close, min and max buttons
-    setup();
-
+    this->setWindowTitle(tr("Quick System Info"));
+    this->setWindowIcon(QIcon::fromTheme("mx-qsi"));
+    ui->widget->setEnabled(false);
+    ui->textSysInfo->setWordWrapMode(QTextOption::NoWrap);
+    ui->textSysInfo->setPlainText(tr("Loading..."));
+    resize(QGuiApplication::primaryScreen()->availableGeometry().size() * 0.6);
+    // This fires the lengthy setup routine after the window is displayed.
+    QTimer::singleShot(0, this, &MainWindow::setup);
 }
 
 MainWindow::~MainWindow()
@@ -58,22 +65,14 @@ MainWindow::~MainWindow()
 void MainWindow::setup()
 {
     version = getVersion("quick-system-info-gui");
-    this->setWindowTitle(tr("Quick System Info"));
-    this->setWindowIcon(QIcon::fromTheme("mx-qsi"));
     systeminfo();
-    ui->textBrowser->setWordWrapMode(QTextOption::NoWrap);
-    resize(QGuiApplication::primaryScreen()->availableGeometry().size() * 0.6);
     QAction *copyreport = new QAction(this);
-    copyreport->setShortcut(Qt::Key_C | Qt::CTRL);
-    connect(copyreport, SIGNAL(triggered()), this, SLOT(on_ButtonCopy_clicked()));
+    copyreport->setShortcut(Qt::Key_C | Qt::ALT);
+    connect(copyreport, &QAction::triggered, this, &MainWindow::on_ButtonCopy_clicked);
     this->addAction(copyreport);
 
-    QAction *copyreport2 = new QAction(this);
-    copyreport2->setShortcut((Qt::Key_C | Qt::ALT));
-    connect(copyreport2, SIGNAL(triggered()), this, SLOT(on_ButtonCopy_clicked()));
-    this->addAction(copyreport2);
-
     ui->ButtonCopy->setDefault(true);
+    ui->widget->setEnabled(true);
 }
 
 // Util function for getting bash command output and error code
@@ -131,24 +130,40 @@ void MainWindow::on_buttonAbout_clicked()
     this->show();
 }
 
+void MainWindow::on_pushSave_clicked()
+{
+    QFileDialog dialog(this, tr("Save System Information"));
+    dialog.setDefaultSuffix("txt");
+    dialog.setNameFilters({"*.txt"});
+    dialog.selectFile("sysinfo.txt");
+    dialog.setAcceptMode(QFileDialog::AcceptSave);
+    if(dialog.exec()) {
+        QFile file(dialog.selectedFiles().at(0));
+        bool ok = false;
+        if (file.open(QFile::Truncate|QFile::WriteOnly)) {
+            const QByteArray &text = ui->textSysInfo->toPlainText().toUtf8();
+            ok = (file.write(text) == text.size());
+            file.close();
+        }
+        if (ok) QMessageBox::information(this, windowTitle(), tr("System information saved."));
+        else QMessageBox::critical(this, windowTitle(), tr("Could not save system information."));
+    }
+}
+
 void MainWindow::on_ButtonCopy_clicked()
 {
     QClipboard *clipboard = QApplication::clipboard();
-    QString text2 = ui->textBrowser->toPlainText();
-    text2.append("[/code]");
-    text2.prepend("[code]\n");
-    clipboard->setText(text2);
+    clipboard->setText("[CODE]" + ui->textSysInfo->toPlainText() + "[/CODE]");
 }
 
 void MainWindow::systeminfo()
 {
     QString text = runCmd(QStringLiteral("/usr/bin/quick-system-info-mx -g")).output;
-    text.remove("[code]\n");
+    text.remove("[code]");
     text.remove("[/code]");
     text.replace("http: /","http:/");
     text.replace("https: /","https:/");
-    ui->textBrowser->setText(text);
-
+    ui->textSysInfo->setPlainText(text.trimmed());
 }
 
 
