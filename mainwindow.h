@@ -3,9 +3,7 @@
  **********************************************************************
  * Copyright (C) 2015 MX Authors
  *
- * Authors: Adrian
- *          Paul David Callahan
- *          Dolphin Oracle
+ * Authors: Dolphin Oracle, AK-47, Adrian
  *          MX Linux <http://mxlinux.org>
  *
  * This file is part of mx-welcome.

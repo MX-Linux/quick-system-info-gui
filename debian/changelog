@@ -1,3 +1,13 @@
+quick-system-info-gui (22.10.06mx21) mx; urgency=medium
+
+  [AK-47]
+  * Ui improvements
+
+  [Dolphin]
+  * update help file 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 14 Oct 2022 21:47:19 -0400
+
 quick-system-info-gui (22.08.05mx21) mx; urgency=medium
 
   *  fix blank space in http: characters
