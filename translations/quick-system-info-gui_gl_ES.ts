@@ -2,214 +2,152 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="14"/>
-        <location filename="mainwindow.cpp" line="65"/>
-        <location filename="mainwindow.cpp" line="255"/>
-        <location filename="mainwindow.cpp" line="264"/>
+        <location filename="../mainwindow.ui" line="32"/>
         <source>MX Welcome</source>
         <translation>MX Dámosche a benvida</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="80"/>
+        <location filename="../mainwindow.ui" line="94"/>
+        <source>Copy the system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="97"/>
+        <source>&amp;Copy for forum</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="104"/>
+        <source>C</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="114"/>
+        <source>Save the system information to a text file.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="117"/>
+        <source>&amp;Save</source>
+        <translation>&amp;Gardar</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="248"/>
         <source>Quit application</source>
         <translation>Saír do aplicativo</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="83"/>
+        <location filename="../mainwindow.ui" line="251"/>
         <source>Close</source>
         <translation>Cerrar</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="90"/>
+        <location filename="../mainwindow.ui" line="258"/>
         <source>Alt+N</source>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="112"/>
+        <location filename="../mainwindow.ui" line="280"/>
         <source>About this application</source>
         <translation>Sobre esta aplicación</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="115"/>
+        <location filename="../mainwindow.ui" line="283"/>
         <source>About...</source>
         <translation>Sobre...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="122"/>
+        <location filename="../mainwindow.ui" line="290"/>
         <source>Alt+B</source>
         <translation>Alt+B</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="203"/>
-        <source>Welcome</source>
-        <translation type="unfinished"/>
+        <location filename="../mainwindow.ui" line="309"/>
+        <source>Help</source>
+        <translation>Axuda</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="484"/>
-        <source>Install MX Linux</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="510"/>
-        <source>Tweak (Panel, etc...)</source>
-        <translation>Axustes (Panel, etc...)</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="536"/>
-        <source>Tools</source>
-        <translation>Ferramentas</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="568"/>
-        <source>Wiki</source>
-        <translation>Wiki</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="600"/>
-        <source>Users Manual</source>
-        <translation>Manual do usuario</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="626"/>
-        <source>FAQ</source>
-        <translation>Preguntas e Respostas</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="652"/>
-        <source>Tour</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="674"/>
-        <source>Popular Apps</source>
-        <translation>Aplicativos</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="700"/>
-        <source>Contribute</source>
-        <translation>Contribuír</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="732"/>
-        <source>Videos</source>
-        <translation>Vídeos</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="764"/>
-        <source>Forums</source>
-        <translation>Forums</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="790"/>
-        <source>About</source>
-        <translation>Sobre</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="798"/>
-        <source>SHORT SYSTEM REPORT:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="805"/>
-        <source>DESKTOP</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="819"/>
-        <source>Quick-System-Info Full Report</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="829"/>
-        <source>Terms of Use</source>
-        <translation>Termos de uso</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="846"/>
-        <source>The name “MX Linux” is covered by Linux Foundation Sublicense No. 20140605-0483. We develop software that is covered by a free license that can be examined in the Wiki list. We also include software developed by others that is under a free license.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="856"/>
-        <source>MX VERSION</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="863"/>
-        <source>DEBIAN VERSION:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="870"/>
-        <source>SUPPORTED UNTIL:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="924"/>
-        <source>Show this dialog at start up</source>
-        <translation>Amosar esta lapela ao iniciar</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="78"/>
-        <source>User demo, password:</source>
-        <translation>Usuario demo, contrasinal:</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="78"/>
-        <source>Superuser root, password:</source>
-        <translation>Superusuario, contrasinal:</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="178"/>
-        <location filename="mainwindow.cpp" line="194"/>
-        <source>Error</source>
-        <translation>Erro</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="255"/>
-        <source>About MX Welcome</source>
-        <translation>Sobre MX Dámosche a benvida</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="255"/>
+        <location filename="../mainwindow.cpp" line="99"/>
         <source>Version: </source>
-        <translation>Versión</translation>
+        <translation>Versión: </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="255"/>
-        <source>Program for displaying a welcome screen in MX Linux</source>
-        <translation>Programa para amosar unha pantalla de benvida no MX Linux</translation>
+        <location filename="../mainwindow.cpp" line="47"/>
+        <location filename="../mainwindow.cpp" line="99"/>
+        <location filename="../mainwindow.cpp" line="108"/>
+        <source>Quick System Info</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="255"/>
+        <location filename="../mainwindow.cpp" line="51"/>
+        <source>Loading...</source>
+        <translation>Cargando...</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="99"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="256"/>
+        <location filename="../mainwindow.cpp" line="99"/>
+        <source>About Quick-System-Info-gui</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="99"/>
+        <source>Program for displaying a quick system info report</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="100"/>
         <source>License</source>
         <translation>Licenza</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="257"/>
+        <location filename="../mainwindow.cpp" line="101"/>
         <source>Changelog</source>
         <translation>Rexistro dos cambios</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="258"/>
+        <location filename="../mainwindow.cpp" line="102"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="274"/>
+        <location filename="../mainwindow.cpp" line="118"/>
         <source>&amp;Close</source>
         <translation>&amp;Cerrar</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="133"/>
+        <source>Save System Information</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="146"/>
+        <source>System information saved.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="147"/>
+        <source>Could not save system information.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="173"/>
+        <source>%1 Help</source>
+        <translation>Axuda para %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="173"/>
+        <source>Quick System Info (gui)</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="main.cpp" line="71"/>
+        <location filename="../main.cpp" line="65"/>
         <source>You must run this program as normal user.</source>
         <translation>Dbeeb executar este programa como usuario normal.</translation>
     </message>
@@ -217,24 +155,35 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="main.cpp" line="44"/>
-        <source>This tool displays a welcome screen with two tabs.</source>
+        <location filename="../main.cpp" line="42"/>
+        <source>This tool displays a the quick system info report in a gui.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="main.cpp" line="47"/>
-        <source>Start with About tab selected. The About tab provides basic information about the current MX Linux version, the user&apos;s hardware, and access to a full system report.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="main.cpp" line="50"/>
-        <source>Run a test mode.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="main.cpp" line="71"/>
+        <location filename="../main.cpp" line="65"/>
         <source>Error</source>
         <translation>Erro</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="40"/>
+        <source>License</source>
+        <translation>Licenza</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="41"/>
+        <location filename="../about.cpp" line="51"/>
+        <source>Changelog</source>
+        <translation>Rexistro dos cambios</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="42"/>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="63"/>
+        <source>&amp;Close</source>
+        <translation>&amp;Cerrar</translation>
     </message>
 </context>
 </TS>
