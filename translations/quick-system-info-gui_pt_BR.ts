@@ -1,37 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="pt_BR">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="pt_BR">
 <context>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="32"/>
         <source>MX Welcome</source>
-        <translation>Bem-vindo (a) ao MX Linux</translation>
+        <translation>Seja Bem-Vindo(a) ao MX Linux</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="94"/>
         <source>Copy the system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia as informações do sistema operacional para a área de transferência, dentro dos códigos [CODE][/CODE] prontas para ser utilizado em uma postagem no fórum.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="97"/>
         <source>&amp;Copy for forum</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Copiar para o fórum</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="104"/>
         <source>C</source>
-        <translation type="unfinished"></translation>
+        <translation>R</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="114"/>
         <source>Save the system information to a text file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar as informações do sistema operacional em um arquivo de texto.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="117"/>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Salvar</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="248"/>
@@ -66,7 +64,7 @@
     <message>
         <location filename="../mainwindow.ui" line="309"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajuda</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
@@ -78,12 +76,12 @@
         <location filename="../mainwindow.cpp" line="99"/>
         <location filename="../mainwindow.cpp" line="108"/>
         <source>Quick System Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Informações do Sistema Operacional</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="51"/>
         <source>Loading...</source>
-        <translation type="unfinished"></translation>
+        <translation>Carregando...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
@@ -93,12 +91,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <source>About Quick-System-Info-gui</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobre a interface gráfica de informações do sistema operacional</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <source>Program for displaying a quick system info report</source>
-        <translation type="unfinished"></translation>
+        <translation>Programa que permite exibir um relatório contendo as informações do sistema operacional</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="100"/>
@@ -123,27 +121,27 @@
     <message>
         <location filename="../mainwindow.cpp" line="133"/>
         <source>Save System Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar as Informações do Sistema Operacional</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="146"/>
         <source>System information saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>As informações do sistema operacional foram salvas.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="147"/>
         <source>Could not save system information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível salvar as informações do sistema operacional.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="173"/>
         <source>%1 Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajuda do %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="173"/>
         <source>Quick System Info (gui)</source>
-        <translation type="unfinished"></translation>
+        <translation>Interface Gráfica das Informações do Sistema Operacional</translation>
     </message>
 </context>
 <context>
@@ -151,7 +149,7 @@
     <message>
         <location filename="../main.cpp" line="65"/>
         <source>You must run this program as normal user.</source>
-        <translation>Você tem que executar este programa como usuário normal.</translation>
+        <translation>Você tem que executar este programa como um usuário normal.</translation>
     </message>
 </context>
 <context>
@@ -159,33 +157,33 @@
     <message>
         <location filename="../main.cpp" line="42"/>
         <source>This tool displays a the quick system info report in a gui.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta ferramenta exibe um relatório de contendo as informações do sistema operacional em uma interface gráfica.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="65"/>
         <source>Error</source>
-        <translation>Erro</translation>
+        <translation>Ocorreu um Erro</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="40"/>
         <source>License</source>
-        <translation type="unfinished">Licença</translation>
+        <translation>Licença</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="41"/>
         <location filename="../about.cpp" line="51"/>
         <source>Changelog</source>
-        <translation type="unfinished">Relatório de alterações</translation>
+        <translation>Relatório de alterações</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="42"/>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="63"/>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Fechar</translation>
+        <translation>&amp;Fechar</translation>
     </message>
 </context>
 </TS>

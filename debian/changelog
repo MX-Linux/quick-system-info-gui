@@ -1,3 +1,10 @@
+quick-system-info-gui (22.10.07mx21) mx; urgency=medium
+
+  [AK-47]
+  * show busy cursor at launch
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 16 Oct 2022 00:02:47 -0400
+
 quick-system-info-gui (22.10.06mx21) mx; urgency=medium
 
   [AK-47]
