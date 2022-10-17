@@ -9,7 +9,7 @@
     <message>
         <location filename="../mainwindow.ui" line="94"/>
         <source>Copy the system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation>Copia as informações do sistema operacional para a área de transferência, dentro dos códigos [CODE][/CODE] prontas para ser utilizado em uma postagem no fórum.</translation>
+        <translation>Copia as informações do computador e do sistema operacional para a área de transferência, dentro do código [CODE][/CODE] prontas para serem utilizadas em uma postagem no fórum.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="97"/>
@@ -24,7 +24,7 @@
     <message>
         <location filename="../mainwindow.ui" line="114"/>
         <source>Save the system information to a text file.</source>
-        <translation>Salvar as informações do sistema operacional em um arquivo de texto.</translation>
+        <translation>Salvar as informações do computador e do sistema operacional em um arquivo de texto.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="117"/>
@@ -76,7 +76,7 @@
         <location filename="../mainwindow.cpp" line="99"/>
         <location filename="../mainwindow.cpp" line="108"/>
         <source>Quick System Info</source>
-        <translation>Informações do Sistema Operacional</translation>
+        <translation>Informações do Computador e do Sistema Operacional</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="51"/>
@@ -91,12 +91,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <source>About Quick-System-Info-gui</source>
-        <translation>Sobre a interface gráfica de informações do sistema operacional</translation>
+        <translation>Sobre a interface gráfica de informações do computador e do sistema operacional</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <source>Program for displaying a quick system info report</source>
-        <translation>Programa que permite exibir um relatório contendo as informações do sistema operacional</translation>
+        <translation>Programa que permite exibir um relatório contendo as informações do computador e do sistema operacional</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="100"/>
@@ -121,17 +121,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="133"/>
         <source>Save System Information</source>
-        <translation>Salvar as Informações do Sistema Operacional</translation>
+        <translation>Salvar as Informações do Computador e do Sistema Operacional</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="146"/>
         <source>System information saved.</source>
-        <translation>As informações do sistema operacional foram salvas.</translation>
+        <translation>As informações do computador e do sistema operacional foram salvas.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="147"/>
         <source>Could not save system information.</source>
-        <translation>Não foi possível salvar as informações do sistema operacional.</translation>
+        <translation>Não foi possível salvar as informações do computador e do sistema operacional.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="173"/>
@@ -141,7 +141,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="173"/>
         <source>Quick System Info (gui)</source>
-        <translation>Interface Gráfica das Informações do Sistema Operacional</translation>
+        <translation>Interface Gráfica das Informações do Computador e do Sistema Operacional</translation>
     </message>
 </context>
 <context>
@@ -157,7 +157,7 @@
     <message>
         <location filename="../main.cpp" line="42"/>
         <source>This tool displays a the quick system info report in a gui.</source>
-        <translation>Esta ferramenta exibe um relatório de contendo as informações do sistema operacional em uma interface gráfica.</translation>
+        <translation>Esta ferramenta exibe um relatório de contendo as informações do computador e do sistema operacional em uma interface gráfica.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="65"/>

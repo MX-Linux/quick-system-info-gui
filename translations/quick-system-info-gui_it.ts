@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="it">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="it">
 <context>
     <name>MainWindow</name>
     <message>
@@ -11,27 +9,27 @@
     <message>
         <location filename="../mainwindow.ui" line="94"/>
         <source>Copy the system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia le informazioni di sistema negli appunti, racchiuse nei tag [CODE][/CODE] pronte per l&apos;uso in un post del forum.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="97"/>
         <source>&amp;Copy for forum</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Copia per il forum</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="104"/>
         <source>C</source>
-        <translation type="unfinished"></translation>
+        <translation>C</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="114"/>
         <source>Save the system information to a text file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva le informazioni di sistema in un file di testo.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="117"/>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Salva</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="248"/>
@@ -66,7 +64,7 @@
     <message>
         <location filename="../mainwindow.ui" line="309"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Aiuto</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
@@ -78,12 +76,12 @@
         <location filename="../mainwindow.cpp" line="99"/>
         <location filename="../mainwindow.cpp" line="108"/>
         <source>Quick System Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Veloce info di sistema</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="51"/>
         <source>Loading...</source>
-        <translation type="unfinished"></translation>
+        <translation>Caricamento...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
@@ -93,12 +91,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <source>About Quick-System-Info-gui</source>
-        <translation type="unfinished"></translation>
+        <translation>Informazioni su Quick-System-Info-gui</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <source>Program for displaying a quick system info report</source>
-        <translation type="unfinished"></translation>
+        <translation>Programma per la visualizzazione di un rapporto veloce delle informazioni di sistema</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="100"/>
@@ -118,32 +116,32 @@
     <message>
         <location filename="../mainwindow.cpp" line="118"/>
         <source>&amp;Close</source>
-        <translation>&amp;Chiudi</translation>
+        <translation>C&amp;hiudi</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="133"/>
         <source>Save System Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva le informazioni di sistema</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="146"/>
         <source>System information saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Informazioni di sistema salvate.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="147"/>
         <source>Could not save system information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile salvare le informazioni di sistema.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="173"/>
         <source>%1 Help</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Aiuto</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="173"/>
         <source>Quick System Info (gui)</source>
-        <translation type="unfinished"></translation>
+        <translation>Veloci informazioni di sistema (gui)</translation>
     </message>
 </context>
 <context>
@@ -159,7 +157,7 @@
     <message>
         <location filename="../main.cpp" line="42"/>
         <source>This tool displays a the quick system info report in a gui.</source>
-        <translation type="unfinished"></translation>
+        <translation>Questo strumento visualizza un veloce rapporto delle informazioni di sistema in una gui.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="65"/>
@@ -169,23 +167,23 @@
     <message>
         <location filename="../about.cpp" line="40"/>
         <source>License</source>
-        <translation type="unfinished">Licenza</translation>
+        <translation>Licenza</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="41"/>
         <location filename="../about.cpp" line="51"/>
         <source>Changelog</source>
-        <translation type="unfinished">Registro delle modifiche</translation>
+        <translation>Registro delle modifiche</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="42"/>
         <source>Cancel</source>
-        <translation type="unfinished">Annulla</translation>
+        <translation>Annulla</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="63"/>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Chiudi</translation>
+        <translation>&amp;Chiudi</translation>
     </message>
 </context>
 </TS>

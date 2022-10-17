@@ -14,7 +14,7 @@
     <message>
         <location filename="../mainwindow.ui" line="97"/>
         <source>&amp;Copy for forum</source>
-        <translation>&amp;フォーラム用にコピー</translation>
+        <translation>フォーラム用にコピー (&amp;C)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="104"/>
@@ -29,7 +29,7 @@
     <message>
         <location filename="../mainwindow.ui" line="117"/>
         <source>&amp;Save</source>
-        <translation>&amp;Save</translation>
+        <translation>保存 (&amp;S)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="248"/>
@@ -116,7 +116,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="118"/>
         <source>&amp;Close</source>
-        <translation>&amp;閉じる</translation>
+        <translation>閉じる (&amp;C)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="133"/>
@@ -183,7 +183,7 @@
     <message>
         <location filename="../about.cpp" line="63"/>
         <source>&amp;Close</source>
-        <translation>&amp;閉じる</translation>
+        <translation>閉じる (&amp;C)</translation>
     </message>
 </context>
 </TS>

@@ -96,7 +96,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <source>Program for displaying a quick system info report</source>
-        <translation>Programa que muestra un informe rápido de la información del sistema</translation>
+        <translation>Programa que muestra un reporte rápido de la información del sistema</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="100"/>
