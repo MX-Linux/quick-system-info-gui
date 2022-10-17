@@ -63,7 +63,7 @@ TRANSLATIONS += translations/quick-system-info-gui_af.ts \
                 translations/quick-system-info-gui_fil_PH.ts \
                 translations/quick-system-info-gui_fr.ts \
                 translations/quick-system-info-gui_fr_BE.ts \
-                translations/quick-system-info-gui_fr_FR.ts \
+                #translations/quick-system-info-gui_fr_FR.ts \
                 translations/quick-system-info-gui_gl_es.ts \
                 translations/quick-system-info-gui_gu.ts \
                 translations/quick-system-info-gui_he.ts \
@@ -82,9 +82,9 @@ TRANSLATIONS += translations/quick-system-info-gui_af.ts \
                 translations/quick-system-info-gui_mk.ts \
                 translations/quick-system-info-gui_mr.ts \
                 translations/quick-system-info-gui_nb.ts \
-                translations/quick-system-info-gui_nb_NO.ts \
+                #translations/quick-system-info-gui_nb_NO.ts \
                 translations/quick-system-info-gui_nl.ts \
-                translations/quick-system-info-gui_nl_BE.ts \
+                #translations/quick-system-info-gui_nl_BE.ts \
                 translations/quick-system-info-gui_or.ts \
                 translations/quick-system-info-gui_pl.ts \
                 translations/quick-system-info-gui_pt.ts \
