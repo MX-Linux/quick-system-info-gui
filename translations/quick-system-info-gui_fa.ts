@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fa">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fa">
 <context>
     <name>MainWindow</name>
     <message>
@@ -11,27 +9,27 @@
     <message>
         <location filename="../mainwindow.ui" line="94"/>
         <source>Copy the system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="97"/>
         <source>&amp;Copy for forum</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="104"/>
         <source>C</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="114"/>
         <source>Save the system information to a text file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="117"/>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="248"/>
@@ -66,7 +64,7 @@
     <message>
         <location filename="../mainwindow.ui" line="309"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>راهنما </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
@@ -78,12 +76,12 @@
         <location filename="../mainwindow.cpp" line="99"/>
         <location filename="../mainwindow.cpp" line="108"/>
         <source>Quick System Info</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="51"/>
         <source>Loading...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
@@ -93,12 +91,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <source>About Quick-System-Info-gui</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <source>Program for displaying a quick system info report</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="100"/>
@@ -123,27 +121,27 @@
     <message>
         <location filename="../mainwindow.cpp" line="133"/>
         <source>Save System Information</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="146"/>
         <source>System information saved.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="147"/>
         <source>Could not save system information.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="173"/>
         <source>%1 Help</source>
-        <translation type="unfinished"></translation>
+        <translation>راهنمای 1%</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="173"/>
         <source>Quick System Info (gui)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -159,33 +157,33 @@
     <message>
         <location filename="../main.cpp" line="42"/>
         <source>This tool displays a the quick system info report in a gui.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../main.cpp" line="65"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../about.cpp" line="40"/>
         <source>License</source>
-        <translation type="unfinished">لایسنس</translation>
+        <translation>لایسنس</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="41"/>
         <location filename="../about.cpp" line="51"/>
         <source>Changelog</source>
-        <translation type="unfinished">لیست موارد بهبود یافته</translation>
+        <translation>لیست موارد بهبود یافته</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="42"/>
         <source>Cancel</source>
-        <translation type="unfinished">لغو</translation>
+        <translation>لغو</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="63"/>
         <source>&amp;Close</source>
-        <translation type="unfinished">و بستن</translation>
+        <translation>و بستن</translation>
     </message>
 </context>
 </TS>
