@@ -1,3 +1,9 @@
+quick-system-info-gui (22.10.010mx21) mx; urgency=medium
+
+  * translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 20:11:49 -0400
+
 quick-system-info-gui (22.10.09mx21) mx; urgency=medium
 
   * fix license button
