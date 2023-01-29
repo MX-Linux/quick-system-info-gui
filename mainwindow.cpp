@@ -49,6 +49,7 @@ MainWindow::MainWindow(const QCommandLineParser& arg_parser, QWidget* parent)
     this->setWindowIcon(QIcon::fromTheme("mx-qsi"));
     ui->widget->setEnabled(false);
     ui->textSysInfo->setWordWrapMode(QTextOption::NoWrap);
+    ui->textSysInfo->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->textSysInfo->setPlainText(tr("Loading..."));
     resize(QGuiApplication::primaryScreen()->availableGeometry().size() * 0.6);
     // This fires the lengthy setup routine after the window is displayed.
