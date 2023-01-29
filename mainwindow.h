@@ -30,6 +30,7 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <QSettings>
+#include <QMenu>
 
 namespace Ui {
 class MainWindow;
@@ -70,6 +71,10 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QSettings user_settings;
+    void createActions();
+    void createMenu();
+    QMenu *menu;
+    QAction *forumcopy;
 };
 
 

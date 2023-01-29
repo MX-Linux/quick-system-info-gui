@@ -160,3 +160,4 @@ void MainWindow::on_ButtonHelp_clicked()
 
     displayDoc(url, tr("%1 Help").arg(tr("Quick System Info (gui)")));
 }
+
