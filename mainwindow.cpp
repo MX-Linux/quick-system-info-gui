@@ -66,8 +66,9 @@ void MainWindow::setup()
     version = getVersion("quick-system-info-gui");
     systeminfo();
     QAction *copyreport = new QAction(this);
-    copyreport->setShortcut(Qt::Key_C | Qt::ALT);
+    copyreport->setShortcut(Qt::Key_C | Qt::CTRL);
     connect(copyreport, &QAction::triggered, this, &MainWindow::on_ButtonCopy_clicked);
+
     this->addAction(copyreport);
 
     ui->ButtonCopy->setDefault(true);
@@ -130,7 +131,14 @@ void MainWindow::on_pushSave_clicked()
 void MainWindow::on_ButtonCopy_clicked()
 {
     QClipboard *clipboard = QApplication::clipboard();
-    clipboard->setText("[CODE]" + ui->textSysInfo->toPlainText() + "[/CODE]");
+    QString text;
+    text = ui->textSysInfo->textCursor().selectedText();
+    QChar replace = QChar(0x2029);
+    text.replace(replace,"\n");
+    if (text.isEmpty()){
+        text = ui->textSysInfo->toPlainText();
+    }
+    clipboard->setText("[CODE]" + text + "[/CODE]");
 }
 
 void MainWindow::systeminfo()
