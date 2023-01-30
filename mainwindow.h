@@ -22,18 +22,18 @@
  * along with mx-welcome.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 
-
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QCommandLineParser>
+#include <QMenu>
 #include <QMessageBox>
+#include <QPoint>
 #include <QProcess>
 #include <QSettings>
-#include <QMenu>
-#include <QPoint>
 
-namespace Ui {
+namespace Ui
+{
 class MainWindow;
 }
 
@@ -42,20 +42,19 @@ struct Result {
     QString output;
 };
 
-
 class MainWindow : public QDialog
 {
     Q_OBJECT
 
 protected:
-    QProcess *proc;
+    QProcess *proc {};
 
 public:
     explicit MainWindow(const QCommandLineParser &arg_parser, QWidget *parent = nullptr);
     ~MainWindow();
 
-    Result runCmd(QString cmd);
-    QString getVersion(QString name);
+    Result runCmd(const QString &cmd);
+    QString getVersion(const QString &name);
 
     QString version;
     QString output;
@@ -74,13 +73,11 @@ private:
     QSettings user_settings;
     void forumcopy();
     void plaincopy();
-    QMenu *menu;
-    QAction *forumcopyaction;
-    QAction *plaincopyaction;
-    QAction *saveasfile;
+    QMenu *menu {};
+    QAction *forumcopyaction {};
+    QAction *plaincopyaction {};
+    QAction *saveasfile {};
     void createmenu(QPoint pos);
 };
 
-
 #endif // MAINWINDOW_H
-
