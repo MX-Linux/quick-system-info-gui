@@ -68,9 +68,13 @@ void MainWindow::setup()
     systeminfo();
     QAction *copyreport = new QAction(this);
     copyreport->setShortcut(Qt::Key_C | Qt::CTRL);
-    connect(copyreport, &QAction::triggered, this, &MainWindow::on_ButtonCopy_clicked);
+    connect(copyreport, &QAction::triggered, this, &MainWindow::forumcopy);
+    QAction *plaincopyaction = new QAction(this);
+    connect(plaincopyaction, &QAction::triggered, this, &MainWindow::plaincopy);
+    plaincopyaction->setShortcut(Qt::Key_C | Qt::ALT);
 
     this->addAction(copyreport);
+    this->addAction(plaincopyaction);
 
     ui->ButtonCopy->setDefault(true);
     ui->widget->setEnabled(true);
@@ -131,15 +135,7 @@ void MainWindow::on_pushSave_clicked()
 
 void MainWindow::on_ButtonCopy_clicked()
 {
-    QClipboard *clipboard = QApplication::clipboard();
-    QString text;
-    text = ui->textSysInfo->textCursor().selectedText();
-    QChar replace = QChar(0x2029);
-    text.replace(replace,"\n");
-    if (text.isEmpty()){
-        text = ui->textSysInfo->toPlainText();
-    }
-    clipboard->setText("[CODE]" + text + "[/CODE]");
+    forumcopy();
 }
 
 void MainWindow::systeminfo()
@@ -161,3 +157,26 @@ void MainWindow::on_ButtonHelp_clicked()
     displayDoc(url, tr("%1 Help").arg(tr("Quick System Info (gui)")));
 }
 
+void MainWindow::forumcopy(){
+    QClipboard *clipboard = QApplication::clipboard();
+    QString text;
+    text = ui->textSysInfo->textCursor().selectedText();
+    QChar replace = QChar(0x2029);
+    text.replace(replace,"\n");
+    if (text.isEmpty()){
+        text = ui->textSysInfo->toPlainText();
+    }
+    clipboard->setText("[CODE]" + text + "[/CODE]");
+}
+
+void MainWindow::plaincopy(){
+    QClipboard *clipboard = QApplication::clipboard();
+    QString text;
+    text = ui->textSysInfo->textCursor().selectedText();
+    QChar replace = QChar(0x2029);
+    text.replace(replace,"\n");
+    if (text.isEmpty()){
+        text = ui->textSysInfo->toPlainText();
+    }
+    clipboard->setText(text);
+}

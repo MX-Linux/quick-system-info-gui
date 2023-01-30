@@ -71,10 +71,11 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QSettings user_settings;
-    void createActions();
-    void createMenu();
+    void forumcopy();
+    void plaincopy();
     QMenu *menu;
-    QAction *forumcopy;
+    QAction *forumcopyaction;
+    QAction *plaincopyaction;
 };
 
 
