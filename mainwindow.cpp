@@ -30,6 +30,7 @@
 #include <QScreen>
 #include <QAction>
 #include <QFileDialog>
+#include <QPoint>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -52,6 +53,7 @@ MainWindow::MainWindow(const QCommandLineParser& arg_parser, QWidget* parent)
     ui->textSysInfo->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->textSysInfo->setPlainText(tr("Loading..."));
     resize(QGuiApplication::primaryScreen()->availableGeometry().size() * 0.6);
+    connect(ui->textSysInfo, &QPlainTextEdit::customContextMenuRequested, [this](QPoint pos) { createmenu(pos);});
     // This fires the lengthy setup routine after the window is displayed.
     QTimer::singleShot(0, this, &MainWindow::setup);
 }
@@ -72,6 +74,7 @@ void MainWindow::setup()
     QAction *plaincopyaction = new QAction(this);
     connect(plaincopyaction, &QAction::triggered, this, &MainWindow::plaincopy);
     plaincopyaction->setShortcut(Qt::Key_C | Qt::ALT);
+
 
     this->addAction(copyreport);
     this->addAction(plaincopyaction);
@@ -179,4 +182,22 @@ void MainWindow::plaincopy(){
         text = ui->textSysInfo->toPlainText();
     }
     clipboard->setText(text);
+}
+
+void MainWindow::createmenu(QPoint pos){
+    QMenu menu(this);
+    forumcopyaction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy-symbolic")), tr("Copy for forum"), this);
+    connect(forumcopyaction, &QAction::triggered, [this] { forumcopy(); });
+    plaincopyaction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy-symbolic")), tr("Plain text copy"), this);
+    connect(plaincopyaction, &QAction::triggered, [this] { plaincopy(); });
+    saveasfile = new QAction(QIcon::fromTheme(QStringLiteral("document-save")), tr("Save"), this);
+    connect(saveasfile, &QAction::triggered, [this] { MainWindow::on_pushSave_clicked(); });
+    menu.addAction(forumcopyaction);
+    menu.addAction(plaincopyaction);
+    menu.addAction(saveasfile);
+
+    menu.exec(ui->textSysInfo->mapToGlobal(pos));
+    forumcopyaction->deleteLater();
+    plaincopyaction->deleteLater();
+    saveasfile->deleteLater();
 }

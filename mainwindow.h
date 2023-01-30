@@ -31,6 +31,7 @@
 #include <QProcess>
 #include <QSettings>
 #include <QMenu>
+#include <QPoint>
 
 namespace Ui {
 class MainWindow;
@@ -76,6 +77,8 @@ private:
     QMenu *menu;
     QAction *forumcopyaction;
     QAction *plaincopyaction;
+    QAction *saveasfile;
+    void createmenu(QPoint pos);
 };
 
 
