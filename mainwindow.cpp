@@ -22,23 +22,23 @@
  * along with mx-welcome.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 
-#include <QDebug>
-#include <QTimer>
-#include <QDir>
-#include <QFileInfo>
-#include <QTextEdit>
-#include <QScreen>
 #include <QAction>
+#include <QDebug>
+#include <QDir>
 #include <QFileDialog>
+#include <QFileInfo>
 #include <QPoint>
+#include <QScreen>
+#include <QTextEdit>
+#include <QTimer>
 
+#include "QClipboard"
+#include "about.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "version.h"
-#include "QClipboard"
-#include "about.h"
 
-MainWindow::MainWindow(const QCommandLineParser& arg_parser, QWidget* parent)
+MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::MainWindow)
 {
@@ -53,15 +53,12 @@ MainWindow::MainWindow(const QCommandLineParser& arg_parser, QWidget* parent)
     ui->textSysInfo->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->textSysInfo->setPlainText(tr("Loading..."));
     resize(QGuiApplication::primaryScreen()->availableGeometry().size() * 0.6);
-    connect(ui->textSysInfo, &QPlainTextEdit::customContextMenuRequested, [this](QPoint pos) { createmenu(pos);});
+    connect(ui->textSysInfo, &QPlainTextEdit::customContextMenuRequested, this, &MainWindow::createmenu);
     // This fires the lengthy setup routine after the window is displayed.
     QTimer::singleShot(0, this, &MainWindow::setup);
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
+MainWindow::~MainWindow() { delete ui; }
 
 // setup versious items first time program runs
 void MainWindow::setup()
@@ -69,12 +66,11 @@ void MainWindow::setup()
     version = getVersion("quick-system-info-gui");
     systeminfo();
     QAction *copyreport = new QAction(this);
-    copyreport->setShortcut(Qt::Key_C | Qt::CTRL);
+    copyreport->setShortcut(Qt::CTRL | Qt::Key_C);
     connect(copyreport, &QAction::triggered, this, &MainWindow::forumcopy);
     QAction *plaincopyaction = new QAction(this);
     connect(plaincopyaction, &QAction::triggered, this, &MainWindow::plaincopy);
-    plaincopyaction->setShortcut(Qt::Key_C | Qt::ALT);
-
+    plaincopyaction->setShortcut(Qt::ALT | Qt::Key_C);
 
     this->addAction(copyreport);
     this->addAction(plaincopyaction);
@@ -85,7 +81,7 @@ void MainWindow::setup()
 }
 
 // Util function for getting bash command output and error code
-Result MainWindow::runCmd(QString cmd)
+Result MainWindow::runCmd(const QString &cmd)
 {
     QEventLoop loop;
     QProcess proc;
@@ -93,26 +89,24 @@ Result MainWindow::runCmd(QString cmd)
     connect(&proc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop, &QEventLoop::quit);
     proc.start("/bin/bash", QStringList() << "-c" << cmd);
     loop.exec();
-    return { proc.exitCode(), proc.readAll().trimmed() };
+    return {proc.exitCode(), proc.readAll().trimmed()};
 }
 
 // Get version of the program
-QString MainWindow::getVersion(QString name)
-{
-    return runCmd("dpkg-query -f '${Version}' -W " + name).output;
-}
+QString MainWindow::getVersion(const QString &name) { return runCmd("dpkg-query -f '${Version}' -W " + name).output; }
 
 // About button clicked
 void MainWindow::on_buttonAbout_clicked()
 {
     this->hide();
-    displayAboutMsgBox(tr("About Quick-System-Info-gui"),
-                       "<p align=\"center\"><b><h2>" + tr("Quick System Info") + "</h2></b></p><p align=\"center\">" +
-                       tr("Version: ") + VERSION + "</p><p align=\"center\"><h3>" +
-                       tr("Program for displaying a quick system info report") +
-                       "</h3></p><p align=\"center\"><a href=\"http://mxlinux.org\">http://mxlinux.org</a><br /></p>"
-                       "<p align=\"center\">" + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
-                       QStringLiteral("/usr/share/doc/quick-system-info-gui/license.html"), tr("License").arg(this->windowTitle()));
+    displayAboutMsgBox(
+        tr("About Quick-System-Info-gui"),
+        "<p align=\"center\"><b><h2>" + tr("Quick System Info") + "</h2></b></p><p align=\"center\">" + tr("Version: ")
+            + VERSION + "</p><p align=\"center\"><h3>" + tr("Program for displaying a quick system info report")
+            + "</h3></p><p align=\"center\"><a href=\"http://mxlinux.org\">http://mxlinux.org</a><br /></p>"
+              "<p align=\"center\">"
+            + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
+        QStringLiteral("/usr/share/doc/quick-system-info-gui/license.html"), tr("License").arg(this->windowTitle()));
     this->show();
 }
 
@@ -123,35 +117,32 @@ void MainWindow::on_pushSave_clicked()
     dialog.setNameFilters({"*.txt"});
     dialog.selectFile("sysinfo.txt");
     dialog.setAcceptMode(QFileDialog::AcceptSave);
-    if(dialog.exec()) {
+    if (dialog.exec()) {
         QFile file(dialog.selectedFiles().at(0));
         bool ok = false;
-        if (file.open(QFile::Truncate|QFile::WriteOnly)) {
+        if (file.open(QFile::Truncate | QFile::WriteOnly)) {
             const QByteArray &text = ui->textSysInfo->toPlainText().toUtf8();
             ok = (file.write(text) == text.size());
             file.close();
         }
-        if (ok) QMessageBox::information(this, windowTitle(), tr("System information saved."));
-        else QMessageBox::critical(this, windowTitle(), tr("Could not save system information."));
+        if (ok)
+            QMessageBox::information(this, windowTitle(), tr("System information saved."));
+        else
+            QMessageBox::critical(this, windowTitle(), tr("Could not save system information."));
     }
 }
 
-void MainWindow::on_ButtonCopy_clicked()
-{
-    forumcopy();
-}
+void MainWindow::on_ButtonCopy_clicked() { forumcopy(); }
 
 void MainWindow::systeminfo()
 {
     QString text = runCmd(QStringLiteral("/usr/bin/quick-system-info-mx -g")).output;
     text.remove("[code]");
     text.remove("[/code]");
-    text.replace("http: /","http:/");
-    text.replace("https: /","https:/");
+    text.replace("http: /", "http:/");
+    text.replace("https: /", "https:/");
     ui->textSysInfo->setPlainText(text.trimmed());
 }
-
-
 
 void MainWindow::on_ButtonHelp_clicked()
 {
@@ -160,38 +151,37 @@ void MainWindow::on_ButtonHelp_clicked()
     displayDoc(url, tr("%1 Help").arg(tr("Quick System Info (gui)")));
 }
 
-void MainWindow::forumcopy(){
+void MainWindow::forumcopy()
+{
     QClipboard *clipboard = QApplication::clipboard();
-    QString text;
-    text = ui->textSysInfo->textCursor().selectedText();
-    QChar replace = QChar(0x2029);
-    text.replace(replace,"\n");
-    if (text.isEmpty()){
+    QString text = ui->textSysInfo->textCursor().selectedText();
+    text.replace(QChar(0x2029), "\n");
+    if (text.isEmpty()) {
         text = ui->textSysInfo->toPlainText();
     }
     clipboard->setText("[CODE]" + text + "[/CODE]");
 }
 
-void MainWindow::plaincopy(){
+void MainWindow::plaincopy()
+{
     QClipboard *clipboard = QApplication::clipboard();
-    QString text;
-    text = ui->textSysInfo->textCursor().selectedText();
-    QChar replace = QChar(0x2029);
-    text.replace(replace,"\n");
-    if (text.isEmpty()){
+    QString text = ui->textSysInfo->textCursor().selectedText();
+    text.replace(QChar(0x2029), "\n");
+    if (text.isEmpty()) {
         text = ui->textSysInfo->toPlainText();
     }
     clipboard->setText(text);
 }
 
-void MainWindow::createmenu(QPoint pos){
+void MainWindow::createmenu(QPoint pos)
+{
     QMenu menu(this);
     forumcopyaction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy-symbolic")), tr("Copy for forum"), this);
-    connect(forumcopyaction, &QAction::triggered, [this] { forumcopy(); });
+    connect(forumcopyaction, &QAction::triggered, this, &MainWindow::forumcopy);
     plaincopyaction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy-symbolic")), tr("Plain text copy"), this);
-    connect(plaincopyaction, &QAction::triggered, [this] { plaincopy(); });
+    connect(plaincopyaction, &QAction::triggered, this, &MainWindow::plaincopy);
     saveasfile = new QAction(QIcon::fromTheme(QStringLiteral("document-save")), tr("Save"), this);
-    connect(saveasfile, &QAction::triggered, [this] { MainWindow::on_pushSave_clicked(); });
+    connect(saveasfile, &QAction::triggered, this, &MainWindow::on_pushSave_clicked);
     menu.addAction(forumcopyaction);
     menu.addAction(plaincopyaction);
     menu.addAction(saveasfile);
