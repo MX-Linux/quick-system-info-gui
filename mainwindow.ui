@@ -69,7 +69,7 @@
       <string notr="true">QTabBar::tab { height: 30px; width: 326px; } </string>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
-      <item row="0" column="0">
+      <item row="1" column="0">
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0" colspan="2">
          <widget class="QPlainTextEdit" name="textSysInfo">
@@ -145,6 +145,9 @@
          </widget>
         </item>
        </layout>
+      </item>
+      <item row="0" column="0">
+       <widget class="QComboBox" name="comboBoxCommand"/>
       </item>
      </layout>
     </widget>

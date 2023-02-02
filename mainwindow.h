@@ -64,9 +64,9 @@ private slots:
     void on_pushSave_clicked();
     void on_ButtonCopy_clicked();
     void on_buttonAbout_clicked();
-    void systeminfo();
-
     void on_ButtonHelp_clicked();
+
+    void on_comboBoxCommand_currentIndexChanged(int index);
 
 private:
     Ui::MainWindow *ui;
@@ -78,6 +78,10 @@ private:
     QAction *plaincopyaction {};
     QAction *saveasfile {};
     void createmenu(QPoint pos);
+    void systeminfo();
+    void apthistory();
+    void displaylog(const QString &logfile);
+    void buildcomboBoxCommand();
 };
 
 #endif // MAINWINDOW_H

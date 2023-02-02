@@ -64,7 +64,7 @@ MainWindow::~MainWindow() { delete ui; }
 void MainWindow::setup()
 {
     version = getVersion("quick-system-info-gui");
-    systeminfo();
+    buildcomboBoxCommand();
     QAction *copyreport = new QAction(this);
     copyreport->setShortcut(Qt::CTRL | Qt::Key_C);
     connect(copyreport, &QAction::triggered, this, &MainWindow::forumcopy);
@@ -113,9 +113,26 @@ void MainWindow::on_buttonAbout_clicked()
 void MainWindow::on_pushSave_clicked()
 {
     QFileDialog dialog(this, tr("Save System Information"));
-    dialog.setDefaultSuffix("txt");
-    dialog.setNameFilters({"*.txt"});
-    dialog.selectFile("sysinfo.txt");
+    switch(ui->comboBoxCommand->currentIndex()){
+      case 0:
+        dialog.setDefaultSuffix("txt");
+        dialog.setNameFilters({"*.txt"});
+        dialog.selectFile("sysinfo.txt");
+        break;
+
+      case 1:
+        dialog.setDefaultSuffix("txt");
+        dialog.setNameFilters({"*.txt"});
+        dialog.selectFile("apthistory.txt");
+        break;
+
+      default:
+        dialog.setDefaultSuffix("log");
+        dialog.setNameFilters({"*.log"});
+        dialog.selectFile(ui->comboBoxCommand->currentText());
+        break;
+    }
+
     dialog.setAcceptMode(QFileDialog::AcceptSave);
     if (dialog.exec()) {
         QFile file(dialog.selectedFiles().at(0));
@@ -142,6 +159,41 @@ void MainWindow::systeminfo()
     text.replace("http: /", "http:/");
     text.replace("https: /", "https:/");
     ui->textSysInfo->setPlainText(text.trimmed());
+}
+
+void MainWindow::apthistory()
+{
+    QString text = runCmd(QStringLiteral("zgrep -EH ' install | upgrade | purge | remove ' /var/log/dpkg* | cut -f2- -d: | sort -r | sed 's/ remove / remove  /;s/ purge / purge   /' | grep \"^\" ")).output;
+    ui->textSysInfo->setPlainText(text.trimmed());
+}
+
+void MainWindow::buildcomboBoxCommand()
+{
+    QStringList logfiles = QDir("/var/log/").entryList(QStringList() << "*.log",QDir::Files);
+
+    //add syslog if it exists
+    if (QFileInfo("/var/log/syslog").exists()){
+        logfiles.append("syslog");
+    }
+
+    //special cases live/*.log
+    QStringList livelogfilespre = QDir("/var/log/live").entryList(QStringList() << "*.log",QDir::Files);
+    QStringList livelogfilespost;
+    QStringListIterator it(livelogfilespre);
+    while(it.hasNext()){
+        QString i = "live/" + it.next();
+        livelogfilespost.append(i);
+    }
+    logfiles.append(livelogfilespost);
+
+    logfiles.sort(Qt::CaseInsensitive);
+    logfiles.prepend("apt " + tr("history"));
+    logfiles.prepend(tr("Quick System Info"));
+
+
+
+    ui->comboBoxCommand->addItems(logfiles);
+
 }
 
 void MainWindow::on_ButtonHelp_clicked()
@@ -190,4 +242,47 @@ void MainWindow::createmenu(QPoint pos)
     forumcopyaction->deleteLater();
     plaincopyaction->deleteLater();
     saveasfile->deleteLater();
+}
+
+void MainWindow::displaylog(const QString &logfile)
+{
+    QString text;
+    QFile file("/var/log/" + logfile);
+    if (QFileInfo("/var/log/" + logfile).permission(QFile::ReadOther)){
+        if (!file.open(QIODevice::ReadOnly)) {
+            QMessageBox::information(0, "error", file.errorString());
+            return;
+        }
+        QTextStream in(&file);
+
+        while(!in.atEnd()) {
+            text = in.readAll();
+        }
+
+        file.close();
+    } else {
+        text = runCmd("pkexec /usr/lib/quick-system-info-gui/qsig-lib /var/log/" + logfile).output;
+    }
+
+    ui->textSysInfo->setPlainText(text.trimmed());
+}
+
+
+void MainWindow::on_comboBoxCommand_currentIndexChanged(int index)
+{
+    switch(index){
+      case 0:
+        ui->textSysInfo->setPlainText(tr("Loading..."));
+        systeminfo();
+        break;
+
+        case 1:
+        apthistory();
+        break;
+
+        default:
+        displaylog(ui->comboBoxCommand->currentText());
+        break;
+    }
+
 }
