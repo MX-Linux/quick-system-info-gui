@@ -6,10 +6,10 @@
 
 
 readadminfile(){
-TEMP=$(mktemp quick-system-info-gui.XXXXXX -d)
-cp "$1" $TEMP
-cat $TEMP/syslog
-rm -R $TEMP
+#TEMP=$(mktemp quick-system-info-gui.XXXXXX -d)
+#cp "$1" $TEMP
+cat "$1"
+#rm -R $TEMP
 }
 
 

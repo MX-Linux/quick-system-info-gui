@@ -169,12 +169,31 @@ void MainWindow::apthistory()
 
 void MainWindow::buildcomboBoxCommand()
 {
-    ui->comboBoxCommand->addItem(tr("Quick System Info"));
-    ui->comboBoxCommand->addItem("apt " + tr("history"));
+    QStringList logfiles = QDir("/var/log/").entryList(QStringList() << "*.log",QDir::Files);
 
-    QDir logdirecotry("/var/log");
-    QStringList logfiles = logdirecotry.entryList(QStringList() << "*.log",QDir::Files);
+    //add syslog if it exists
+    if (QFileInfo("/var/log/syslog").exists()){
+        logfiles.append("syslog");
+    }
+
+    //special cases live/*.log
+    QStringList livelogfilespre = QDir("/var/log/live").entryList(QStringList() << "*.log",QDir::Files);
+    QStringList livelogfilespost;
+    QStringListIterator it(livelogfilespre);
+    while(it.hasNext()){
+        QString i = "live/" + it.next();
+        livelogfilespost.append(i);
+    }
+    logfiles.append(livelogfilespost);
+
+    logfiles.sort(Qt::CaseInsensitive);
+    logfiles.prepend("apt " + tr("history"));
+    logfiles.prepend(tr("Quick System Info"));
+
+
+
     ui->comboBoxCommand->addItems(logfiles);
+
 }
 
 void MainWindow::on_ButtonHelp_clicked()
@@ -227,8 +246,24 @@ void MainWindow::createmenu(QPoint pos)
 
 void MainWindow::displaylog(const QString &logfile)
 {
-    //replace with Qfile read stuff later
-    QString text = runCmd("cat /var/log/" + logfile).output;
+    QString text;
+    QFile file("/var/log/" + logfile);
+    if (QFileInfo("/var/log/" + logfile).permission(QFile::ReadOther)){
+        if (!file.open(QIODevice::ReadOnly)) {
+            QMessageBox::information(0, "error", file.errorString());
+            return;
+        }
+        QTextStream in(&file);
+
+        while(!in.atEnd()) {
+            text = in.readAll();
+        }
+
+        file.close();
+    } else {
+        text = runCmd("pkexec /usr/lib/quick-system-info-gui/qsig-lib /var/log/" + logfile).output;
+    }
+
     ui->textSysInfo->setPlainText(text.trimmed());
 }
 
@@ -238,7 +273,7 @@ void MainWindow::on_comboBoxCommand_currentIndexChanged(int index)
     switch(index){
       case 0:
         ui->textSysInfo->setPlainText(tr("Loading..."));
-        systeminfo();
+        //systeminfo();
         break;
 
         case 1:
