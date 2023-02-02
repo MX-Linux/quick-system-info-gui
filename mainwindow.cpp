@@ -65,15 +65,19 @@ void MainWindow::setup()
 {
     version = getVersion("quick-system-info-gui");
     buildcomboBoxCommand();
-//    QAction *copyreport = new QAction(this);
-//    copyreport->setShortcut(Qt::CTRL | Qt::Key_C);
-//    connect(copyreport, &QAction::triggered, this, &MainWindow::forumcopy);
-//    QAction *plaincopyaction = new QAction(this);
-//    connect(plaincopyaction, &QAction::triggered, this, &MainWindow::plaincopy);
-//    plaincopyaction->setShortcut(Qt::ALT | Qt::Key_C);
+    QAction *copyreport = new QAction(this);
+    copyreport->setShortcut(Qt::CTRL | Qt::Key_C);
+    connect(copyreport, &QAction::triggered, this, &MainWindow::forumcopy);
+    QAction *plaincopyaction = new QAction(this);
+    connect(plaincopyaction, &QAction::triggered, this, &MainWindow::plaincopy);
+    plaincopyaction->setShortcut(Qt::ALT | Qt::Key_C);
+    QAction *savefileaction = new QAction(this);
+    connect(savefileaction, &QAction::triggered, this, &MainWindow::on_pushSave_clicked);
+    savefileaction->setShortcut(Qt::CTRL | Qt::Key_S);
 
-//    this->addAction(copyreport);
-//    this->addAction(plaincopyaction);
+    this->addAction(copyreport);
+    this->addAction(plaincopyaction);
+    this->addAction(savefileaction);
 
     ui->ButtonCopy->setDefault(true);
     ui->widget->setEnabled(true);
@@ -237,6 +241,8 @@ void MainWindow::createmenu(QPoint pos)
     plaincopyaction->setShortcut(Qt::ALT | Qt::Key_C);
     connect(plaincopyaction, &QAction::triggered, this, &MainWindow::plaincopy);
     saveasfile = new QAction(QIcon::fromTheme(QStringLiteral("document-save")), tr("Save"), this);
+    saveasfile->setShortcutVisibleInContextMenu(true);
+    saveasfile->setShortcut(Qt::CTRL | Qt::Key_S);
     connect(saveasfile, &QAction::triggered, this, &MainWindow::on_pushSave_clicked);
     menu.addAction(forumcopyaction);
     menu.addAction(plaincopyaction);
