@@ -273,7 +273,7 @@ void MainWindow::on_comboBoxCommand_currentIndexChanged(int index)
     switch(index){
       case 0:
         ui->textSysInfo->setPlainText(tr("Loading..."));
-        //systeminfo();
+        systeminfo();
         break;
 
         case 1:
