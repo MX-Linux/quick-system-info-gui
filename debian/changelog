@@ -1,7 +1,7 @@
 quick-system-info-gui (23.02.02mx21) mx; urgency=medium
 
-  * move menu shortcuts to createmenu
   * show shortcut keys on right-click menu 
+  * update translations
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 01 Feb 2023 23:10:26 -0500
 
