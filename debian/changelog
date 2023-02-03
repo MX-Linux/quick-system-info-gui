@@ -1,3 +1,9 @@
+quick-system-info-gui (23.02.03mx21) mx; urgency=medium
+
+  * add message to policy file 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 02 Feb 2023 22:21:46 -0500
+
 quick-system-info-gui (23.02.02mx21) mx; urgency=medium
 
   * show shortcut keys on right-click menu 
