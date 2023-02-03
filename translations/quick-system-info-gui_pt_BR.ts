@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="pt_BR">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="pt_BR">
 <context>
     <name>MainWindow</name>
     <message>
@@ -92,7 +90,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="109"/>
         <source>About Quick-System-Info-gui</source>
-        <translation>Sobre a interface gráfica de informações do computador e do sistema operacional</translation>
+        <translation>Sobre a interface gráfica das informações do computador e do sistema operacional</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="112"/>
@@ -144,17 +142,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="189"/>
         <source>Copy for forum</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar para o fórum</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="191"/>
         <source>Plain text copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Cópia de texto simples</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="193"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar</translation>
     </message>
 </context>
 <context>
@@ -170,7 +168,7 @@
     <message>
         <location filename="../main.cpp" line="42"/>
         <source>This tool displays a the quick system info report in a gui.</source>
-        <translation>Esta ferramenta exibe um relatório de contendo as informações do computador e do sistema operacional em uma interface gráfica.</translation>
+        <translation>Esta ferramenta exibe um relatório contendo as informações do computador e do sistema operacional em uma interface gráfica.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="65"/>
