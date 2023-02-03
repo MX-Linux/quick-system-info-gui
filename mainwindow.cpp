@@ -173,30 +173,23 @@ void MainWindow::apthistory()
 
 void MainWindow::buildcomboBoxCommand()
 {
-    QStringList logfiles = QDir("/var/log/").entryList(QStringList() << "*.log",QDir::Files);
+    QString logfilelist=runCmd("pkexec /usr/lib/quick-system-info-gui/qsig-lib-list list").output;
+    QStringList logfiles = logfilelist.split("\n");
+    QStringList logfilespost;
 
-    //add syslog if it exists
-    if (QFileInfo("/var/log/syslog").exists()){
-        logfiles.append("syslog");
-    }
 
-    //special cases live/*.log
-    QStringList livelogfilespre = QDir("/var/log/live").entryList(QStringList() << "*.log",QDir::Files);
-    QStringList livelogfilespost;
-    QStringListIterator it(livelogfilespre);
+    QStringListIterator it(logfiles);
     while(it.hasNext()){
-        QString i = "live/" + it.next();
-        livelogfilespost.append(i);
+        QString i = it.next();
+        i.remove("/var/log/");
+        logfilespost.append(i);
     }
-    logfiles.append(livelogfilespost);
 
-    logfiles.sort(Qt::CaseInsensitive);
-    logfiles.prepend("apt " + tr("history"));
-    logfiles.prepend(tr("Quick System Info"));
+    logfilespost.sort(Qt::CaseInsensitive);
+    logfilespost.prepend("apt " + tr("history"));
+    logfilespost.prepend(tr("Quick System Info"));
 
-
-
-    ui->comboBoxCommand->addItems(logfiles);
+    ui->comboBoxCommand->addItems(logfilespost);
 
 }
 
@@ -271,7 +264,7 @@ void MainWindow::displaylog(const QString &logfile)
 
         file.close();
     } else {
-        text = runCmd("pkexec /usr/lib/quick-system-info-gui/qsig-lib /var/log/" + logfile).output;
+        text = runCmd("pkexec /usr/lib/quick-system-info-gui/qsig-lib readadminfile /var/log/" + logfile).output;
     }
 
     ui->textSysInfo->setPlainText(text.trimmed());
