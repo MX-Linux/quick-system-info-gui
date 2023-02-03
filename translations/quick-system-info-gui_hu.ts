@@ -1,37 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="hu">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="hu">
 <context>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="32"/>
         <source>MX Welcome</source>
-        <translation type="unfinished"></translation>
+        <translation>Üdvözli az MX</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="130"/>
         <source>Copy the system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="unfinished"></translation>
+        <translation>Másolja a rendszerinformációkat a vágólapra, [CODE][/CODE] címkék közt, készen egy fórumbejegyzésben való felhasználásra.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="133"/>
         <source>&amp;Copy for forum</source>
-        <translation type="unfinished"></translation>
+        <translation>Másolás fórumhoz</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="140"/>
         <source>C</source>
-        <translation>T</translation>
+        <translation>C</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="116"/>
         <source>Save the system information to a text file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rendszerinformációk mentése egy szövegfájlba.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="119"/>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Mentés</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="221"/>
@@ -56,7 +54,7 @@
     <message>
         <location filename="../mainwindow.ui" line="288"/>
         <source>About...</source>
-        <translation>Névjegy</translation>
+        <translation>Névjegy...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="295"/>
@@ -77,12 +75,12 @@
         <location filename="../mainwindow.cpp" line="49"/>
         <location filename="../mainwindow.cpp" line="110"/>
         <source>Quick System Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Gyors rendszerinformációk</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="54"/>
         <source>Loading...</source>
-        <translation type="unfinished"></translation>
+        <translation>Betöltés...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="114"/>
@@ -92,21 +90,21 @@
     <message>
         <location filename="../mainwindow.cpp" line="109"/>
         <source>About Quick-System-Info-gui</source>
-        <translation type="unfinished"></translation>
+        <translation>A Gyors rendszerinformációk felületről</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="112"/>
         <source>Program for displaying a quick system info report</source>
-        <translation type="unfinished"></translation>
+        <translation>Egy gyors rendszerinformáció jelentés megjelenítésére szolgáló program</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="115"/>
         <source>License</source>
-        <translation>Liszensz</translation>
+        <translation>Licenc</translation>
     </message>
     <message>
         <source>Changelog</source>
-        <translation type="vanished">Változásbejegyzés</translation>
+        <translation type="vanished">Változások listája</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -114,47 +112,47 @@
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="vanished">&amp;Bezár</translation>
+        <translation type="vanished">&amp;Bezárás</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="121"/>
         <source>Save System Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Rendszerinformációk mentése</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="134"/>
         <source>System information saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rendszerinformációk mentve.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="135"/>
         <source>Could not save system information.</source>
-        <translation type="unfinished"></translation>
+        <translation>A rendszerinformációk mentése nem sikerült.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="160"/>
         <source>%1 Help</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Súgó</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="160"/>
         <source>Quick System Info (gui)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gyors rendszerinfó (grafikus felület)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="189"/>
         <source>Copy for forum</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="191"/>
         <source>Plain text copy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="193"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Mentés</translation>
     </message>
 </context>
 <context>
@@ -162,7 +160,7 @@
     <message>
         <location filename="../main.cpp" line="65"/>
         <source>You must run this program as normal user.</source>
-        <translation type="unfinished"></translation>
+        <translation>Egyszerű felhasználóként kell futtatnia ezt a programot</translation>
     </message>
 </context>
 <context>
@@ -170,7 +168,7 @@
     <message>
         <location filename="../main.cpp" line="42"/>
         <source>This tool displays a the quick system info report in a gui.</source>
-        <translation type="unfinished"></translation>
+        <translation>Egy az eszköz a grafikus felületen jelenít meg gyors rendszerinformációkat</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="65"/>
@@ -180,13 +178,13 @@
     <message>
         <location filename="../about.cpp" line="40"/>
         <source>License</source>
-        <translation>Liszensz</translation>
+        <translation>Licenc</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="41"/>
         <location filename="../about.cpp" line="51"/>
         <source>Changelog</source>
-        <translation>Változásbejegyzés</translation>
+        <translation>Változások listája</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="42"/>
@@ -196,7 +194,7 @@
     <message>
         <location filename="../about.cpp" line="63"/>
         <source>&amp;Close</source>
-        <translation>&amp;Bezár</translation>
+        <translation>&amp;Bezárás</translation>
     </message>
 </context>
 </TS>

@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="es_ES">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="es_ES">
 <context>
     <name>MainWindow</name>
     <message>
@@ -144,17 +142,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="189"/>
         <source>Copy for forum</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar para el foro</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="191"/>
         <source>Plain text copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia en texto plano</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="193"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar</translation>
     </message>
 </context>
 <context>

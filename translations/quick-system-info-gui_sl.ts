@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sl">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="sl">
 <context>
     <name>MainWindow</name>
     <message>
@@ -11,12 +9,12 @@
     <message>
         <location filename="../mainwindow.ui" line="130"/>
         <source>Copy the system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiraj podatke o sistemu na odložišče v obliki [CODE][/CODE] oznak za uporabo v sporočilu na forumu.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="133"/>
         <source>&amp;Copy for forum</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kopiraj za forum</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="140"/>
@@ -26,7 +24,7 @@
     <message>
         <location filename="../mainwindow.ui" line="116"/>
         <source>Save the system information to a text file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Shrani podatke o sistemu v tekstovno datoteko.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="119"/>
@@ -77,7 +75,7 @@
         <location filename="../mainwindow.cpp" line="49"/>
         <location filename="../mainwindow.cpp" line="110"/>
         <source>Quick System Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Hitri podatki o sistemu</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="54"/>
@@ -92,12 +90,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="109"/>
         <source>About Quick-System-Info-gui</source>
-        <translation type="unfinished"></translation>
+        <translation>O Hitri-podatki-o-sistemu-gui</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="112"/>
         <source>Program for displaying a quick system info report</source>
-        <translation type="unfinished"></translation>
+        <translation>Program za hiter prikaz informacij o sistemu</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="115"/>
@@ -119,17 +117,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="121"/>
         <source>Save System Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Shrani informacije o sistemu</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="134"/>
         <source>System information saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingformacije o sistemu so shranjene.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="135"/>
         <source>Could not save system information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Informaciji o sistemu ni bilo mogoče shraniti.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="160"/>
@@ -139,22 +137,22 @@
     <message>
         <location filename="../mainwindow.cpp" line="160"/>
         <source>Quick System Info (gui)</source>
-        <translation type="unfinished"></translation>
+        <translation>Hitri podatki o sistemu (gui)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="189"/>
         <source>Copy for forum</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="191"/>
         <source>Plain text copy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="193"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Shrani</translation>
     </message>
 </context>
 <context>
@@ -170,7 +168,7 @@
     <message>
         <location filename="../main.cpp" line="42"/>
         <source>This tool displays a the quick system info report in a gui.</source>
-        <translation type="unfinished"></translation>
+        <translation>To je orodje za hiter prikaz poročila o sistemu v grafičnem vmesniku.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="65"/>

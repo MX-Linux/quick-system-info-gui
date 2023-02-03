@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sq">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="sq">
 <context>
     <name>MainWindow</name>
     <message>
@@ -11,22 +9,22 @@
     <message>
         <location filename="../mainwindow.ui" line="130"/>
         <source>Copy the system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopjoni hollësitë e sistemit në të papastër, paketuar në etiketa [CODE][/CODE], gati për t’i përdorur në ndonjë postim forumesh.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="133"/>
         <source>&amp;Copy for forum</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kopjoji për forum</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="140"/>
         <source>C</source>
-        <translation type="unfinished"></translation>
+        <translation>K</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="116"/>
         <source>Save the system information to a text file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruajini hollësitë e sistemit në një kartelë tekst.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="119"/>
@@ -77,7 +75,7 @@
         <location filename="../mainwindow.cpp" line="49"/>
         <location filename="../mainwindow.cpp" line="110"/>
         <source>Quick System Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Hollësi Sistemi Shpejt e Shpejt</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="54"/>
@@ -92,12 +90,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="109"/>
         <source>About Quick-System-Info-gui</source>
-        <translation type="unfinished"></translation>
+        <translation>Mbi Quick-System-Info-gui</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="112"/>
         <source>Program for displaying a quick system info report</source>
-        <translation type="unfinished"></translation>
+        <translation>Program për shfaqje të shpejtë të një raporti hollësish sistemi</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="115"/>
@@ -119,17 +117,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="121"/>
         <source>Save System Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruani Hollësi Sistemi</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="134"/>
         <source>System information saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hollësitë e sistemit u ruajtën.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="135"/>
         <source>Could not save system information.</source>
-        <translation type="unfinished"></translation>
+        <translation>S’u ruajtën dot hollësitë e sistemit.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="160"/>
@@ -139,22 +137,22 @@
     <message>
         <location filename="../mainwindow.cpp" line="160"/>
         <source>Quick System Info (gui)</source>
-        <translation type="unfinished"></translation>
+        <translation>Hollësi Sistemi Shpejt e Shpejt (gui)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="189"/>
         <source>Copy for forum</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopjoje për forum</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="191"/>
         <source>Plain text copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopje tekst i thjeshtë</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="193"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruaje</translation>
     </message>
 </context>
 <context>
@@ -170,7 +168,7 @@
     <message>
         <location filename="../main.cpp" line="42"/>
         <source>This tool displays a the quick system info report in a gui.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ky mjet shfaq shpejt një raport hollësish sistemi në një gui.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="65"/>
