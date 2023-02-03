@@ -1,3 +1,9 @@
+quick-system-info-gui (23.02.04mx21) mx; urgency=medium
+
+  * include missing lib 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 03 Feb 2023 06:37:25 -0500
+
 quick-system-info-gui (23.02.03mx21) mx; urgency=medium
 
   * add message to policy file 
