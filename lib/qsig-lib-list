@@ -2,19 +2,15 @@
 
 #root level functions requiring password for quick-system-info-gui
 
-
-readadminfile(){
-
-cat "$FILE"
-
+list(){
+find /var/log -type f -size +0c -name '*log'
 }
 
 main()
 {
 ACTION="$1"
-FILE="$2"
-
 $ACTION
+
 }
 
 main "$@"
