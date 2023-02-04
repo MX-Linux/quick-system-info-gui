@@ -20,7 +20,7 @@
     <annotate key="org.freedesktop.policykit.exec.path">/usr/lib/quick-system-info-gui/qsig-lib</annotate>
     <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
   </action>
-  <action id="org.mxlinux.quick-system-info-gui">
+  <action id="org.mxlinux.quick-system-info-gui-list">
 	<message>Quick System Info:  Authentication is required to proceed</message>
     <icon_name>mx-qsi</icon_name>
     <description>list root owned files for quick-system-info-gui</description>

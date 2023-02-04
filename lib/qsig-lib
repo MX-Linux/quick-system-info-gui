@@ -6,8 +6,8 @@
 readadminfile(){
 
 cat "$FILE"
-
 }
+
 
 main()
 {
