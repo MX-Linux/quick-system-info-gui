@@ -5,7 +5,7 @@
 
 readadminfile(){
 
-cat "$FILE"
+zcat --force "$FILE"*
 
 }
 
