@@ -5,9 +5,11 @@
 
 readadminfile(){
 
+
 zcat --force "$FILE"*
 
 }
+
 
 main()
 {
