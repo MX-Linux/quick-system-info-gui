@@ -2,6 +2,13 @@
 
 #root level functions requiring password for quick-system-info-gui
 
+unset ALLOWED
+declare -A ALLOWED=(
+    #action     allowed
+    list        true
+    )
+
+
 list(){
 find /var/log -type f -size +0c -name '*log'
 }
@@ -9,7 +16,14 @@ find /var/log -type f -size +0c -name '*log'
 main()
 {
 ACTION="$1"
-$ACTION
+
+case "${ALLOWED[$ACTION]}" in
+    true) $ACTION
+          ;;
+       *) echo "[Error]: Unknown action '$ACTION'"
+          exit 1
+          ;;
+esac
 
 }
 
