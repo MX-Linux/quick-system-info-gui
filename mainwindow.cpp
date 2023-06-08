@@ -90,7 +90,7 @@ void MainWindow::setup()
     selall->setShortcutVisibleInContextMenu(true);
     connect(selall, &QAction::triggered, this, &MainWindow::listSelectAll);
     QAction *seldef = new QAction(QIcon::fromTheme(QStringLiteral("edit-clear-all")),
-        tr("Reset Selection"), this);
+        tr("Revert Selection"), this);
     seldef->setShortcut(Qt::CTRL | Qt::SHIFT | Qt::Key_A);
     seldef->setShortcutVisibleInContextMenu(true);
     connect(seldef, &QAction::triggered, this, &MainWindow::listSelectDefault);
