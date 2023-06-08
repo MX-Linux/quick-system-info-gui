@@ -61,16 +61,19 @@ public:
     void setup();
 
 private slots:
+    void on_pushSaveMulti_clicked();
     void on_pushSave_clicked();
     void on_ButtonCopy_clicked();
     void on_buttonAbout_clicked();
     void on_ButtonHelp_clicked();
+    void on_listInfo_itemSelectionChanged();
 
-    void on_comboBoxCommand_currentIndexChanged(int index);
+    void on_listInfo_itemChanged();
 
 private:
     Ui::MainWindow *ui;
     QSettings user_settings;
+    void lockGUI(bool lock);
     void forumcopy();
     void plaincopy();
     QMenu *menu {};
@@ -78,10 +81,12 @@ private:
     QAction *plaincopyaction {};
     QAction *saveasfile {};
     void createmenu(QPoint pos);
-    void systeminfo();
-    void apthistory();
-    void displaylog(const QString &logfile);
-    void buildcomboBoxCommand();
+    QString systeminfo();
+    QString apthistory();
+    QString readlog(const QString &logfile);
+    void buildInfoList();
+    void listSelectAll();
+    void listSelectDefault();
 };
 
 #endif // MAINWINDOW_H

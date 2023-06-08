@@ -22,6 +22,7 @@
  * along with mx-welcome.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 
+#include <cassert>
 #include <QAction>
 #include <QDebug>
 #include <QDir>
@@ -44,16 +45,14 @@ MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent)
 {
     qDebug().noquote() << QCoreApplication::applicationName() << "version:" << VERSION;
     ui->setupUi(this);
-    QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+    lockGUI(true);
     setWindowFlags(Qt::Window); // for the close, min and max buttons
-    this->setWindowTitle(tr("Quick System Info"));
-    this->setWindowIcon(QIcon::fromTheme("mx-qsi"));
-    ui->widget->setEnabled(false);
     ui->textSysInfo->setWordWrapMode(QTextOption::NoWrap);
     ui->textSysInfo->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->textSysInfo->setPlainText(tr("Loading..."));
     resize(QGuiApplication::primaryScreen()->availableGeometry().size() * 0.6);
     connect(ui->textSysInfo, &QPlainTextEdit::customContextMenuRequested, this, &MainWindow::createmenu);
+    ui->listInfo->setContextMenuPolicy(Qt::ActionsContextMenu);
     // This fires the lengthy setup routine after the window is displayed.
     QTimer::singleShot(0, this, &MainWindow::setup);
 }
@@ -64,7 +63,9 @@ MainWindow::~MainWindow() { delete ui; }
 void MainWindow::setup()
 {
     version = getVersion("quick-system-info-gui");
-    buildcomboBoxCommand();
+    buildInfoList();
+    ui->listInfo->setCurrentRow(0);
+
     QAction *copyreport = new QAction(this);
     copyreport->setShortcut(Qt::CTRL | Qt::Key_C);
     connect(copyreport, &QAction::triggered, this, &MainWindow::forumcopy);
@@ -79,9 +80,42 @@ void MainWindow::setup()
     this->addAction(plaincopyaction);
     this->addAction(savefileaction);
 
+    // Info list shortcuts and context menu.
+    QAction *selall = new QAction(QIcon::fromTheme(QStringLiteral("edit-select-all")),
+        tr("Select &All"), this);
+    selall->setShortcut(Qt::CTRL | Qt::Key_A);
+    selall->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+    selall->setShortcutVisibleInContextMenu(true);
+    connect(selall, &QAction::triggered, this, &MainWindow::listSelectAll);
+    QAction *seldef = new QAction(QIcon::fromTheme(QStringLiteral("edit-clear-all")),
+        tr("Reset Selection"), this);
+    seldef->setShortcut(Qt::CTRL | Qt::SHIFT | Qt::Key_A);
+    seldef->setShortcutVisibleInContextMenu(true);
+    connect(seldef, &QAction::triggered, this, &MainWindow::listSelectDefault);
+    QAction *save = new QAction(QIcon::fromTheme(QStringLiteral("document-save")),
+        ui->pushSaveMulti->text(), this);
+    save->setShortcut(Qt::ALT | Qt::Key_S);
+    save->setShortcutVisibleInContextMenu(true);
+    connect(save, &QAction::triggered, this, &MainWindow::on_pushSaveMulti_clicked);
+
+    ui->listInfo->addAction(selall);
+    ui->listInfo->addAction(seldef);
+    ui->listInfo->addAction(save);
+
     ui->ButtonCopy->setDefault(true);
-    ui->widget->setEnabled(true);
-    QApplication::setOverrideCursor(QCursor());
+    lockGUI(false);
+}
+
+void MainWindow::lockGUI(bool lock)
+{
+    if (ui->widget->isEnabled() == lock) {
+        ui->widget->setDisabled(lock);
+        if (lock) QApplication::setOverrideCursor(Qt::WaitCursor);
+        else {
+            ui->listInfo->setFocus();
+            QApplication::restoreOverrideCursor();
+        }
+    }
 }
 
 // Util function for getting bash command output and error code
@@ -117,80 +151,133 @@ void MainWindow::on_buttonAbout_clicked()
 void MainWindow::on_pushSave_clicked()
 {
     QFileDialog dialog(this, tr("Save System Information"));
-    switch(ui->comboBoxCommand->currentIndex()){
-      case 0:
-        dialog.setDefaultSuffix("txt");
-        dialog.setNameFilters({"*.txt"});
-        dialog.selectFile("sysinfo.txt");
-        break;
-
-      case 1:
-        dialog.setDefaultSuffix("txt");
-        dialog.setNameFilters({"*.txt"});
-        dialog.selectFile("apthistory.txt");
-        break;
-
-      default:
-        dialog.setDefaultSuffix("log");
-        dialog.setNameFilters({"*.log"});
-        dialog.selectFile(ui->comboBoxCommand->currentText());
-        break;
-    }
-
     dialog.setAcceptMode(QFileDialog::AcceptSave);
+    QListWidgetItem *item = ui->listInfo->item(ui->listInfo->currentRow());
+    assert(item != nullptr);
+    const QString &selname = item->data(Qt::UserRole).toString();
+    const QString &ext = QFileInfo(selname).suffix();
+    dialog.setDefaultSuffix(ext);
+    dialog.setNameFilter("*."+ext);
+    dialog.selectFile(selname);
+
     if (dialog.exec()) {
-        QFile file(dialog.selectedFiles().at(0));
+        lockGUI(true);
+        const QString selpath = dialog.selectedFiles().at(0);
         bool ok = false;
+        QFile file(selpath);
         if (file.open(QFile::Truncate | QFile::WriteOnly)) {
             const QByteArray &text = ui->textSysInfo->toPlainText().toUtf8();
-            ok = (file.write(text) == text.size());
+            ok = (file.write(text) != text.size());
             file.close();
         }
-        if (ok)
+        if (ok) {
             QMessageBox::information(this, windowTitle(), tr("System information saved."));
-        else
+        } else {
             QMessageBox::critical(this, windowTitle(), tr("Could not save system information."));
+        }
+        lockGUI(false);
+    }
+}
+void MainWindow::on_pushSaveMulti_clicked()
+{
+    QFileDialog dialog(this, tr("Save System Information"));
+    dialog.setFileMode(QFileDialog::Directory);
+    dialog.setAcceptMode(QFileDialog::AcceptSave);
+
+    if (dialog.exec()) {
+        lockGUI(true);
+        const QString selpath = dialog.selectedFiles().at(0);
+        bool ok = true;
+        for (int row = 0; row < ui->listInfo->count(); ++row) {
+            const QListWidgetItem *item = ui->listInfo->item(row);
+            assert(item != nullptr);
+            if (item->checkState() != Qt::Checked) continue;
+
+            QFile file(selpath + '/' + item->data(Qt::UserRole).toString());
+            if (file.open(QFile::Truncate | QFile::WriteOnly)) {
+                QByteArray contents;
+                switch(row) {
+                    case 0: contents = systeminfo().toUtf8(); break;
+                    case 1: contents = apthistory().toUtf8(); break;
+                    default: contents = readlog(item->text()).toUtf8(); break;
+                }
+                if (file.write(contents) != contents.size()) ok = false;
+                file.close();
+            }
+        }
+        if (ok) {
+            QMessageBox::information(this, windowTitle(), tr("System information saved."));
+        } else {
+            QMessageBox::critical(this, windowTitle(), tr("Could not save system information."));
+        }
+        lockGUI(false);
     }
 }
 
 void MainWindow::on_ButtonCopy_clicked() { forumcopy(); }
 
-void MainWindow::systeminfo()
+QString MainWindow::systeminfo()
 {
     QString text = runCmd(QStringLiteral("/usr/bin/quick-system-info-mx -g")).output;
     text.remove("[code]");
     text.remove("[/code]");
     text.replace("http: /", "http:/");
     text.replace("https: /", "https:/");
-    ui->textSysInfo->setPlainText(text.trimmed());
+    return text.trimmed();
 }
 
-void MainWindow::apthistory()
+QString MainWindow::apthistory()
 {
-    QString text = runCmd(QStringLiteral("zgrep -EH ' install | upgrade | purge | remove ' /var/log/dpkg* | cut -f2- -d: | sort -r | sed 's/ remove / remove  /;s/ purge / purge   /' | grep \"^\" ")).output;
-    ui->textSysInfo->setPlainText(text.trimmed());
+    return runCmd(QStringLiteral("zgrep -EH ' install | upgrade | purge | remove ' /var/log/dpkg*"
+        " | cut -f2- -d: | sort -r | sed 's/ remove / remove  /;s/ purge / purge   /'"
+        " | grep \"^\" ")).output.trimmed();
 }
 
-void MainWindow::buildcomboBoxCommand()
+void MainWindow::buildInfoList()
 {
+    ui->listInfo->blockSignals(true);
+    ui->listInfo->clear();
     QString logfilelist=runCmd("pkexec /usr/lib/quick-system-info-gui/qsig-lib-list list").output;
     QStringList logfiles = logfilelist.split("\n");
-    QStringList logfilespost;
 
-
-    QStringListIterator it(logfiles);
-    while(it.hasNext()){
-        QString i = it.next();
-        i.remove("/var/log/");
-        logfilespost.append(i);
+    // Because QListWidget does not have case-insensitive sort, do it here first.
+    for(QString &item : logfiles) {
+        item.remove("/var/log/");
+    }
+    logfiles.sort(Qt::CaseInsensitive);
+    for(const QString &logfile : logfiles) {
+        auto *item = new QListWidgetItem(logfile, ui->listInfo);
+        item->setData(Qt::UserRole, QFileInfo(logfile).fileName());
+        item->setCheckState(Qt::Unchecked);
     }
 
-    logfilespost.sort(Qt::CaseInsensitive);
-    logfilespost.prepend("apt " + tr("history"));
-    logfilespost.prepend(tr("Quick System Info"));
+    // Special treatment for QSI because of how important it is.
+    auto *item = new QListWidgetItem(tr("Quick System Info"));
+    item->setCheckState(Qt::Checked);
+    auto ifont = item->font();
+    ifont.setBold(true);
+    item->setFont(ifont);
+    item->setData(Qt::UserRole, "sysinfo.txt");
+    ui->listInfo->insertItem(0, item);
+    // Special apt history info
+    item = new QListWidgetItem("apt " + tr("history"));
+    item->setCheckState(Qt::Unchecked);
+    item->setData(Qt::UserRole, "apthistory.txt");
+    ui->listInfo->insertItem(1, item);
 
-    ui->comboBoxCommand->addItems(logfilespost);
-
+    ui->listInfo->blockSignals(false);
+    on_listInfo_itemChanged(); // Set up multi buttons.
+    // Resize the splitter according to the new contents
+    QApplication::processEvents(); // Allow the scroll bar to materialise
+    QList<int> sizes = ui->splitter->sizes();
+    if(sizes.count() > 1) {
+        const int total = sizes.at(0) + sizes.at(1);
+        const int shint = ui->listInfo->sizeHintForColumn(0)
+            + (sizes.at(0) - ui->listInfo->viewport()->contentsRect().width());
+        sizes[0] = shint;
+        sizes[1] = total - shint;
+        ui->splitter->setSizes(sizes);
+    }
 }
 
 void MainWindow::on_ButtonHelp_clicked()
@@ -247,19 +334,19 @@ void MainWindow::createmenu(QPoint pos)
     saveasfile->deleteLater();
 }
 
-void MainWindow::displaylog(const QString &logfile)
+QString MainWindow::readlog(const QString &logfile)
 {
     QString text;
     QFile file("/var/log/" + logfile);
     if (QFileInfo("/var/log/" + logfile).permission(QFile::ReadOther)){
         if (!file.open(QIODevice::ReadOnly)) {
             QMessageBox::information(0, "error", file.errorString());
-            return;
+            return text;
         }
         QTextStream in(&file);
 
         while(!in.atEnd()) {
-            text = in.readAll();
+            text += in.readAll();
         }
 
         file.close();
@@ -267,25 +354,57 @@ void MainWindow::displaylog(const QString &logfile)
         text = runCmd("pkexec /usr/lib/quick-system-info-gui/qsig-lib readadminfile /var/log/" + logfile).output;
     }
 
-    ui->textSysInfo->setPlainText(text.trimmed());
+    return text.trimmed();
 }
 
-
-void MainWindow::on_comboBoxCommand_currentIndexChanged(int index)
+// The currentRowchanged() signal occurs before the selection change is displayed.
+void MainWindow::on_listInfo_itemSelectionChanged()
 {
-    switch(index){
-      case 0:
-        ui->textSysInfo->setPlainText(tr("Loading..."));
-        systeminfo();
+    lockGUI(true);
+    ui->textSysInfo->setPlainText(tr("Loading..."));
+
+    const int selrow = ui->listInfo->currentRow();
+    switch(selrow){
+    case 0:
+        ui->textSysInfo->setPlainText(systeminfo());
         break;
 
-        case 1:
-        apthistory();
+    case 1:
+        ui->textSysInfo->setPlainText(apthistory());
         break;
 
-        default:
-        displaylog(ui->comboBoxCommand->currentText());
+    default:
+        ui->textSysInfo->setPlainText(readlog(ui->listInfo->item(selrow)->text()));
         break;
     }
 
+    lockGUI(false);
+}
+
+void MainWindow::on_listInfo_itemChanged()
+{
+    int nchecked = 0;
+    for(int row = 0; row < ui->listInfo->count(); ++row) {
+        if (ui->listInfo->item(row)->checkState() == Qt::Checked) {
+            ++nchecked;
+        }
+    }
+    ui->pushSaveMulti->setEnabled(nchecked > 0);
+    ui->pushSaveMulti->setText(tr("Save") + QStringLiteral(" × %1").arg(nchecked));
+}
+
+// List checkbox selection presets
+void MainWindow::listSelectAll()
+{
+    for(int row = 0; row < ui->listInfo->count(); ++row) {
+        ui->listInfo->item(row)->setCheckState(Qt::Checked);
+    }
+}
+void MainWindow::listSelectDefault()
+{
+    const int lcount = ui->listInfo->count();
+    if (lcount > 0) ui->listInfo->item(0)->setCheckState(Qt::Checked);
+    for(int row = 1; row < lcount; ++row) {
+        ui->listInfo->item(row)->setCheckState(Qt::Unchecked);
+    }
 }

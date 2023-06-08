@@ -37,3 +37,5 @@ ui_*.h
 # QtCtreator CMake
 CMakeLists.txt.user*
 
+# Auto-generated makefile
+Makefile

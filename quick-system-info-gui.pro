@@ -105,4 +105,4 @@ TRANSLATIONS += translations/quick-system-info-gui_af.ts \
 
 RESOURCES +=
 
-
+CONFIG += release warn_on c++17
