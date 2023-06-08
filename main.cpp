@@ -28,6 +28,7 @@
 #include <QLibraryInfo>
 #include <QLocale>
 #include <QTranslator>
+#include <QMessageBox>
 
 #include "mainwindow.h"
 #include <unistd.h>
