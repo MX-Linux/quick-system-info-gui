@@ -76,11 +76,6 @@ private:
     void lockGUI(bool lock);
     void forumcopy();
     void plaincopy();
-    QMenu *menu {};
-    QAction *forumcopyaction {};
-    QAction *plaincopyaction {};
-    QAction *saveasfile {};
-    void createmenu(QPoint pos);
     QString systeminfo();
     QString apthistory();
     QString readlog(const QString &logfile);

@@ -48,10 +48,9 @@ MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent)
     lockGUI(true);
     setWindowFlags(Qt::Window); // for the close, min and max buttons
     ui->textSysInfo->setWordWrapMode(QTextOption::NoWrap);
-    ui->textSysInfo->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->textSysInfo->setContextMenuPolicy(Qt::ActionsContextMenu);
     ui->textSysInfo->setPlainText(tr("Loading..."));
     resize(QGuiApplication::primaryScreen()->availableGeometry().size() * 0.6);
-    connect(ui->textSysInfo, &QPlainTextEdit::customContextMenuRequested, this, &MainWindow::createmenu);
     ui->listInfo->setContextMenuPolicy(Qt::ActionsContextMenu);
     // This fires the lengthy setup routine after the window is displayed.
     QTimer::singleShot(0, this, &MainWindow::setup);
@@ -66,19 +65,26 @@ void MainWindow::setup()
     buildInfoList();
     ui->listInfo->setCurrentRow(0);
 
-    QAction *copyreport = new QAction(this);
-    copyreport->setShortcut(Qt::CTRL | Qt::Key_C);
-    connect(copyreport, &QAction::triggered, this, &MainWindow::forumcopy);
-    QAction *plaincopyaction = new QAction(this);
-    connect(plaincopyaction, &QAction::triggered, this, &MainWindow::plaincopy);
+    // Log text box shortcuts and context menu
+    QAction *forumcopyaction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy-symbolic")),
+        tr("Copy for forum"), this);
+    forumcopyaction->setShortcutVisibleInContextMenu(true);
+    forumcopyaction->setShortcut(Qt::CTRL | Qt::Key_C);
+    connect(forumcopyaction, &QAction::triggered, this, &MainWindow::forumcopy);
+    QAction *plaincopyaction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy-symbolic")),
+        tr("Plain text copy"), this);
+    plaincopyaction->setShortcutVisibleInContextMenu(true);
     plaincopyaction->setShortcut(Qt::ALT | Qt::Key_C);
-    QAction *savefileaction = new QAction(this);
-    connect(savefileaction, &QAction::triggered, this, &MainWindow::on_pushSave_clicked);
-    savefileaction->setShortcut(Qt::CTRL | Qt::Key_S);
+    connect(plaincopyaction, &QAction::triggered, this, &MainWindow::plaincopy);
+    QAction *saveasfile = new QAction(QIcon::fromTheme(QStringLiteral("document-save")),
+        tr("Save"), this);
+    saveasfile->setShortcutVisibleInContextMenu(true);
+    saveasfile->setShortcut(Qt::CTRL | Qt::Key_S);
+    connect(saveasfile, &QAction::triggered, this, &MainWindow::on_pushSave_clicked);
 
-    this->addAction(copyreport);
-    this->addAction(plaincopyaction);
-    this->addAction(savefileaction);
+    ui->textSysInfo->addAction(forumcopyaction);
+    ui->textSysInfo->addAction(plaincopyaction);
+    ui->textSysInfo->addAction(saveasfile);
 
     // Info list shortcuts and context menu.
     QAction *selall = new QAction(QIcon::fromTheme(QStringLiteral("edit-select-all")),
@@ -92,15 +98,15 @@ void MainWindow::setup()
     seldef->setShortcut(Qt::CTRL | Qt::SHIFT | Qt::Key_A);
     seldef->setShortcutVisibleInContextMenu(true);
     connect(seldef, &QAction::triggered, this, &MainWindow::listSelectDefault);
-    QAction *save = new QAction(QIcon::fromTheme(QStringLiteral("document-save")),
+    QAction *multisave = new QAction(QIcon::fromTheme(QStringLiteral("document-save")),
         ui->pushSaveMulti->text(), this);
-    save->setShortcut(Qt::ALT | Qt::Key_S);
-    save->setShortcutVisibleInContextMenu(true);
-    connect(save, &QAction::triggered, this, &MainWindow::on_pushSaveMulti_clicked);
+    multisave->setShortcut(Qt::ALT | Qt::Key_S);
+    multisave->setShortcutVisibleInContextMenu(true);
+    connect(multisave, &QAction::triggered, this, &MainWindow::on_pushSaveMulti_clicked);
 
     ui->listInfo->addAction(selall);
     ui->listInfo->addAction(seldef);
-    ui->listInfo->addAction(save);
+    ui->listInfo->addAction(multisave);
 
     ui->ButtonCopy->setDefault(true);
     lockGUI(false);
@@ -307,31 +313,6 @@ void MainWindow::plaincopy()
         text = ui->textSysInfo->toPlainText();
     }
     clipboard->setText(text);
-}
-
-void MainWindow::createmenu(QPoint pos)
-{
-    QMenu menu(this);
-    forumcopyaction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy-symbolic")), tr("Copy for forum"), this);
-    forumcopyaction->setShortcutVisibleInContextMenu(true);
-    forumcopyaction->setShortcut(Qt::CTRL | Qt::Key_C);
-    connect(forumcopyaction, &QAction::triggered, this, &MainWindow::forumcopy);
-    plaincopyaction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy-symbolic")), tr("Plain text copy"), this);
-    plaincopyaction->setShortcutVisibleInContextMenu(true);
-    plaincopyaction->setShortcut(Qt::ALT | Qt::Key_C);
-    connect(plaincopyaction, &QAction::triggered, this, &MainWindow::plaincopy);
-    saveasfile = new QAction(QIcon::fromTheme(QStringLiteral("document-save")), tr("Save"), this);
-    saveasfile->setShortcutVisibleInContextMenu(true);
-    saveasfile->setShortcut(Qt::CTRL | Qt::Key_S);
-    connect(saveasfile, &QAction::triggered, this, &MainWindow::on_pushSave_clicked);
-    menu.addAction(forumcopyaction);
-    menu.addAction(plaincopyaction);
-    menu.addAction(saveasfile);
-
-    menu.exec(ui->textSysInfo->mapToGlobal(pos));
-    forumcopyaction->deleteLater();
-    plaincopyaction->deleteLater();
-    saveasfile->deleteLater();
 }
 
 QString MainWindow::readlog(const QString &logfile)
