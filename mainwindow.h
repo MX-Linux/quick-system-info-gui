@@ -61,7 +61,7 @@ public:
     void setup();
 
 private slots:
-    void on_pushSaveMulti_clicked();
+    void on_pushMultiSave_clicked();
     void on_pushSave_clicked();
     void on_ButtonCopy_clicked();
     void on_buttonAbout_clicked();
@@ -73,6 +73,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QSettings user_settings;
+    QAction *actionMultiSave = nullptr;
     void lockGUI(bool lock);
     void forumcopy();
     void plaincopy();

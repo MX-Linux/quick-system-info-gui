@@ -62,8 +62,6 @@ MainWindow::~MainWindow() { delete ui; }
 void MainWindow::setup()
 {
     version = getVersion("quick-system-info-gui");
-    buildInfoList();
-    ui->listInfo->setCurrentRow(0);
 
     // Log text box shortcuts and context menu
     QAction *forumcopyaction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy-symbolic")),
@@ -98,15 +96,17 @@ void MainWindow::setup()
     seldef->setShortcut(Qt::CTRL | Qt::SHIFT | Qt::Key_A);
     seldef->setShortcutVisibleInContextMenu(true);
     connect(seldef, &QAction::triggered, this, &MainWindow::listSelectDefault);
-    QAction *multisave = new QAction(QIcon::fromTheme(QStringLiteral("document-save")),
-        ui->pushSaveMulti->text(), this);
-    multisave->setShortcut(Qt::ALT | Qt::Key_S);
-    multisave->setShortcutVisibleInContextMenu(true);
-    connect(multisave, &QAction::triggered, this, &MainWindow::on_pushSaveMulti_clicked);
+    actionMultiSave = new QAction(QIcon::fromTheme(QStringLiteral("document-save")), QString(), this);
+    actionMultiSave->setShortcut(Qt::CTRL | Qt::SHIFT | Qt::Key_S);
+    actionMultiSave->setShortcutVisibleInContextMenu(true);
+    connect(actionMultiSave, &QAction::triggered, this, &MainWindow::on_pushMultiSave_clicked);
 
     ui->listInfo->addAction(selall);
     ui->listInfo->addAction(seldef);
-    ui->listInfo->addAction(multisave);
+    ui->listInfo->addAction(actionMultiSave);
+
+    buildInfoList();
+    ui->listInfo->setCurrentRow(0);
 
     ui->ButtonCopy->setDefault(true);
     lockGUI(false);
@@ -184,7 +184,7 @@ void MainWindow::on_pushSave_clicked()
         lockGUI(false);
     }
 }
-void MainWindow::on_pushSaveMulti_clicked()
+void MainWindow::on_pushMultiSave_clicked()
 {
     QFileDialog dialog(this, tr("Save System Information"));
     dialog.setFileMode(QFileDialog::Directory);
@@ -241,26 +241,31 @@ QString MainWindow::apthistory()
 
 void MainWindow::buildInfoList()
 {
-    ui->listInfo->blockSignals(true);
-    ui->listInfo->clear();
     QString logfilelist=runCmd("pkexec /usr/lib/quick-system-info-gui/qsig-lib-list list").output;
     QStringList logfiles = logfilelist.split("\n");
+    ui->listInfo->blockSignals(true);
+    ui->listInfo->clear();
 
-    // Because QListWidget does not have case-insensitive sort, do it here first.
-    for(QString &item : logfiles) {
-        item.remove("/var/log/");
-    }
-    logfiles.sort(Qt::CaseInsensitive);
-    for(const QString &logfile : logfiles) {
+    // Populate with log files and sort.
+    for(QString &logfile : logfiles) {
+        QFileInfo qfi(logfile);
+        logfile.remove("/var/log/");
         auto *item = new QListWidgetItem(logfile, ui->listInfo);
-        item->setData(Qt::UserRole, QFileInfo(logfile).fileName());
+        item->setData(Qt::UserRole, logfile.replace('/','+'));
         item->setCheckState(Qt::Unchecked);
+        // Italics for log files that require root to read.
+        if (!qfi.permission(QFile::ReadOther)) {
+            QFont ifont = item->font();
+            ifont.setItalic(true);
+            item->setFont(ifont);
+        }
     }
+    ui->listInfo->sortItems(); // Sort current list before adding special items.
 
     // Special treatment for QSI because of how important it is.
-    auto *item = new QListWidgetItem(tr("Quick System Info"));
+    QListWidgetItem *item = new QListWidgetItem(tr("Quick System Info"));
     item->setCheckState(Qt::Checked);
-    auto ifont = item->font();
+    QFont ifont = item->font();
     ifont.setBold(true);
     item->setFont(ifont);
     item->setData(Qt::UserRole, "sysinfo.txt");
@@ -370,8 +375,12 @@ void MainWindow::on_listInfo_itemChanged()
             ++nchecked;
         }
     }
-    ui->pushSaveMulti->setEnabled(nchecked > 0);
-    ui->pushSaveMulti->setText(tr("Save") + QStringLiteral(" × %1").arg(nchecked));
+    const QString ctltext = tr("Save Selected (×%1)").arg(nchecked);
+    ui->pushMultiSave->setEnabled(nchecked > 0);
+    ui->pushMultiSave->setText(ctltext);
+    assert(actionMultiSave != nullptr);
+    actionMultiSave->setEnabled(nchecked > 0);
+    actionMultiSave->setText(ctltext);
 }
 
 // List checkbox selection presets
