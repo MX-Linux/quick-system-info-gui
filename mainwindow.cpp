@@ -405,9 +405,16 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
             // Auto-resize splitter to fit list column.
             QList<int> sizes = ui->splitter->sizes();
             if(sizes.count() > 1) {
+                int shint = ui->listInfo->sizeHintForColumn(0);
+                if (sizes.at(0) <= 0) {
+                    // If the list is collapsed, pre-size it to ensure correct calculations.
+                    sizes[0] = shint;
+                    sizes[1] -= shint;
+                    ui->splitter->setSizes(sizes);
+                    sizes = ui->splitter->sizes();
+                }
                 const int total = sizes.at(0) + sizes.at(1);
-                const int shint = ui->listInfo->sizeHintForColumn(0)
-                                  + (sizes.at(0) - ui->listInfo->viewport()->contentsRect().width());
+                shint += sizes.at(0) - ui->listInfo->viewport()->contentsRect().width();
                 sizes[0] = shint;
                 sizes[1] = total - shint;
                 ui->splitter->setSizes(sizes);
