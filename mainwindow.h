@@ -73,6 +73,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QSettings user_settings;
+    QStringList defaultMatches;
     QAction *actionMultiSave = nullptr;
     void lockGUI(bool lock);
     void forumcopy();

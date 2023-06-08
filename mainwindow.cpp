@@ -52,6 +52,7 @@ MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent)
     ui->textSysInfo->setPlainText(tr("Loading..."));
     resize(QGuiApplication::primaryScreen()->availableGeometry().size() * 0.6);
     ui->listInfo->setContextMenuPolicy(Qt::ActionsContextMenu);
+    defaultMatches = arg_parser.positionalArguments();
     // This fires the lengthy setup routine after the window is displayed.
     QTimer::singleShot(0, this, &MainWindow::setup);
 }
@@ -252,7 +253,6 @@ void MainWindow::buildInfoList()
         logfile.remove("/var/log/");
         auto *item = new QListWidgetItem(logfile, ui->listInfo);
         item->setData(Qt::UserRole, logfile.replace('/','+'));
-        item->setCheckState(Qt::Unchecked);
         // Italics for log files that require root to read.
         if (!qfi.permission(QFile::ReadOther)) {
             QFont ifont = item->font();
@@ -264,7 +264,6 @@ void MainWindow::buildInfoList()
 
     // Special treatment for QSI because of how important it is.
     QListWidgetItem *item = new QListWidgetItem(tr("Quick System Info"));
-    item->setCheckState(Qt::Checked);
     QFont ifont = item->font();
     ifont.setBold(true);
     item->setFont(ifont);
@@ -272,12 +271,13 @@ void MainWindow::buildInfoList()
     ui->listInfo->insertItem(0, item);
     // Special apt history info
     item = new QListWidgetItem("apt " + tr("history"));
-    item->setCheckState(Qt::Unchecked);
     item->setData(Qt::UserRole, "apthistory.txt");
     ui->listInfo->insertItem(1, item);
 
+    listSelectDefault();
     ui->listInfo->blockSignals(false);
     on_listInfo_itemChanged(); // Set up multi buttons.
+
     // Resize the splitter according to the new contents
     QApplication::processEvents(); // Allow the scroll bar to materialise
     QList<int> sizes = ui->splitter->sizes();
@@ -396,5 +396,12 @@ void MainWindow::listSelectDefault()
     if (lcount > 0) ui->listInfo->item(0)->setCheckState(Qt::Checked);
     for(int row = 1; row < lcount; ++row) {
         ui->listInfo->item(row)->setCheckState(Qt::Unchecked);
+    }
+    // Check any items that match what is specified on the command line.
+    for(const QString &match : qAsConst(defaultMatches)) {
+        QList<QListWidgetItem *> matched = ui->listInfo->findItems(match, Qt::MatchWildcard);
+        for(QListWidgetItem *item : matched) {
+            item->setCheckState(Qt::Checked);
+        }
     }
 }
