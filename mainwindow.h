@@ -84,6 +84,7 @@ private:
     void buildInfoList();
     void listSelectAll();
     void listSelectDefault();
+    bool eventFilter(QObject *watched, QEvent *event);
 };
 
 #endif // MAINWINDOW_H
