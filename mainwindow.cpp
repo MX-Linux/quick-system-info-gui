@@ -61,6 +61,12 @@ MainWindow::~MainWindow() { delete ui; }
 // setup versious items first time program runs
 void MainWindow::setup()
 {
+    // Allow user-friendly match strings.
+    for(QString &match : defaultMatches) {
+        match.replace('/', '+');
+        if (!match.contains('.')) match.append(QStringLiteral(".txt"));
+    }
+
     // Log text box shortcuts and context menu
     QAction *forumcopyaction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy-symbolic")),
         tr("Copy for forum"), this);
@@ -379,16 +385,16 @@ void MainWindow::listSelectAll()
 void MainWindow::listSelectDefault()
 {
     const int lcount = ui->listInfo->count();
-    if (lcount > 0) ui->listInfo->item(0)->setCheckState(Qt::Checked);
-    for(int row = 1; row < lcount; ++row) {
-        ui->listInfo->item(row)->setCheckState(Qt::Unchecked);
+    if (lcount > 0) {
+        // Quick System Info should always be selected.
+        ui->listInfo->item(0)->setCheckState(Qt::Checked);
     }
-    // Check any items that match what is specified on the command line.
-    for(const QString &match : qAsConst(defaultMatches)) {
-        QList<QListWidgetItem *> matched = ui->listInfo->findItems(match, Qt::MatchWildcard);
-        for(QListWidgetItem *item : matched) {
-            item->setCheckState(Qt::Checked);
-        }
+    for(int row = 1; row < lcount; ++row) {
+        QListWidgetItem *item = ui->listInfo->item(row);
+        assert(item != nullptr);
+        const bool sel = defaultMatches.contains(item->data(Qt::UserRole).toString(),
+            Qt::CaseInsensitive);
+        item->setCheckState(sel ? Qt::Checked : Qt::Unchecked);
     }
 }
 
