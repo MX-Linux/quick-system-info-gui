@@ -35,7 +35,8 @@ SOURCES += main.cpp\
 
 HEADERS  += \
     about.h \
-    mainwindow.h
+    mainwindow.h \
+    version.h
 
 FORMS    += \
     mainwindow.ui

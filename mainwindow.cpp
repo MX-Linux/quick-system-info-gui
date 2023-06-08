@@ -28,12 +28,11 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QFileInfo>
-#include <QPoint>
+#include <QMessageBox>
 #include <QScreen>
-#include <QTextEdit>
 #include <QTimer>
+#include <QClipboard>
 
-#include "QClipboard"
 #include "about.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -62,8 +61,6 @@ MainWindow::~MainWindow() { delete ui; }
 // setup versious items first time program runs
 void MainWindow::setup()
 {
-    version = getVersion("quick-system-info-gui");
-
     // Log text box shortcuts and context menu
     QAction *forumcopyaction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy-symbolic")),
         tr("Copy for forum"), this);
@@ -110,6 +107,7 @@ void MainWindow::setup()
     buildInfoList();
     ui->listInfo->setCurrentRow(0);
 
+    connect(ui->ButtonCopy, &QPushButton::clicked, this, &MainWindow::forumcopy);
     ui->ButtonCopy->setDefault(true);
     lockGUI(false);
 }
@@ -137,9 +135,6 @@ Result MainWindow::runCmd(const QString &cmd)
     loop.exec();
     return {proc.exitCode(), proc.readAll().trimmed()};
 }
-
-// Get version of the program
-QString MainWindow::getVersion(const QString &name) { return runCmd("dpkg-query -f '${Version}' -W " + name).output; }
 
 // About button clicked
 void MainWindow::on_buttonAbout_clicked()
@@ -221,8 +216,6 @@ void MainWindow::on_pushMultiSave_clicked()
         lockGUI(false);
     }
 }
-
-void MainWindow::on_ButtonCopy_clicked() { forumcopy(); }
 
 QString MainWindow::systeminfo()
 {
@@ -403,6 +396,7 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 {
     if (event->type() == QEvent::MouseButtonDblClick) {
         if (watched == ui->splitter->handle(1)) {
+            // Auto-resize splitter to fit list column.
             QList<int> sizes = ui->splitter->sizes();
             if(sizes.count() > 1) {
                 const int total = sizes.at(0) + sizes.at(1);

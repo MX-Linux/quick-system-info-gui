@@ -26,11 +26,10 @@
 #define MAINWINDOW_H
 
 #include <QCommandLineParser>
-#include <QMenu>
-#include <QMessageBox>
-#include <QPoint>
+#include <QDialog>
+#include <QAction>
+#include <QEvent>
 #include <QProcess>
-#include <QSettings>
 
 namespace Ui
 {
@@ -54,25 +53,19 @@ public:
     ~MainWindow();
 
     Result runCmd(const QString &cmd);
-    QString getVersion(const QString &name);
 
-    QString version;
-    QString output;
     void setup();
 
 private slots:
     void on_pushMultiSave_clicked();
     void on_pushSave_clicked();
-    void on_ButtonCopy_clicked();
     void on_buttonAbout_clicked();
     void on_ButtonHelp_clicked();
     void on_listInfo_itemSelectionChanged();
-
     void on_listInfo_itemChanged();
 
 private:
     Ui::MainWindow *ui;
-    QSettings user_settings;
     QStringList defaultMatches;
     QAction *actionMultiSave = nullptr;
     void lockGUI(bool lock);
