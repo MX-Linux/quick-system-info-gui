@@ -57,8 +57,8 @@ public:
     void setup();
 
 private slots:
-    void on_pushMultiSave_clicked();
     void on_pushSave_clicked();
+    void on_pushSaveText_clicked();
     void on_buttonAbout_clicked();
     void on_ButtonHelp_clicked();
     void on_listInfo_itemSelectionChanged();
@@ -67,7 +67,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QStringList defaultMatches;
-    QAction *actionMultiSave = nullptr;
+    QAction *actionSave = nullptr;
     void lockGUI(bool lock);
     void forumcopy();
     void plaincopy();

@@ -82,10 +82,10 @@ void MainWindow::setup()
     plaincopyaction->setShortcut(Qt::ALT | Qt::Key_C);
     connect(plaincopyaction, &QAction::triggered, this, &MainWindow::plaincopy);
     QAction *saveasfile = new QAction(QIcon::fromTheme(QStringLiteral("document-save")),
-        tr("Save"), this);
+        tr("Save text..."), this);
     saveasfile->setShortcutVisibleInContextMenu(true);
-    saveasfile->setShortcut(Qt::CTRL | Qt::Key_S);
-    connect(saveasfile, &QAction::triggered, this, &MainWindow::on_pushSave_clicked);
+    saveasfile->setShortcut(Qt::CTRL | Qt::SHIFT | Qt::Key_S);
+    connect(saveasfile, &QAction::triggered, this, &MainWindow::on_pushSaveText_clicked);
 
     ui->textSysInfo->addAction(forumcopyaction);
     ui->textSysInfo->addAction(plaincopyaction);
@@ -103,14 +103,15 @@ void MainWindow::setup()
     seldef->setShortcut(Qt::CTRL | Qt::SHIFT | Qt::Key_A);
     seldef->setShortcutVisibleInContextMenu(true);
     connect(seldef, &QAction::triggered, this, &MainWindow::listSelectDefault);
-    actionMultiSave = new QAction(QIcon::fromTheme(QStringLiteral("document-save")), QString(), this);
-    actionMultiSave->setShortcut(Qt::CTRL | Qt::SHIFT | Qt::Key_S);
-    actionMultiSave->setShortcutVisibleInContextMenu(true);
-    connect(actionMultiSave, &QAction::triggered, this, &MainWindow::on_pushMultiSave_clicked);
+    actionSave = new QAction(QIcon::fromTheme(QStringLiteral("document-save")),
+        tr("&Save..."), this);
+    actionSave->setShortcut(Qt::CTRL | Qt::Key_S);
+    actionSave->setShortcutVisibleInContextMenu(true);
+    connect(actionSave, &QAction::triggered, this, &MainWindow::on_pushSave_clicked);
 
     ui->listInfo->addAction(selall);
     ui->listInfo->addAction(seldef);
-    ui->listInfo->addAction(actionMultiSave);
+    ui->listInfo->addAction(actionSave);
 
     ui->splitter->handle(1)->installEventFilter(this);
     buildInfoList();
@@ -160,9 +161,9 @@ void MainWindow::on_buttonAbout_clicked()
     this->show();
 }
 
-void MainWindow::on_pushSave_clicked()
+void MainWindow::on_pushSaveText_clicked()
 {
-    QFileDialog dialog(this, tr("Save System Information"));
+    QFileDialog dialog(this);
     dialog.setAcceptMode(QFileDialog::AcceptSave);
     QListWidgetItem *item = ui->listInfo->item(ui->listInfo->currentRow());
     assert(item != nullptr);
@@ -190,7 +191,7 @@ void MainWindow::on_pushSave_clicked()
         lockGUI(false);
     }
 }
-void MainWindow::on_pushMultiSave_clicked()
+void MainWindow::on_pushSave_clicked()
 {
     QFileDialog dialog(this, tr("Save System Information"));
     dialog.setAcceptMode(QFileDialog::AcceptSave);
@@ -389,12 +390,12 @@ void MainWindow::on_listInfo_itemChanged()
             ++nchecked;
         }
     }
-    const QString ctltext = tr("Save Selected (×%1)").arg(nchecked);
-    ui->pushMultiSave->setEnabled(nchecked > 0);
-    ui->pushMultiSave->setText(ctltext);
-    assert(actionMultiSave != nullptr);
-    actionMultiSave->setEnabled(nchecked > 0);
-    actionMultiSave->setText(ctltext);
+    const QString ctltext = tr("&Save (×%1)...").arg(nchecked);
+    ui->pushSave->setEnabled(nchecked > 0);
+    ui->pushSave->setText(ctltext);
+    assert(actionSave != nullptr);
+    actionSave->setEnabled(nchecked > 0);
+    actionSave->setText(ctltext);
 }
 
 // List checkbox selection presets
