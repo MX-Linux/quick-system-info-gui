@@ -78,6 +78,7 @@ private:
     void listSelectAll();
     void listSelectDefault();
     bool eventFilter(QObject *watched, QEvent *event);
+    void autoFitSplitter();
 };
 
 #endif // MAINWINDOW_H

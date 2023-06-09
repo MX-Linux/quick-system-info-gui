@@ -301,9 +301,9 @@ void MainWindow::buildInfoList()
     ui->listInfo->blockSignals(false);
     on_listInfo_itemChanged(); // Set up multi buttons.
 
-    // Resize the splitter to the contents by simulating a double-click.
-    QApplication::postEvent(ui->splitter->handle(1),
-        new QEvent(QEvent::MouseButtonDblClick), Qt::LowEventPriority);
+    // Resize the splitter according to the new contents
+    QApplication::processEvents(); // Allow the scroll bar to materialise
+    autoFitSplitter();
 }
 
 void MainWindow::on_ButtonHelp_clicked()
@@ -422,25 +422,27 @@ void MainWindow::listSelectDefault()
 bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 {
     if (event->type() == QEvent::MouseButtonDblClick) {
-        if (watched == ui->splitter->handle(1)) {
-            // Auto-resize splitter to fit list column.
-            QList<int> sizes = ui->splitter->sizes();
-            if(sizes.count() > 1) {
-                int shint = ui->listInfo->sizeHintForColumn(0);
-                if (sizes.at(0) <= 0) {
-                    // If the list is collapsed, pre-size it to ensure correct calculations.
-                    sizes[0] = shint;
-                    sizes[1] -= shint;
-                    ui->splitter->setSizes(sizes);
-                    sizes = ui->splitter->sizes();
-                }
-                const int total = sizes.at(0) + sizes.at(1);
-                shint += sizes.at(0) - ui->listInfo->viewport()->contentsRect().width();
-                sizes[0] = shint;
-                sizes[1] = total - shint;
-                ui->splitter->setSizes(sizes);
-            }
-        }
+        if (watched == ui->splitter->handle(1)) autoFitSplitter();
     }
     return false;
+}
+// Auto-resize splitter to fit list column.
+void MainWindow::autoFitSplitter()
+{
+    QList<int> sizes = ui->splitter->sizes();
+    if(sizes.count() > 1) {
+        int shint = ui->listInfo->sizeHintForColumn(0);
+        if (sizes.at(0) <= 0) {
+            // If the list is collapsed, pre-size it to ensure correct calculations.
+            sizes[0] = shint;
+            sizes[1] -= shint;
+            ui->splitter->setSizes(sizes);
+            sizes = ui->splitter->sizes();
+        }
+        const int total = sizes.at(0) + sizes.at(1);
+        shint += sizes.at(0) - ui->listInfo->viewport()->contentsRect().width();
+        sizes[0] = shint;
+        sizes[1] = total - shint;
+        ui->splitter->setSizes(sizes);
+    }
 }
