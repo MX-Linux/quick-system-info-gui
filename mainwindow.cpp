@@ -167,11 +167,10 @@ void MainWindow::on_pushSaveText_clicked()
     dialog.setAcceptMode(QFileDialog::AcceptSave);
     QListWidgetItem *item = ui->listInfo->item(ui->listInfo->currentRow());
     assert(item != nullptr);
-    const QString &selname = item->data(Qt::UserRole).toString().replace('/','+');
-    const QString &ext = QFileInfo(selname).suffix();
-    dialog.setDefaultSuffix(ext);
-    dialog.setNameFilter("*."+ext);
-    dialog.selectFile(selname);
+    const QStringList filters({"text/plain", "text/x-log", "application/octet-stream"});
+    dialog.setMimeTypeFilters(filters); // Segmentation fault when using init list directly.
+    dialog.setDefaultSuffix("txt");
+    dialog.selectFile(item->data(Qt::UserRole).toString().replace('/','+'));
 
     if (dialog.exec()) {
         lockGUI(true);
@@ -180,7 +179,7 @@ void MainWindow::on_pushSaveText_clicked()
         QFile file(selpath);
         if (file.open(QFile::Truncate | QFile::WriteOnly)) {
             const QByteArray &text = ui->textSysInfo->toPlainText().toUtf8();
-            ok = (file.write(text) != text.size());
+            ok = (file.write(text) == text.size());
             file.close();
         }
         if (ok) {
@@ -195,8 +194,9 @@ void MainWindow::on_pushSave_clicked()
 {
     QFileDialog dialog(this, tr("Save System Information"));
     dialog.setAcceptMode(QFileDialog::AcceptSave);
+    const QStringList filters({"application/zip", "application/gzip", "application/octet-stream"});
+    dialog.setMimeTypeFilters(filters); // Segmentation fault when using init list directory.
     dialog.setDefaultSuffix("zip");
-    dialog.setNameFilter("*.zip");
     dialog.selectFile("sysinfo.zip");
     if (!dialog.exec()) return;
 
