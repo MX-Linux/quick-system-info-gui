@@ -23,6 +23,7 @@
  **********************************************************************/
 
 #include <cassert>
+#include <ctime>
 #include <QAction>
 #include <QDebug>
 #include <QDir>
@@ -32,6 +33,9 @@
 #include <QScreen>
 #include <QTimer>
 #include <QClipboard>
+
+#include <archive.h>
+#include <archive_entry.h>
 
 #include "about.h"
 #include "mainwindow.h"
@@ -63,7 +67,6 @@ void MainWindow::setup()
 {
     // Allow user-friendly match strings.
     for(QString &match : defaultMatches) {
-        match.replace('/', '+');
         if (!match.contains('.')) match.append(QStringLiteral(".txt"));
     }
 
@@ -163,7 +166,7 @@ void MainWindow::on_pushSave_clicked()
     dialog.setAcceptMode(QFileDialog::AcceptSave);
     QListWidgetItem *item = ui->listInfo->item(ui->listInfo->currentRow());
     assert(item != nullptr);
-    const QString &selname = item->data(Qt::UserRole).toString();
+    const QString &selname = item->data(Qt::UserRole).toString().replace('/','+');
     const QString &ext = QFileInfo(selname).suffix();
     dialog.setDefaultSuffix(ext);
     dialog.setNameFilter("*."+ext);
@@ -190,37 +193,56 @@ void MainWindow::on_pushSave_clicked()
 void MainWindow::on_pushMultiSave_clicked()
 {
     QFileDialog dialog(this, tr("Save System Information"));
-    dialog.setFileMode(QFileDialog::Directory);
     dialog.setAcceptMode(QFileDialog::AcceptSave);
+    dialog.setDefaultSuffix("zip");
+    dialog.setNameFilter("*.zip");
+    dialog.selectFile("sysinfo.zip");
+    if (!dialog.exec()) return;
 
-    if (dialog.exec()) {
-        lockGUI(true);
-        const QString selpath = dialog.selectedFiles().at(0);
-        bool ok = true;
+    bool ok = true;
+    lockGUI(true);
+    struct archive *arc = nullptr;
+    struct archive_entry *arcentry = nullptr;
+    try {
+        const QByteArray selfile = dialog.selectedFiles().at(0).toUtf8();
+        arc = archive_write_new();
+        arcentry = archive_entry_new();
+        if (!arc || !arcentry) throw true;
+        if (archive_write_set_format_filter_by_ext(arc, selfile.constData()) != ARCHIVE_OK) throw false;
+        if (archive_write_open_filename(arc, selfile.constData()) != ARCHIVE_OK) throw false;
+
         for (int row = 0; row < ui->listInfo->count(); ++row) {
             const QListWidgetItem *item = ui->listInfo->item(row);
             assert(item != nullptr);
             if (item->checkState() != Qt::Checked) continue;
 
-            QFile file(selpath + '/' + item->data(Qt::UserRole).toString());
-            if (file.open(QFile::Truncate | QFile::WriteOnly)) {
-                QByteArray contents;
-                switch(row) {
-                    case 0: contents = systeminfo().toUtf8(); break;
-                    case 1: contents = apthistory().toUtf8(); break;
-                    default: contents = readlog(item->text()).toUtf8(); break;
-                }
-                if (file.write(contents) != contents.size()) ok = false;
-                file.close();
+            QByteArray contents;
+            switch(row) {
+                case 0: contents = systeminfo().toUtf8(); break;
+                case 1: contents = apthistory().toUtf8(); break;
+                default: contents = readlog(item->text()).toUtf8(); break;
             }
+            archive_entry_set_pathname(arcentry, item->data(Qt::UserRole).toByteArray().constData());
+            archive_entry_set_filetype(arcentry, AE_IFREG);
+            archive_entry_set_perm(arcentry, 0644);
+            archive_entry_set_mtime(arcentry, time(NULL), 0);
+            archive_entry_set_size(arcentry, contents.size());
+            if (archive_write_header(arc, arcentry) != ARCHIVE_OK) throw false;
+
+            if (archive_write_data(arc, contents.constData(), contents.size()) != contents.size()) throw false;
+            archive_entry_clear(arcentry);
         }
-        if (ok) {
-            QMessageBox::information(this, windowTitle(), tr("System information saved."));
-        } else {
-            QMessageBox::critical(this, windowTitle(), tr("Could not save system information."));
-        }
-        lockGUI(false);
+        if (archive_write_close(arc) != ARCHIVE_OK) throw false;
+    } catch(bool sys) {
+        const char *msg = (arc && sys) ? strerror(errno) : archive_error_string(arc);
+        QMessageBox::critical(this, windowTitle(),
+            tr("Could not save system information.") + '\n' + msg);
+        ok = false;
     }
+    if (arcentry) archive_entry_free(arcentry);
+    if (arc) archive_write_free(arc);
+    lockGUI(false);
+    if (ok) QMessageBox::information(this, windowTitle(), tr("System information saved."));
 }
 
 QString MainWindow::systeminfo()
@@ -252,7 +274,7 @@ void MainWindow::buildInfoList()
         QFileInfo qfi(logfile);
         logfile.remove("/var/log/");
         auto *item = new QListWidgetItem(logfile, ui->listInfo);
-        item->setData(Qt::UserRole, logfile.replace('/','+'));
+        item->setData(Qt::UserRole, logfile);
         // Italics for log files that require root to read.
         if (!qfi.permission(QFile::ReadOther)) {
             QFont ifont = item->font();
@@ -267,7 +289,7 @@ void MainWindow::buildInfoList()
     QFont ifont = item->font();
     ifont.setBold(true);
     item->setFont(ifont);
-    item->setData(Qt::UserRole, "sysinfo.txt");
+    item->setData(Qt::UserRole, "inxi.txt");
     ui->listInfo->insertItem(0, item);
     // Special apt history info
     item = new QListWidgetItem("apt " + tr("history"));
