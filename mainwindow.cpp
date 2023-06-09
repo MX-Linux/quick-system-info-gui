@@ -23,6 +23,7 @@
  **********************************************************************/
 
 #include <cassert>
+#include <ctime>
 #include <QAction>
 #include <QDebug>
 #include <QDir>
@@ -32,6 +33,9 @@
 #include <QScreen>
 #include <QTimer>
 #include <QClipboard>
+
+#include <archive.h>
+#include <archive_entry.h>
 
 #include "about.h"
 #include "mainwindow.h"
@@ -63,8 +67,7 @@ void MainWindow::setup()
 {
     // Allow user-friendly match strings.
     for(QString &match : defaultMatches) {
-        match.replace('/', '+');
-        if (!match.contains('.')) match.append(QStringLiteral(".txt"));
+        if (!match.contains('.')) match.append(".txt");
     }
 
     // Log text box shortcuts and context menu
@@ -79,10 +82,10 @@ void MainWindow::setup()
     plaincopyaction->setShortcut(Qt::ALT | Qt::Key_C);
     connect(plaincopyaction, &QAction::triggered, this, &MainWindow::plaincopy);
     QAction *saveasfile = new QAction(QIcon::fromTheme(QStringLiteral("document-save")),
-        tr("Save"), this);
+        tr("Save text..."), this);
     saveasfile->setShortcutVisibleInContextMenu(true);
-    saveasfile->setShortcut(Qt::CTRL | Qt::Key_S);
-    connect(saveasfile, &QAction::triggered, this, &MainWindow::on_pushSave_clicked);
+    saveasfile->setShortcut(Qt::CTRL | Qt::SHIFT | Qt::Key_S);
+    connect(saveasfile, &QAction::triggered, this, &MainWindow::on_pushSaveText_clicked);
 
     ui->textSysInfo->addAction(forumcopyaction);
     ui->textSysInfo->addAction(plaincopyaction);
@@ -100,14 +103,15 @@ void MainWindow::setup()
     seldef->setShortcut(Qt::CTRL | Qt::SHIFT | Qt::Key_A);
     seldef->setShortcutVisibleInContextMenu(true);
     connect(seldef, &QAction::triggered, this, &MainWindow::listSelectDefault);
-    actionMultiSave = new QAction(QIcon::fromTheme(QStringLiteral("document-save")), QString(), this);
-    actionMultiSave->setShortcut(Qt::CTRL | Qt::SHIFT | Qt::Key_S);
-    actionMultiSave->setShortcutVisibleInContextMenu(true);
-    connect(actionMultiSave, &QAction::triggered, this, &MainWindow::on_pushMultiSave_clicked);
+    actionSave = new QAction(QIcon::fromTheme(QStringLiteral("document-save")),
+        tr("&Save..."), this);
+    actionSave->setShortcut(Qt::CTRL | Qt::Key_S);
+    actionSave->setShortcutVisibleInContextMenu(true);
+    connect(actionSave, &QAction::triggered, this, &MainWindow::on_pushSave_clicked);
 
     ui->listInfo->addAction(selall);
     ui->listInfo->addAction(seldef);
-    ui->listInfo->addAction(actionMultiSave);
+    ui->listInfo->addAction(actionSave);
 
     ui->splitter->handle(1)->installEventFilter(this);
     buildInfoList();
@@ -137,7 +141,7 @@ Result MainWindow::runCmd(const QString &cmd)
     QProcess proc;
     proc.setProcessChannelMode(QProcess::MergedChannels);
     connect(&proc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop, &QEventLoop::quit);
-    proc.start("/bin/bash", QStringList() << "-c" << cmd);
+    proc.start("/bin/bash", {"-c", cmd});
     loop.exec();
     return {proc.exitCode(), proc.readAll().trimmed()};
 }
@@ -157,17 +161,16 @@ void MainWindow::on_buttonAbout_clicked()
     this->show();
 }
 
-void MainWindow::on_pushSave_clicked()
+void MainWindow::on_pushSaveText_clicked()
 {
-    QFileDialog dialog(this, tr("Save System Information"));
+    QFileDialog dialog(this);
     dialog.setAcceptMode(QFileDialog::AcceptSave);
     QListWidgetItem *item = ui->listInfo->item(ui->listInfo->currentRow());
     assert(item != nullptr);
-    const QString &selname = item->data(Qt::UserRole).toString();
-    const QString &ext = QFileInfo(selname).suffix();
-    dialog.setDefaultSuffix(ext);
-    dialog.setNameFilter("*."+ext);
-    dialog.selectFile(selname);
+    const QStringList filters({"text/plain", "text/x-log", "application/octet-stream"});
+    dialog.setMimeTypeFilters(filters); // Segmentation fault when using init list directly.
+    dialog.setDefaultSuffix("txt");
+    dialog.selectFile(item->data(Qt::UserRole).toString().replace('/','+'));
 
     if (dialog.exec()) {
         lockGUI(true);
@@ -176,7 +179,7 @@ void MainWindow::on_pushSave_clicked()
         QFile file(selpath);
         if (file.open(QFile::Truncate | QFile::WriteOnly)) {
             const QByteArray &text = ui->textSysInfo->toPlainText().toUtf8();
-            ok = (file.write(text) != text.size());
+            ok = (file.write(text) == text.size());
             file.close();
         }
         if (ok) {
@@ -187,40 +190,60 @@ void MainWindow::on_pushSave_clicked()
         lockGUI(false);
     }
 }
-void MainWindow::on_pushMultiSave_clicked()
+void MainWindow::on_pushSave_clicked()
 {
     QFileDialog dialog(this, tr("Save System Information"));
-    dialog.setFileMode(QFileDialog::Directory);
     dialog.setAcceptMode(QFileDialog::AcceptSave);
+    const QStringList filters({"application/zip", "application/gzip", "application/octet-stream"});
+    dialog.setMimeTypeFilters(filters); // Segmentation fault when using init list directory.
+    dialog.setDefaultSuffix("zip");
+    dialog.selectFile("sysinfo.zip");
+    if (!dialog.exec()) return;
 
-    if (dialog.exec()) {
-        lockGUI(true);
-        const QString selpath = dialog.selectedFiles().at(0);
-        bool ok = true;
+    bool ok = true;
+    lockGUI(true);
+    struct archive *arc = nullptr;
+    struct archive_entry *arcentry = nullptr;
+    try {
+        const QByteArray selfile = dialog.selectedFiles().at(0).toUtf8();
+        arc = archive_write_new();
+        arcentry = archive_entry_new();
+        if (!arc || !arcentry) throw true;
+        if (archive_write_set_format_filter_by_ext(arc, selfile.constData()) != ARCHIVE_OK) throw false;
+        if (archive_write_open_filename(arc, selfile.constData()) != ARCHIVE_OK) throw false;
+
         for (int row = 0; row < ui->listInfo->count(); ++row) {
             const QListWidgetItem *item = ui->listInfo->item(row);
             assert(item != nullptr);
             if (item->checkState() != Qt::Checked) continue;
 
-            QFile file(selpath + '/' + item->data(Qt::UserRole).toString());
-            if (file.open(QFile::Truncate | QFile::WriteOnly)) {
-                QByteArray contents;
-                switch(row) {
-                    case 0: contents = systeminfo().toUtf8(); break;
-                    case 1: contents = apthistory().toUtf8(); break;
-                    default: contents = readlog(item->text()).toUtf8(); break;
-                }
-                if (file.write(contents) != contents.size()) ok = false;
-                file.close();
+            QByteArray contents;
+            switch(row) {
+                case 0: contents = systeminfo().toUtf8(); break;
+                case 1: contents = apthistory().toUtf8(); break;
+                default: contents = readlog(item->text()).toUtf8(); break;
             }
+            archive_entry_set_pathname(arcentry, item->data(Qt::UserRole).toByteArray().constData());
+            archive_entry_set_filetype(arcentry, AE_IFREG);
+            archive_entry_set_perm(arcentry, 0644);
+            archive_entry_set_mtime(arcentry, time(NULL), 0);
+            archive_entry_set_size(arcentry, contents.size());
+            if (archive_write_header(arc, arcentry) != ARCHIVE_OK) throw false;
+
+            if (archive_write_data(arc, contents.constData(), contents.size()) != contents.size()) throw false;
+            archive_entry_clear(arcentry);
         }
-        if (ok) {
-            QMessageBox::information(this, windowTitle(), tr("System information saved."));
-        } else {
-            QMessageBox::critical(this, windowTitle(), tr("Could not save system information."));
-        }
-        lockGUI(false);
+        if (archive_write_close(arc) != ARCHIVE_OK) throw false;
+    } catch(bool sys) {
+        const char *msg = (arc && sys) ? strerror(errno) : archive_error_string(arc);
+        QMessageBox::critical(this, windowTitle(),
+            tr("Could not save system information.") + '\n' + msg);
+        ok = false;
     }
+    if (arcentry) archive_entry_free(arcentry);
+    if (arc) archive_write_free(arc);
+    lockGUI(false);
+    if (ok) QMessageBox::information(this, windowTitle(), tr("System information saved."));
 }
 
 QString MainWindow::systeminfo()
@@ -252,7 +275,7 @@ void MainWindow::buildInfoList()
         QFileInfo qfi(logfile);
         logfile.remove("/var/log/");
         auto *item = new QListWidgetItem(logfile, ui->listInfo);
-        item->setData(Qt::UserRole, logfile.replace('/','+'));
+        item->setData(Qt::UserRole, logfile);
         // Italics for log files that require root to read.
         if (!qfi.permission(QFile::ReadOther)) {
             QFont ifont = item->font();
@@ -267,7 +290,7 @@ void MainWindow::buildInfoList()
     QFont ifont = item->font();
     ifont.setBold(true);
     item->setFont(ifont);
-    item->setData(Qt::UserRole, "sysinfo.txt");
+    item->setData(Qt::UserRole, "inxi.txt");
     ui->listInfo->insertItem(0, item);
     // Special apt history info
     item = new QListWidgetItem("apt " + tr("history"));
@@ -278,15 +301,14 @@ void MainWindow::buildInfoList()
     ui->listInfo->blockSignals(false);
     on_listInfo_itemChanged(); // Set up multi buttons.
 
-    // Resize the splitter to the contents by simulating a double-click.
-    QApplication::postEvent(ui->splitter->handle(1),
-        new QEvent(QEvent::MouseButtonDblClick), Qt::LowEventPriority);
+    // Resize the splitter according to the new contents
+    QApplication::processEvents(); // Allow the scroll bar to materialise
+    autoFitSplitter();
 }
 
 void MainWindow::on_ButtonHelp_clicked()
 {
-    QString url = QStringLiteral("file:///usr/share/doc/quick-system-info-gui/quick-system-info-gui.html");
-
+    const QString &url = QStringLiteral("file:///usr/share/doc/quick-system-info-gui/quick-system-info-gui.html");
     displayDoc(url, tr("%1 Help").arg(tr("Quick System Info (gui)")));
 }
 
@@ -339,7 +361,6 @@ QString MainWindow::readlog(const QString &logfile)
 void MainWindow::on_listInfo_itemSelectionChanged()
 {
     lockGUI(true);
-    ui->textSysInfo->setPlainText(tr("Loading..."));
 
     const int selrow = ui->listInfo->currentRow();
     switch(selrow){
@@ -367,12 +388,12 @@ void MainWindow::on_listInfo_itemChanged()
             ++nchecked;
         }
     }
-    const QString ctltext = tr("Save Selected (×%1)").arg(nchecked);
-    ui->pushMultiSave->setEnabled(nchecked > 0);
-    ui->pushMultiSave->setText(ctltext);
-    assert(actionMultiSave != nullptr);
-    actionMultiSave->setEnabled(nchecked > 0);
-    actionMultiSave->setText(ctltext);
+    const QString ctltext = tr("&Save (×%1)...").arg(nchecked);
+    ui->pushSave->setEnabled(nchecked > 0);
+    ui->pushSave->setText(ctltext);
+    assert(actionSave != nullptr);
+    actionSave->setEnabled(nchecked > 0);
+    actionSave->setText(ctltext);
 }
 
 // List checkbox selection presets
@@ -401,25 +422,27 @@ void MainWindow::listSelectDefault()
 bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 {
     if (event->type() == QEvent::MouseButtonDblClick) {
-        if (watched == ui->splitter->handle(1)) {
-            // Auto-resize splitter to fit list column.
-            QList<int> sizes = ui->splitter->sizes();
-            if(sizes.count() > 1) {
-                int shint = ui->listInfo->sizeHintForColumn(0);
-                if (sizes.at(0) <= 0) {
-                    // If the list is collapsed, pre-size it to ensure correct calculations.
-                    sizes[0] = shint;
-                    sizes[1] -= shint;
-                    ui->splitter->setSizes(sizes);
-                    sizes = ui->splitter->sizes();
-                }
-                const int total = sizes.at(0) + sizes.at(1);
-                shint += sizes.at(0) - ui->listInfo->viewport()->contentsRect().width();
-                sizes[0] = shint;
-                sizes[1] = total - shint;
-                ui->splitter->setSizes(sizes);
-            }
-        }
+        if (watched == ui->splitter->handle(1)) autoFitSplitter();
     }
     return false;
+}
+// Auto-resize splitter to fit list column.
+void MainWindow::autoFitSplitter()
+{
+    QList<int> sizes = ui->splitter->sizes();
+    if(sizes.count() > 1) {
+        int shint = ui->listInfo->sizeHintForColumn(0);
+        if (sizes.at(0) <= 0) {
+            // If the list is collapsed, pre-size it to ensure correct calculations.
+            sizes[0] = shint;
+            sizes[1] -= shint;
+            ui->splitter->setSizes(sizes);
+            sizes = ui->splitter->sizes();
+        }
+        const int total = sizes.at(0) + sizes.at(1);
+        shint += sizes.at(0) - ui->listInfo->viewport()->contentsRect().width();
+        sizes[0] = shint;
+        sizes[1] = total - shint;
+        ui->splitter->setSizes(sizes);
+    }
 }
