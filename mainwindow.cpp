@@ -141,7 +141,7 @@ Result MainWindow::runCmd(const QString &cmd)
     QProcess proc;
     proc.setProcessChannelMode(QProcess::MergedChannels);
     connect(&proc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop, &QEventLoop::quit);
-    proc.start("/bin/bash", QStringList() << "-c" << cmd);
+    proc.start("/bin/bash", {"-c", cmd});
     loop.exec();
     return {proc.exitCode(), proc.readAll().trimmed()};
 }
@@ -362,7 +362,6 @@ QString MainWindow::readlog(const QString &logfile)
 void MainWindow::on_listInfo_itemSelectionChanged()
 {
     lockGUI(true);
-    ui->textSysInfo->setPlainText(tr("Loading..."));
 
     const int selrow = ui->listInfo->currentRow();
     switch(selrow){
