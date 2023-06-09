@@ -67,7 +67,7 @@ void MainWindow::setup()
 {
     // Allow user-friendly match strings.
     for(QString &match : defaultMatches) {
-        if (!match.contains('.')) match.append(QStringLiteral(".txt"));
+        if (!match.contains('.')) match.append(".txt");
     }
 
     // Log text box shortcuts and context menu
@@ -308,8 +308,7 @@ void MainWindow::buildInfoList()
 
 void MainWindow::on_ButtonHelp_clicked()
 {
-    QString url = QStringLiteral("file:///usr/share/doc/quick-system-info-gui/quick-system-info-gui.html");
-
+    const QString &url = QStringLiteral("file:///usr/share/doc/quick-system-info-gui/quick-system-info-gui.html");
     displayDoc(url, tr("%1 Help").arg(tr("Quick System Info (gui)")));
 }
 
