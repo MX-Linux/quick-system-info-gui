@@ -171,24 +171,19 @@ void MainWindow::on_pushSaveText_clicked()
     dialog.setMimeTypeFilters(filters); // Segmentation fault when using init list directly.
     dialog.setDefaultSuffix("txt");
     dialog.selectFile(item->data(Qt::UserRole).toString().replace('/','+'));
+    if (!dialog.exec()) return;
 
-    if (dialog.exec()) {
-        lockGUI(true);
-        const QString selpath = dialog.selectedFiles().at(0);
-        bool ok = false;
-        QFile file(selpath);
-        if (file.open(QFile::Truncate | QFile::WriteOnly)) {
-            const QByteArray &text = ui->textSysInfo->toPlainText().toUtf8();
-            ok = (file.write(text) == text.size());
-            file.close();
-        }
-        if (ok) {
-            QMessageBox::information(this, windowTitle(), tr("System information saved."));
-        } else {
-            QMessageBox::critical(this, windowTitle(), tr("Could not save system information."));
-        }
-        lockGUI(false);
+    lockGUI(true);
+    QString errmsg;
+    QFile file(dialog.selectedFiles().at(0));
+    if (file.open(QFile::Truncate | QFile::WriteOnly)) {
+        const QByteArray &text = ui->textSysInfo->toPlainText().toUtf8();
+        if (file.write(text) != text.size()) errmsg = file.errorString();
+        file.close();
     }
+
+    lockGUI(false);
+    showSavedMessage(file.fileName(), errmsg);
 }
 void MainWindow::on_pushSave_clicked()
 {
@@ -200,12 +195,12 @@ void MainWindow::on_pushSave_clicked()
     dialog.selectFile("sysinfo.zip");
     if (!dialog.exec()) return;
 
-    bool ok = true;
     lockGUI(true);
     struct archive *arc = nullptr;
     struct archive_entry *arcentry = nullptr;
+    QString errmsg;
+    const QByteArray &selfile = dialog.selectedFiles().at(0).toUtf8();
     try {
-        const QByteArray selfile = dialog.selectedFiles().at(0).toUtf8();
         arc = archive_write_new();
         arcentry = archive_entry_new();
         if (!arc || !arcentry) throw true;
@@ -235,15 +230,39 @@ void MainWindow::on_pushSave_clicked()
         }
         if (archive_write_close(arc) != ARCHIVE_OK) throw false;
     } catch(bool sys) {
-        const char *msg = (arc && sys) ? strerror(errno) : archive_error_string(arc);
-        QMessageBox::critical(this, windowTitle(),
-            tr("Could not save system information.") + '\n' + msg);
-        ok = false;
+        if (!arc || sys) errmsg = strerror(errno);
+        else errmsg = archive_error_string(arc);
     }
     if (arcentry) archive_entry_free(arcentry);
     if (arc) archive_write_free(arc);
+
     lockGUI(false);
-    if (ok) QMessageBox::information(this, windowTitle(), tr("System information saved."));
+    showSavedMessage(selfile, errmsg);
+}
+void MainWindow::showSavedMessage(const QString &filename, const QString &errmsg)
+{
+    QMessageBox msgbox(this);
+    QPushButton *open = nullptr;
+    if (errmsg.isEmpty()) {
+        msgbox.setIcon(QMessageBox::Information);
+        msgbox.setText(tr("System information saved."));
+        open = msgbox.addButton(tr("Open folder"), QMessageBox::AcceptRole);
+        // The dialog X button needs a RejectRole button to work.
+        msgbox.addButton(tr("OK"), QMessageBox::RejectRole);
+        open->setIcon(QIcon::fromTheme("folder"));
+        msgbox.setInformativeText(filename);
+    } else {
+        msgbox.setIcon(QMessageBox::Critical);
+        msgbox.setText(tr("Could not save system information."));
+        msgbox.setInformativeText(errmsg);
+    }
+    msgbox.exec();
+    if (open && msgbox.clickedButton() == open) {
+        // Send the dbus message that opens the configured file manager with the file selected.
+        runCmd("dbus-send --session --dest=org.freedesktop.FileManager1"
+            " --type=method_call /org/freedesktop/FileManager1 org.freedesktop.FileManager1.ShowItems"
+            " array:string:\"file://" + filename + "\" string:\"\"");
+    }
 }
 
 QString MainWindow::systeminfo()
