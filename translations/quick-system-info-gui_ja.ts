@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ja">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ja">
 <context>
     <name>MainWindow</name>
     <message>
@@ -8,52 +6,36 @@
         <translation type="vanished">MX ウェルカム</translation>
     </message>
     <message>
-        <source>Copy the system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="vanished">システム情報をコピーしてフォーラムの投稿用に合わせた [CODE][/CODE] 形式で出力します。</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="109"/>
         <source>&amp;Copy for forum</source>
-        <translation>フォーラム用にコピー (&amp;C)</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation type="vanished">C</translation>
-    </message>
-    <message>
-        <source>Save the system information to a text file.</source>
-        <translation type="vanished">システム情報をテキストファイル形式で保存します。</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation type="vanished">保存 (&amp;S)</translation>
+        <translation>フォーラム用にコピー(&amp;C)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="92"/>
         <source>Save the displayed system information to a text file.</source>
-        <translation type="unfinished"></translation>
+        <translation>表示されたシステム情報をテキストファイルに保存します。</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="95"/>
         <location filename="../mainwindow.cpp" line="85"/>
         <source>Save text...</source>
-        <translation type="unfinished"></translation>
+        <translation>テキストを保存...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="106"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="unfinished"></translation>
+        <translation>表示されたシステム情報をクリップボードにコピーし、さらに [CODE][/CODE] タグで囲んでフォーラム投稿で利用できるようにします。</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="154"/>
         <source>Save the system information selected from the list to an archive file.</source>
-        <translation type="unfinished"></translation>
+        <translation>一覧から選択したシステム情報を書庫ファイルに保存する。</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="157"/>
         <location filename="../mainwindow.cpp" line="107"/>
         <source>&amp;Save...</source>
-        <translation type="unfinished"></translation>
+        <translation>保存(&amp;S)...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="224"/>
@@ -120,12 +102,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="96"/>
         <source>Select &amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation>すべて選択(&amp;A)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="102"/>
         <source>Revert Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>選択内容を元に戻す</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="156"/>
@@ -140,17 +122,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="251"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>フォルダを開きます</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="253"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="412"/>
         <source>&amp;Save (×%1)...</source>
-        <translation type="unfinished"></translation>
+        <translation>保存(&amp;S) (×%1)...</translation>
     </message>
     <message>
         <source>Changelog</source>
@@ -162,7 +144,7 @@
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="vanished">閉じる (&amp;C)</translation>
+        <translation type="vanished">閉じる(&amp;C)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="191"/>
@@ -182,7 +164,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="317"/>
         <source>history</source>
-        <translation type="unfinished"></translation>
+        <translation>履歴</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="333"/>
@@ -203,10 +185,6 @@
         <location filename="../mainwindow.cpp" line="80"/>
         <source>Plain text copy</source>
         <translation>平文テキスト形式でコピー</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="vanished">保存</translation>
     </message>
 </context>
 <context>
@@ -248,7 +226,7 @@
     <message>
         <location filename="../about.cpp" line="63"/>
         <source>&amp;Close</source>
-        <translation>閉じる (&amp;C)</translation>
+        <translation>閉じる(&amp;C)</translation>
     </message>
 </context>
 </TS>

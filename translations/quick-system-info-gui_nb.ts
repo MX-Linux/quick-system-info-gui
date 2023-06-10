@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="nb">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="nb">
 <context>
     <name>MainWindow</name>
     <message>
@@ -8,52 +6,36 @@
         <translation type="vanished">MX Velkommen</translation>
     </message>
     <message>
-        <source>Copy the system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="vanished">Kopier informasjon om systemet til utklippstavla omsluttet av [CODE][/CODE] -tagger klar til bruk i en forumpost.</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="109"/>
         <source>&amp;Copy for forum</source>
         <translation>&amp;Kopier til forum</translation>
     </message>
     <message>
-        <source>C</source>
-        <translation type="vanished">L</translation>
-    </message>
-    <message>
-        <source>Save the system information to a text file.</source>
-        <translation type="vanished">Lagre systeminformasjon til en tekstfil.</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation type="vanished">&amp;Lagre</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="92"/>
         <source>Save the displayed system information to a text file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="95"/>
         <location filename="../mainwindow.cpp" line="85"/>
         <source>Save text...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="106"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="154"/>
         <source>Save the system information selected from the list to an archive file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="157"/>
         <location filename="../mainwindow.cpp" line="107"/>
         <source>&amp;Save...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="224"/>
@@ -120,12 +102,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="96"/>
         <source>Select &amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="102"/>
         <source>Revert Selection</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="156"/>
@@ -140,17 +122,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="251"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Åpne mappen</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="253"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="412"/>
         <source>&amp;Save (×%1)...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Changelog</source>
@@ -182,7 +164,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="317"/>
         <source>history</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="333"/>
@@ -197,16 +179,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="75"/>
         <source>Copy for forum</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopier til forum</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="80"/>
         <source>Plain text copy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="vanished">Lagre</translation>
+        <translation>Kopier som ren tekst</translation>
     </message>
 </context>
 <context>

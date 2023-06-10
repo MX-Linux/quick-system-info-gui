@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ca">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ca">
 <context>
     <name>MainWindow</name>
     <message>
@@ -8,52 +6,36 @@
         <translation type="vanished">MX Welcome </translation>
     </message>
     <message>
-        <source>Copy the system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="vanished">Copia la informació del Sistema al porta-retalls, entre etiquetes [CODE][/CODE] a punt per a usar en una entrada al fòrum.</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="109"/>
         <source>&amp;Copy for forum</source>
         <translation>&amp;Copia al fòrum</translation>
     </message>
     <message>
-        <source>C</source>
-        <translation type="vanished">C</translation>
-    </message>
-    <message>
-        <source>Save the system information to a text file.</source>
-        <translation type="vanished">Desa la informació del Sistema en un fitxer de text.</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation type="vanished">&amp;Desa</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="92"/>
         <source>Save the displayed system information to a text file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Desa la informació del sistema mostrada a un fitxer de text.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="95"/>
         <location filename="../mainwindow.cpp" line="85"/>
         <source>Save text...</source>
-        <translation type="unfinished"></translation>
+        <translation>Desa el text...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="106"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia la informació del sistema mostrada  al porta-retalls, delimitada per etiquetes [CODE][/CODE], a punt per usar en missatges al fòrum.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="154"/>
         <source>Save the system information selected from the list to an archive file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Desa la informació de sistema seleccionada de la llista en un fitxer d&apos;arxiu.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="157"/>
         <location filename="../mainwindow.cpp" line="107"/>
         <source>&amp;Save...</source>
-        <translation type="unfinished"></translation>
+        <translation>De&amp;sa...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="224"/>
@@ -120,12 +102,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="96"/>
         <source>Select &amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecciona &amp;Tot</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="102"/>
         <source>Revert Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Revoca la Selecció</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="156"/>
@@ -140,17 +122,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="251"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Carpeta oberta</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="253"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>D&apos;acord</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="412"/>
         <source>&amp;Save (×%1)...</source>
-        <translation type="unfinished"></translation>
+        <translation>De&amp;sa (×%1)...</translation>
     </message>
     <message>
         <source>Changelog</source>
@@ -182,7 +164,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="317"/>
         <source>history</source>
-        <translation type="unfinished"></translation>
+        <translation>historial</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="333"/>
@@ -203,10 +185,6 @@
         <location filename="../mainwindow.cpp" line="80"/>
         <source>Plain text copy</source>
         <translation>Copia en text net</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="vanished">Desa </translation>
     </message>
 </context>
 <context>

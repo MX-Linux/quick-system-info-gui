@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="es">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="es">
 <context>
     <name>MainWindow</name>
     <message>
@@ -8,52 +6,36 @@
         <translation type="vanished">MX Bienvenida</translation>
     </message>
     <message>
-        <source>Copy the system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="vanished">Copiar la información del sistema en el portapapeles, encerrada en etiquetas [CODE][/CODE] listas para usar en una publicación del foro.</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="109"/>
         <source>&amp;Copy for forum</source>
         <translation>&amp;Copiar para el foro</translation>
     </message>
     <message>
-        <source>C</source>
-        <translation type="vanished">C</translation>
-    </message>
-    <message>
-        <source>Save the system information to a text file.</source>
-        <translation type="vanished">Guardar la información del sistema en un archivo de texto.</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation type="vanished">&amp;Guardar</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="92"/>
         <source>Save the displayed system information to a text file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar la información del sistema mostrada en un archivo de texto.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="95"/>
         <location filename="../mainwindow.cpp" line="85"/>
         <source>Save text...</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar texto...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="106"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar la información del sistema que se muestra en el portapapeles, encerrada en etiquetas [CODE][/CODE] listas para usar en una publicación del foro.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="154"/>
         <source>Save the system information selected from the list to an archive file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar la información del sistema seleccionada de la lista en un archivo de almacenamiento.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="157"/>
         <location filename="../mainwindow.cpp" line="107"/>
         <source>&amp;Save...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Guardar...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="224"/>
@@ -120,12 +102,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="96"/>
         <source>Select &amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar &amp;Todo</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="102"/>
         <source>Revert Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Revertir selección</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="156"/>
@@ -140,17 +122,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="251"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir carpeta</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="253"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Está bien</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="412"/>
         <source>&amp;Save (×%1)...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Guardar (×%1)...</translation>
     </message>
     <message>
         <source>Changelog</source>
@@ -182,7 +164,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="317"/>
         <source>history</source>
-        <translation type="unfinished"></translation>
+        <translation>historial</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="333"/>
@@ -203,10 +185,6 @@
         <location filename="../mainwindow.cpp" line="80"/>
         <source>Plain text copy</source>
         <translation>Copia en texto plano</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="vanished">Guardar</translation>
     </message>
 </context>
 <context>
