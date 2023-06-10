@@ -275,38 +275,12 @@ void MainWindow::showSavedMessage(const QString &filename, const QString &errmsg
 
 QString MainWindow::systeminfo()
 {
-    QString snapshot = readfile("/etc/snapshot_created");
-    if (!snapshot.isEmpty()) {
-        snapshot.prepend("Snapshot created on: ");
-        snapshot.append('\n');
-    }
-    Result out = run("inxi", {"-Fxxxra", "--filter-all", "-c0"});
-
+    Result out = shell("/usr/bin/quick-system-info-mx -g");
     // Deal with bugs in inxi.
     out.output.replace("http: /", "http:/");
     out.output.replace("https: /", "https:/");
-    // Filtering
-    const QString unamev = shell("uname -v | grep -oP '.*[[:space:]]\\K([0-9]+[.])+[^[:space:]]*'").output;
-    static const QRegularExpression kernel_add("(.+Kernel:(" "\\x1b\\[[0-9;]+[mK]" "|[[:space:]])+[[:alnum:].-]+)(.*)");
-    out.output.replace(kernel_add, "\\1 [" + unamev + "]\\3");
-//    static const QRegularExpression host_filter("(.+Host:(" "\\x1b\\[[0-9;]+[mK]" "|[[:space:]])+)([[:alnum:].-]+)(.*)");
-//    out.output.replace(host_filter, "\\1<filter>\\4");
-//    static const QRegularExpression uuid_filter("[[:xdigit:]]{8}-([[:xdigit:]]{4}-){3}[[:xdigit:]]{12}");
-//    out.output.replace(uuid_filter, "<filter>");
 
-    // Extra information not provided by inxi
-    out.output.append("\n\nBoot Mode: ");
-    if (QFileInfo("/sys/firmware/efi").isDir()) out.output.append("UEFI");
-    else out.output.append("BIOS (legacy, CSM, MBR)");
-    Result sb = shell("(mokutil --sb-state || bootctl --no-variables status)"
-        " 2>/dev/null | sed -nr 's/^\\s*Secure\\s?Boot:?/SecureBoot/p'");
-    if (sb.output.contains("enabled")) out.output.append('\n' + sb.output);
-    const QString &video_tweaks = readfile("/live/config/video-tweaks", false);
-    if (!video_tweaks.isEmpty()) {
-        out.output.append("\nVideo Tweaks:\n" + video_tweaks);
-    }
-
-    return snapshot + out.output.trimmed();
+    return out.output.trimmed();
 }
 
 QString MainWindow::apthistory()
