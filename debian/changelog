@@ -1,3 +1,12 @@
+quick-system-info-gui (23.02.07) mx; urgency=medium
+
+  * new dual-pane report and log viewer paradigm
+  * save multiple reports into a compressed archive file
+  * update help
+  * update build depends
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 09 Jun 2023 20:00:39 -0400
+
 quick-system-info-gui (23.02.06) mx; urgency=medium
 
   * mx-launcher-l10n strings in policy file

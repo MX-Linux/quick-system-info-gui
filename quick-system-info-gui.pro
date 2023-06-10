@@ -104,7 +104,8 @@ TRANSLATIONS += translations/quick-system-info-gui_af.ts \
                 translations/quick-system-info-gui_zh_HK.ts \
                 translations/quick-system-info-gui_zh_TW.ts
 
-RESOURCES +=
+RESOURCES += \
+    qsi_resource.qrc
 
 LIBS += -larchive
 

@@ -1,106 +1,146 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="sq">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="sq">
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.ui" line="32"/>
         <source>MX Welcome</source>
-        <translation>Mirë se vini në MX Linux</translation>
+        <translation type="vanished">Mirë se vini në MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="130"/>
         <source>Copy the system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation>Kopjoni hollësitë e sistemit në të papastër, paketuar në etiketa [CODE][/CODE], gati për t’i përdorur në ndonjë postim forumesh.</translation>
+        <translation type="vanished">Kopjoni hollësitë e sistemit në të papastër, paketuar në etiketa [CODE][/CODE], gati për t’i përdorur në ndonjë postim forumesh.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="133"/>
+        <location filename="../mainwindow.ui" line="115"/>
         <source>&amp;Copy for forum</source>
         <translation>&amp;Kopjoji për forum</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="140"/>
         <source>C</source>
-        <translation>K</translation>
+        <translation type="vanished">K</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="116"/>
         <source>Save the system information to a text file.</source>
-        <translation>Ruajini hollësitë e sistemit në një kartelë tekst.</translation>
+        <translation type="vanished">Ruajini hollësitë e sistemit në një kartelë tekst.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="119"/>
         <source>&amp;Save</source>
-        <translation>&amp;Ruaje</translation>
+        <translation type="vanished">&amp;Ruaje</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="221"/>
+        <location filename="../mainwindow.ui" line="98"/>
+        <source>Save the displayed system information to a text file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="101"/>
+        <location filename="../mainwindow.cpp" line="85"/>
+        <source>Save text...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="112"/>
+        <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="160"/>
+        <source>Save the system information selected from the list to an archive file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="163"/>
+        <location filename="../mainwindow.cpp" line="107"/>
+        <source>&amp;Save...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="230"/>
         <source>Quit application</source>
         <translation>Mbylle aplikacionin</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="224"/>
+        <location filename="../mainwindow.ui" line="233"/>
         <source>Close</source>
         <translation>Mbylle</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="231"/>
+        <location filename="../mainwindow.ui" line="240"/>
         <source>Alt+N</source>
         <translation>Alt+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="285"/>
+        <location filename="../mainwindow.ui" line="294"/>
         <source>About this application</source>
         <translation>Mbi këtë aplikacion</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="288"/>
+        <location filename="../mainwindow.ui" line="297"/>
         <source>About...</source>
         <translation>Mbi…</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="295"/>
+        <location filename="../mainwindow.ui" line="304"/>
         <source>Alt+B</source>
         <translation>Alt+B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="201"/>
+        <location filename="../mainwindow.ui" line="210"/>
         <source>Help</source>
         <translation>Ndihmë</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="111"/>
+        <location filename="../mainwindow.cpp" line="155"/>
         <source>Version: </source>
         <translation>Version: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="49"/>
-        <location filename="../mainwindow.cpp" line="110"/>
+        <location filename="../mainwindow.ui" line="32"/>
+        <location filename="../mainwindow.cpp" line="155"/>
+        <location filename="../mainwindow.cpp" line="289"/>
         <source>Quick System Info</source>
         <translation>Hollësi Sistemi Shpejt e Shpejt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="54"/>
+        <location filename="../mainwindow.cpp" line="55"/>
         <source>Loading...</source>
         <translation>Po ngarkohet…</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="114"/>
+        <location filename="../mainwindow.cpp" line="159"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Të drejta kopjimi (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="109"/>
+        <location filename="../mainwindow.cpp" line="154"/>
         <source>About Quick-System-Info-gui</source>
         <translation>Mbi Quick-System-Info-gui</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="112"/>
+        <location filename="../mainwindow.cpp" line="96"/>
+        <source>Select &amp;All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="102"/>
+        <source>Revert Selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="156"/>
         <source>Program for displaying a quick system info report</source>
         <translation>Program për shfaqje të shpejtë të një raporti hollësish sistemi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="115"/>
+        <location filename="../mainwindow.cpp" line="160"/>
         <source>License</source>
         <translation>Licencë</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="391"/>
+        <source>&amp;Save (×%1)...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Changelog</source>
@@ -115,50 +155,56 @@
         <translation type="vanished">&amp;Mbylle</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="121"/>
+        <location filename="../mainwindow.cpp" line="195"/>
         <source>Save System Information</source>
         <translation>Ruani Hollësi Sistemi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="134"/>
+        <location filename="../mainwindow.cpp" line="186"/>
+        <location filename="../mainwindow.cpp" line="246"/>
         <source>System information saved.</source>
         <translation>Hollësitë e sistemit u ruajtën.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="135"/>
+        <location filename="../mainwindow.cpp" line="188"/>
+        <location filename="../mainwindow.cpp" line="240"/>
         <source>Could not save system information.</source>
         <translation>S’u ruajtën dot hollësitë e sistemit.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="160"/>
+        <location filename="../mainwindow.cpp" line="296"/>
+        <source>history</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="312"/>
         <source>%1 Help</source>
         <translation>Ndihmë për %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="160"/>
+        <location filename="../mainwindow.cpp" line="312"/>
         <source>Quick System Info (gui)</source>
         <translation>Hollësi Sistemi Shpejt e Shpejt (gui)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="189"/>
+        <location filename="../mainwindow.cpp" line="75"/>
         <source>Copy for forum</source>
         <translation>Kopjoje për forum</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="191"/>
+        <location filename="../mainwindow.cpp" line="80"/>
         <source>Plain text copy</source>
         <translation>Kopje tekst i thjeshtë</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="193"/>
         <source>Save</source>
-        <translation>Ruaje</translation>
+        <translation type="vanished">Ruaje</translation>
     </message>
 </context>
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../main.cpp" line="65"/>
+        <location filename="../main.cpp" line="66"/>
         <source>You must run this program as normal user.</source>
         <translation>Këtë program duhet ta xhironi si përdorues i thjeshtë.</translation>
     </message>
@@ -166,12 +212,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../main.cpp" line="42"/>
+        <location filename="../main.cpp" line="43"/>
         <source>This tool displays a the quick system info report in a gui.</source>
         <translation>Ky mjet shfaq shpejt një raport hollësish sistemi në një gui.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="65"/>
+        <location filename="../main.cpp" line="66"/>
         <source>Error</source>
         <translation>Gabim</translation>
     </message>

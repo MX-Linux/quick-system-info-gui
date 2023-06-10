@@ -1,106 +1,146 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="pt">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="pt">
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.ui" line="32"/>
         <source>MX Welcome</source>
-        <translation>MX Boas-vindas</translation>
+        <translation type="vanished">MX Boas-vindas</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="130"/>
         <source>Copy the system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation>Copie a informação do sistema, dentro de tags  [CODE][/CODE] pronta a usar num post no forum.</translation>
+        <translation type="vanished">Copie a informação do sistema, dentro de tags  [CODE][/CODE] pronta a usar num post no forum.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="133"/>
+        <location filename="../mainwindow.ui" line="115"/>
         <source>&amp;Copy for forum</source>
         <translation>&amp;Copiar para o fórum</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="140"/>
         <source>C</source>
-        <translation>R</translation>
+        <translation type="vanished">R</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="116"/>
         <source>Save the system information to a text file.</source>
-        <translation>Gravar a informação sobre o sistema para um ficheiro de texto.</translation>
+        <translation type="vanished">Gravar a informação sobre o sistema para um ficheiro de texto.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="119"/>
         <source>&amp;Save</source>
-        <translation>&amp;Guardar</translation>
+        <translation type="vanished">&amp;Guardar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="221"/>
+        <location filename="../mainwindow.ui" line="98"/>
+        <source>Save the displayed system information to a text file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="101"/>
+        <location filename="../mainwindow.cpp" line="85"/>
+        <source>Save text...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="112"/>
+        <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="160"/>
+        <source>Save the system information selected from the list to an archive file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="163"/>
+        <location filename="../mainwindow.cpp" line="107"/>
+        <source>&amp;Save...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="230"/>
         <source>Quit application</source>
         <translation>Sair da aplicação</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="224"/>
+        <location filename="../mainwindow.ui" line="233"/>
         <source>Close</source>
         <translation>Fechar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="231"/>
+        <location filename="../mainwindow.ui" line="240"/>
         <source>Alt+N</source>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="285"/>
+        <location filename="../mainwindow.ui" line="294"/>
         <source>About this application</source>
         <translation>Sobre esta aplicação</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="288"/>
+        <location filename="../mainwindow.ui" line="297"/>
         <source>About...</source>
         <translation>Sobre...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="295"/>
+        <location filename="../mainwindow.ui" line="304"/>
         <source>Alt+B</source>
         <translation>Alt+B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="201"/>
+        <location filename="../mainwindow.ui" line="210"/>
         <source>Help</source>
         <translation>Ajuda</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="111"/>
+        <location filename="../mainwindow.cpp" line="155"/>
         <source>Version: </source>
         <translation>Versão: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="49"/>
-        <location filename="../mainwindow.cpp" line="110"/>
+        <location filename="../mainwindow.ui" line="32"/>
+        <location filename="../mainwindow.cpp" line="155"/>
+        <location filename="../mainwindow.cpp" line="289"/>
         <source>Quick System Info</source>
         <translation>Informação rápida do sistema</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="54"/>
+        <location filename="../mainwindow.cpp" line="55"/>
         <source>Loading...</source>
         <translation>A carregar...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="114"/>
+        <location filename="../mainwindow.cpp" line="159"/>
         <source>Copyright (c) MX Linux</source>
         <translation> Direitos de autor (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="109"/>
+        <location filename="../mainwindow.cpp" line="154"/>
         <source>About Quick-System-Info-gui</source>
         <translation>Sobre Quick-System-Info-gui</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="112"/>
+        <location filename="../mainwindow.cpp" line="96"/>
+        <source>Select &amp;All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="102"/>
+        <source>Revert Selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="156"/>
         <source>Program for displaying a quick system info report</source>
         <translation>Programa que exibe um relatório sobre informações rápidas do sistema</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="115"/>
+        <location filename="../mainwindow.cpp" line="160"/>
         <source>License</source>
         <translation>Licença</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="391"/>
+        <source>&amp;Save (×%1)...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Changelog</source>
@@ -115,50 +155,56 @@
         <translation type="vanished">&amp;Fechar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="121"/>
+        <location filename="../mainwindow.cpp" line="195"/>
         <source>Save System Information</source>
         <translation>Gravar Informação sobre o Sistema</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="134"/>
+        <location filename="../mainwindow.cpp" line="186"/>
+        <location filename="../mainwindow.cpp" line="246"/>
         <source>System information saved.</source>
         <translation>Informação sobre o sistema gravada.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="135"/>
+        <location filename="../mainwindow.cpp" line="188"/>
+        <location filename="../mainwindow.cpp" line="240"/>
         <source>Could not save system information.</source>
         <translation>Falha ao gravar informação sobre o sistema.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="160"/>
+        <location filename="../mainwindow.cpp" line="296"/>
+        <source>history</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="312"/>
         <source>%1 Help</source>
         <translation>Ajuda do %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="160"/>
+        <location filename="../mainwindow.cpp" line="312"/>
         <source>Quick System Info (gui)</source>
         <translation>Informação rápida sobre o sisema (GUI)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="189"/>
+        <location filename="../mainwindow.cpp" line="75"/>
         <source>Copy for forum</source>
         <translation>Copiar para o fórum</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="191"/>
+        <location filename="../mainwindow.cpp" line="80"/>
         <source>Plain text copy</source>
         <translation>Cópia de texto simples</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="193"/>
         <source>Save</source>
-        <translation>Guardar</translation>
+        <translation type="vanished">Guardar</translation>
     </message>
 </context>
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../main.cpp" line="65"/>
+        <location filename="../main.cpp" line="66"/>
         <source>You must run this program as normal user.</source>
         <translation>Este programa tem que ser executado como utilizador normal.</translation>
     </message>
@@ -166,12 +212,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../main.cpp" line="42"/>
+        <location filename="../main.cpp" line="43"/>
         <source>This tool displays a the quick system info report in a gui.</source>
         <translation>Esta ferramenta exibe um relatório sobre informações rápida do sistema em forma gráfica (GUI)</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="65"/>
+        <location filename="../main.cpp" line="66"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
