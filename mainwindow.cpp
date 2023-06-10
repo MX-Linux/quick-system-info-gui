@@ -280,17 +280,19 @@ QString MainWindow::systeminfo()
         snapshot.prepend("Snapshot created on: ");
         snapshot.append('\n');
     }
-    Result out = runCmd(QStringLiteral("inxi -Fxxxrza -c0"));
+    Result out = runCmd("inxi -Fxxxra --filter-all -c0");
 
+    // Deal with bugs in inxi.
+    out.output.replace("http: /", "http:/");
+    out.output.replace("https: /", "https:/");
     // Filtering
     const QString unamev = runCmd("uname -v | grep -oP '.*[[:space:]]\\K([0-9]+[.])+[^[:space:]]*'").output;
     static const QRegularExpression kernel_add("(.+Kernel:(" "\\x1b\\[[0-9;]+[mK]" "|[[:space:]])+[[:alnum:].-]+)(.*)");
     out.output.replace(kernel_add, "\\1 [" + unamev + "]\\3");
-    static const QRegularExpression uuid_filter("[[:xdigit:]]{8}-([[:xdigit:]]{4}-){3}[[:xdigit:]]{12}");
-    out.output.replace(uuid_filter, "<filter>");
-    // Final filtering
-    out.output.replace("http: /", "http:/");
-    out.output.replace("https: /", "https:/");
+//    static const QRegularExpression host_filter("(.+Host:(" "\\x1b\\[[0-9;]+[mK]" "|[[:space:]])+)([[:alnum:].-]+)(.*)");
+//    out.output.replace(host_filter, "\\1<filter>\\4");
+//    static const QRegularExpression uuid_filter("[[:xdigit:]]{8}-([[:xdigit:]]{4}-){3}[[:xdigit:]]{12}");
+//    out.output.replace(uuid_filter, "<filter>");
 
     // Extra information not provided by inxi
     out.output.append("\n\nBoot Mode: ");
