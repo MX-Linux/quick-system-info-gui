@@ -29,6 +29,7 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QFileInfo>
+#include <QProcess>
 #include <QMessageBox>
 #include <QScreen>
 #include <QTimer>
@@ -281,21 +282,19 @@ QString MainWindow::systeminfo()
     Result out = runCmd(QStringLiteral("inxi -Fxxxrza -c0"));
 
     // Filtering
-    const QString unamer = runCmd("uname -r").output;
-    const QString unamev = runCmd("uname -v |"
-        " grep -oP '.*[[:space:]]\\K[0-9]+[.][0-9]+[.][0-9]+[-][0-9]+[^[:space:]]*'").output;
-    const QString host_filter = "^(.+Host:(${ansi}|[[:space:]])+)([[:alnum:].-]+)";
-    const QString uuid_filter = "[[:xdigit:]]{8}-([[:xdigit:]]{4}-){3}[[:xdigit:]]{12}";
-    out = runCmd("sed -r -e \"/Host:/{s/" + host_filter + "(.*)/\\1<filter>\\4/}\n"
-        "/Kernel:/s/" + unamer + "/" + unamer + " \\[" + unamev + "\\]/\n"
-        "s/" + uuid_filter + "/<filter>/g\n"
-        "s/(Shell[^:]*):[^:]*default:/\\1:/\n"
-        "t qsi\n"
-        "s/(Shell[^q]+)quick-system-in\\b/\\1bash/\n"
-        ":qsi\n"
-        "s/quick-system-in\\b/quick-system-info-mx/\"", &out.output);
+    const QString unamev = runCmd("uname -v | grep -oP '.*[[:space:]]\\K([0-9]+[.])+[^[:space:]]*'").output;
+    static const QRegularExpression kernel_add("(.+Kernel:(" "\\x1b\\[[0-9;]+[mK]" "|[[:space:]])+[[:alnum:].-]+)(.*)");
+    out.output.replace(kernel_add, "\\1 [" + unamev + "]\\3");
+    static const QRegularExpression host_filter("(.+Host:(" "\\x1b\\[[0-9;]+[mK]" "|[[:space:]])+)([[:alnum:].-]+)(.*)");
+    out.output.replace(host_filter, "\\1<filter>\\4");
+    static const QRegularExpression uuid_filter("[[:xdigit:]]{8}-([[:xdigit:]]{4}-){3}[[:xdigit:]]{12}");
+    out.output.replace(uuid_filter, "<filter>");
+    // Final filtering
+    out.output.replace("http: /", "http:/");
+    out.output.replace("https: /", "https:/");
+
     // Extra information not provided by inxi
-    out.output.append("\nBoot Mode: ");
+    out.output.append("\n\nBoot Mode: ");
     if (QFileInfo("/sys/firmware/efi").isDir()) out.output.append("UEFI");
     else out.output.append("BIOS (legacy, CSM, MBR)");
     Result sb = runCmd("(mokutil --sb-state || bootctl --no-variables status)"
@@ -306,9 +305,6 @@ QString MainWindow::systeminfo()
         out.output.append("\nVideo Tweaks:\n" + video_tweaks);
     }
 
-    // Final filtering
-    out.output.replace("http: /", "http:/");
-    out.output.replace("https: /", "https:/");
     return snapshot + out.output.trimmed();
 }
 

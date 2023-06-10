@@ -29,7 +29,6 @@
 #include <QDialog>
 #include <QAction>
 #include <QEvent>
-#include <QProcess>
 
 namespace Ui
 {
@@ -44,9 +43,6 @@ struct Result {
 class MainWindow : public QDialog
 {
     Q_OBJECT
-
-protected:
-    QProcess *proc {};
 
 public:
     explicit MainWindow(const QCommandLineParser &arg_parser, QWidget *parent = nullptr);
