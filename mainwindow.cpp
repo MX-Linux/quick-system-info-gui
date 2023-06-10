@@ -137,13 +137,13 @@ void MainWindow::lockGUI(bool lock)
 }
 
 // Util function for getting bash command output and error code
-Result MainWindow::runCmd(const QString &cmd, const QString *input)
+Result MainWindow::run(const char *program, const QStringList &args, const QString *input)
 {
     QEventLoop loop;
     QProcess proc;
     proc.setProcessChannelMode(QProcess::MergedChannels);
     connect(&proc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop, &QEventLoop::quit);
-    proc.start("/bin/bash", {"-c", cmd});
+    proc.start(program, args);
     if (input && !input->isEmpty()) proc.write(input->toUtf8());
     proc.closeWriteChannel();
     loop.exec();
@@ -267,9 +267,9 @@ void MainWindow::showSavedMessage(const QString &filename, const QString &errmsg
     msgbox.exec();
     if (open && msgbox.clickedButton() == open) {
         // Send the dbus message that opens the configured file manager with the file selected.
-        runCmd("dbus-send --session --dest=org.freedesktop.FileManager1"
-            " --type=method_call /org/freedesktop/FileManager1 org.freedesktop.FileManager1.ShowItems"
-            " array:string:\"file://" + filename + "\" string:\"\"");
+        run("dbus-send", {"--session", "--dest=org.freedesktop.FileManager1", "--type=method_call",
+            "/org/freedesktop/FileManager1", "org.freedesktop.FileManager1.ShowItems",
+            "array:string:file://" + filename, "string:"});
     }
 }
 
@@ -280,13 +280,13 @@ QString MainWindow::systeminfo()
         snapshot.prepend("Snapshot created on: ");
         snapshot.append('\n');
     }
-    Result out = runCmd("inxi -Fxxxra --filter-all -c0");
+    Result out = run("inxi", {"-Fxxxra", "--filter-all", "-c0"});
 
     // Deal with bugs in inxi.
     out.output.replace("http: /", "http:/");
     out.output.replace("https: /", "https:/");
     // Filtering
-    const QString unamev = runCmd("uname -v | grep -oP '.*[[:space:]]\\K([0-9]+[.])+[^[:space:]]*'").output;
+    const QString unamev = shell("uname -v | grep -oP '.*[[:space:]]\\K([0-9]+[.])+[^[:space:]]*'").output;
     static const QRegularExpression kernel_add("(.+Kernel:(" "\\x1b\\[[0-9;]+[mK]" "|[[:space:]])+[[:alnum:].-]+)(.*)");
     out.output.replace(kernel_add, "\\1 [" + unamev + "]\\3");
 //    static const QRegularExpression host_filter("(.+Host:(" "\\x1b\\[[0-9;]+[mK]" "|[[:space:]])+)([[:alnum:].-]+)(.*)");
@@ -298,7 +298,7 @@ QString MainWindow::systeminfo()
     out.output.append("\n\nBoot Mode: ");
     if (QFileInfo("/sys/firmware/efi").isDir()) out.output.append("UEFI");
     else out.output.append("BIOS (legacy, CSM, MBR)");
-    Result sb = runCmd("(mokutil --sb-state || bootctl --no-variables status)"
+    Result sb = shell("(mokutil --sb-state || bootctl --no-variables status)"
         " 2>/dev/null | sed -nr 's/^\\s*Secure\\s?Boot:?/SecureBoot/p'");
     if (sb.output.contains("enabled")) out.output.append('\n' + sb.output);
     const QString &video_tweaks = readfile("/live/config/video-tweaks", false);
@@ -311,14 +311,14 @@ QString MainWindow::systeminfo()
 
 QString MainWindow::apthistory()
 {
-    return runCmd(QStringLiteral("zgrep -EH ' install | upgrade | purge | remove ' /var/log/dpkg*"
+    return shell(QStringLiteral("zgrep -EH ' install | upgrade | purge | remove ' /var/log/dpkg*"
         " | cut -f2- -d: | sort -r | sed 's/ remove / remove  /;s/ purge / purge   /'"
         " | grep \"^\" ")).output.trimmed();
 }
 
 void MainWindow::buildInfoList()
 {
-    QString logfilelist=runCmd("pkexec /usr/lib/quick-system-info-gui/qsig-lib-list list").output;
+    QString logfilelist=run("pkexec", {"/usr/lib/quick-system-info-gui/qsig-lib-list", "list"}).output;
     QStringList logfiles = logfilelist.split("\n");
     ui->listInfo->blockSignals(true);
     ui->listInfo->clear();
@@ -387,13 +387,13 @@ void MainWindow::plaincopy()
     clipboard->setText(text);
 }
 
-QString MainWindow::readfile(const QString &logfile, bool escalate)
+QString MainWindow::readfile(const QString &path, bool escalate)
 {
     QString text;
-    QFileInfo qfi(logfile);
+    QFileInfo qfi(path);
     if (!qfi.isFile()) return text; // Treat non-existent files as empty.
     if (qfi.permission(QFile::ReadOther)){
-        QFile file(logfile);
+        QFile file(path);
         if (!file.open(QIODevice::ReadOnly)) throw file.errorString();
 
         QTextStream in(&file);
@@ -402,7 +402,7 @@ QString MainWindow::readfile(const QString &logfile, bool escalate)
         }
         file.close();
     } else if (escalate) {
-        text = runCmd("pkexec /usr/lib/quick-system-info-gui/qsig-lib readadminfile " + logfile).output;
+        text = run("pkexec", {"/usr/lib/quick-system-info-gui/qsig-lib", "readadminfile", path}).output;
     }
 
     return text.trimmed();

@@ -48,7 +48,12 @@ public:
     explicit MainWindow(const QCommandLineParser &arg_parser, QWidget *parent = nullptr);
     ~MainWindow();
 
-    Result runCmd(const QString &cmd, const QString *input = nullptr);
+    Result run(const char *program, const QStringList &args = QStringList(),
+        const QString *input = nullptr);
+    inline Result shell(const QString &cmd, const QString *input = nullptr)
+    {
+        return run("/bin/bash", {"-c", cmd}, input);
+    }
 
     void setup();
 
@@ -70,7 +75,7 @@ private:
     void showSavedMessage(const QString &filename, const QString &errmsg);
     QString systeminfo();
     QString apthistory();
-    QString readfile(const QString &logfile, bool escalate = true);
+    QString readfile(const QString &path, bool escalate = true);
     void buildInfoList();
     void listSelectAll();
     void listSelectDefault();
