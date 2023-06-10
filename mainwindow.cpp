@@ -286,8 +286,6 @@ QString MainWindow::systeminfo()
     const QString unamev = runCmd("uname -v | grep -oP '.*[[:space:]]\\K([0-9]+[.])+[^[:space:]]*'").output;
     static const QRegularExpression kernel_add("(.+Kernel:(" "\\x1b\\[[0-9;]+[mK]" "|[[:space:]])+[[:alnum:].-]+)(.*)");
     out.output.replace(kernel_add, "\\1 [" + unamev + "]\\3");
-    static const QRegularExpression host_filter("(.+Host:(" "\\x1b\\[[0-9;]+[mK]" "|[[:space:]])+)([[:alnum:].-]+)(.*)");
-    out.output.replace(host_filter, "\\1<filter>\\4");
     static const QRegularExpression uuid_filter("[[:xdigit:]]{8}-([[:xdigit:]]{4}-){3}[[:xdigit:]]{12}");
     out.output.replace(uuid_filter, "<filter>");
     // Final filtering
