@@ -52,7 +52,7 @@ public:
     explicit MainWindow(const QCommandLineParser &arg_parser, QWidget *parent = nullptr);
     ~MainWindow();
 
-    Result runCmd(const QString &cmd);
+    Result runCmd(const QString &cmd, const QString *input = nullptr);
 
     void setup();
 
@@ -74,7 +74,7 @@ private:
     void showSavedMessage(const QString &filename, const QString &errmsg);
     QString systeminfo();
     QString apthistory();
-    QString readlog(const QString &logfile);
+    QString readfile(const QString &logfile, bool escalate = true);
     void buildInfoList();
     void listSelectAll();
     void listSelectDefault();
