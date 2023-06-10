@@ -51,6 +51,7 @@ MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent)
     ui->setupUi(this);
     lockGUI(true);
     setWindowFlags(Qt::Window); // for the close, min and max buttons
+    connect(ui->buttonCancel, &QPushButton::clicked, this, &MainWindow::close);
     ui->textSysInfo->setWordWrapMode(QTextOption::NoWrap);
     ui->textSysInfo->setContextMenuPolicy(Qt::ActionsContextMenu);
     ui->textSysInfo->setPlainText(tr("Loading..."));

@@ -297,12 +297,4 @@
  <resources>
   <include location="qsi_resource.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>buttonCancel</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>close()</slot>
-  </connection>
- </connections>
 </ui>
