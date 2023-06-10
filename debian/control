@@ -2,7 +2,7 @@ Source: quick-system-info-gui
 Section: admin
 Priority: optional
 Maintainer: dolphin oracle <dolphinoracle@gmail.com>
-Build-Depends: debhelper (>=10), qtbase5-dev, qttools5-dev-tools, libarchive
+Build-Depends: debhelper (>=10), qtbase5-dev, qttools5-dev-tools, libarchive-dev
 Standards-Version: 3.9.8
 
 Package: quick-system-info-gui
