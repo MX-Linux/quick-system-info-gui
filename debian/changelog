@@ -1,3 +1,12 @@
+quick-system-info-gui (23.06.01) mx; urgency=medium
+
+  [chkboom]
+  * Add open folder option to save message box.
+  * Make the save dialog default to the home folder.
+  * UI file cleanup. Fixed spacers. 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 09 Jun 2023 23:15:09 -0400
+
 quick-system-info-gui (23.02.07) mx; urgency=medium
 
   * new dual-pane report and log viewer paradigm
