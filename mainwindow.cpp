@@ -29,6 +29,7 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QFileInfo>
+#include <QProcess>
 #include <QMessageBox>
 #include <QScreen>
 #include <QTimer>
@@ -50,6 +51,7 @@ MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent)
     ui->setupUi(this);
     lockGUI(true);
     setWindowFlags(Qt::Window); // for the close, min and max buttons
+    connect(ui->buttonCancel, &QPushButton::clicked, this, &MainWindow::close);
     ui->textSysInfo->setWordWrapMode(QTextOption::NoWrap);
     ui->textSysInfo->setContextMenuPolicy(Qt::ActionsContextMenu);
     ui->textSysInfo->setPlainText(tr("Loading..."));
@@ -135,13 +137,15 @@ void MainWindow::lockGUI(bool lock)
 }
 
 // Util function for getting bash command output and error code
-Result MainWindow::runCmd(const QString &cmd)
+Result MainWindow::run(const char *program, const QStringList &args, const QString *input)
 {
     QEventLoop loop;
     QProcess proc;
     proc.setProcessChannelMode(QProcess::MergedChannels);
     connect(&proc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop, &QEventLoop::quit);
-    proc.start("/bin/bash", {"-c", cmd});
+    proc.start(program, args);
+    if (input && !input->isEmpty()) proc.write(input->toUtf8());
+    proc.closeWriteChannel();
     loop.exec();
     return {proc.exitCode(), proc.readAll().trimmed()};
 }
@@ -218,7 +222,7 @@ void MainWindow::on_pushSave_clicked()
             switch(row) {
                 case 0: contents = systeminfo().toUtf8(); break;
                 case 1: contents = apthistory().toUtf8(); break;
-                default: contents = readlog(item->text()).toUtf8(); break;
+                default: contents = readfile("/var/log/" + item->text()).toUtf8(); break;
             }
             archive_entry_set_pathname(arcentry, item->data(Qt::UserRole).toByteArray().constData());
             archive_entry_set_filetype(arcentry, AE_IFREG);
@@ -234,6 +238,8 @@ void MainWindow::on_pushSave_clicked()
     } catch(bool sys) {
         if (!arc || sys) errmsg = strerror(errno);
         else errmsg = archive_error_string(arc);
+    } catch(const QString &msg) {
+        errmsg = msg;
     }
     if (arcentry) archive_entry_free(arcentry);
     if (arc) archive_write_free(arc);
@@ -261,32 +267,58 @@ void MainWindow::showSavedMessage(const QString &filename, const QString &errmsg
     msgbox.exec();
     if (open && msgbox.clickedButton() == open) {
         // Send the dbus message that opens the configured file manager with the file selected.
-        runCmd("dbus-send --session --dest=org.freedesktop.FileManager1"
-            " --type=method_call /org/freedesktop/FileManager1 org.freedesktop.FileManager1.ShowItems"
-            " array:string:\"file://" + filename + "\" string:\"\"");
+        run("dbus-send", {"--session", "--dest=org.freedesktop.FileManager1", "--type=method_call",
+            "/org/freedesktop/FileManager1", "org.freedesktop.FileManager1.ShowItems",
+            "array:string:file://" + filename, "string:"});
     }
 }
 
 QString MainWindow::systeminfo()
 {
-    QString text = runCmd(QStringLiteral("/usr/bin/quick-system-info-mx -g")).output;
-    text.remove("[code]");
-    text.remove("[/code]");
-    text.replace("http: /", "http:/");
-    text.replace("https: /", "https:/");
-    return text.trimmed();
+    QString snapshot = readfile("/etc/snapshot_created");
+    if (!snapshot.isEmpty()) {
+        snapshot.prepend("Snapshot created on: ");
+        snapshot.append('\n');
+    }
+    Result out = run("inxi", {"-Fxxxra", "--filter-all", "-c0"});
+
+    // Deal with bugs in inxi.
+    out.output.replace("http: /", "http:/");
+    out.output.replace("https: /", "https:/");
+    // Filtering
+    const QString unamev = shell("uname -v | grep -oP '.*[[:space:]]\\K([0-9]+[.])+[^[:space:]]*'").output;
+    static const QRegularExpression kernel_add("(.+Kernel:(" "\\x1b\\[[0-9;]+[mK]" "|[[:space:]])+[[:alnum:].-]+)(.*)");
+    out.output.replace(kernel_add, "\\1 [" + unamev + "]\\3");
+//    static const QRegularExpression host_filter("(.+Host:(" "\\x1b\\[[0-9;]+[mK]" "|[[:space:]])+)([[:alnum:].-]+)(.*)");
+//    out.output.replace(host_filter, "\\1<filter>\\4");
+//    static const QRegularExpression uuid_filter("[[:xdigit:]]{8}-([[:xdigit:]]{4}-){3}[[:xdigit:]]{12}");
+//    out.output.replace(uuid_filter, "<filter>");
+
+    // Extra information not provided by inxi
+    out.output.append("\n\nBoot Mode: ");
+    if (QFileInfo("/sys/firmware/efi").isDir()) out.output.append("UEFI");
+    else out.output.append("BIOS (legacy, CSM, MBR)");
+    Result sb = shell("(mokutil --sb-state || bootctl --no-variables status)"
+        " 2>/dev/null | sed -nr 's/^\\s*Secure\\s?Boot:?/SecureBoot/p'");
+    if (sb.output.contains("enabled")) out.output.append('\n' + sb.output);
+    const QString &video_tweaks = readfile("/live/config/video-tweaks", false);
+    if (!video_tweaks.isEmpty()) {
+        out.output.append("\nVideo Tweaks:\n" + video_tweaks);
+    }
+
+    return snapshot + out.output.trimmed();
 }
 
 QString MainWindow::apthistory()
 {
-    return runCmd(QStringLiteral("zgrep -EH ' install | upgrade | purge | remove ' /var/log/dpkg*"
+    return shell(QStringLiteral("zgrep -EH ' install | upgrade | purge | remove ' /var/log/dpkg*"
         " | cut -f2- -d: | sort -r | sed 's/ remove / remove  /;s/ purge / purge   /'"
         " | grep \"^\" ")).output.trimmed();
 }
 
 void MainWindow::buildInfoList()
 {
-    QString logfilelist=runCmd("pkexec /usr/lib/quick-system-info-gui/qsig-lib-list list").output;
+    QString logfilelist=run("pkexec", {"/usr/lib/quick-system-info-gui/qsig-lib-list", "list"}).output;
     QStringList logfiles = logfilelist.split("\n");
     ui->listInfo->blockSignals(true);
     ui->listInfo->clear();
@@ -355,24 +387,22 @@ void MainWindow::plaincopy()
     clipboard->setText(text);
 }
 
-QString MainWindow::readlog(const QString &logfile)
+QString MainWindow::readfile(const QString &path, bool escalate)
 {
     QString text;
-    QFile file("/var/log/" + logfile);
-    if (QFileInfo("/var/log/" + logfile).permission(QFile::ReadOther)){
-        if (!file.open(QIODevice::ReadOnly)) {
-            QMessageBox::information(0, "error", file.errorString());
-            return text;
-        }
-        QTextStream in(&file);
+    QFileInfo qfi(path);
+    if (!qfi.isFile()) return text; // Treat non-existent files as empty.
+    if (qfi.permission(QFile::ReadOther)){
+        QFile file(path);
+        if (!file.open(QIODevice::ReadOnly)) throw file.errorString();
 
+        QTextStream in(&file);
         while(!in.atEnd()) {
             text += in.readAll();
         }
-
         file.close();
-    } else {
-        text = runCmd("pkexec /usr/lib/quick-system-info-gui/qsig-lib readadminfile /var/log/" + logfile).output;
+    } else if (escalate) {
+        text = run("pkexec", {"/usr/lib/quick-system-info-gui/qsig-lib", "readadminfile", path}).output;
     }
 
     return text.trimmed();
@@ -383,19 +413,23 @@ void MainWindow::on_listInfo_itemSelectionChanged()
 {
     lockGUI(true);
 
-    const int selrow = ui->listInfo->currentRow();
-    switch(selrow){
-    case 0:
-        ui->textSysInfo->setPlainText(systeminfo());
-        break;
+    try {
+        const int selrow = ui->listInfo->currentRow();
+        switch(selrow){
+        case 0:
+            ui->textSysInfo->setPlainText(systeminfo());
+            break;
 
-    case 1:
-        ui->textSysInfo->setPlainText(apthistory());
-        break;
+        case 1:
+            ui->textSysInfo->setPlainText(apthistory());
+            break;
 
-    default:
-        ui->textSysInfo->setPlainText(readlog(ui->listInfo->item(selrow)->text()));
-        break;
+        default:
+            ui->textSysInfo->setPlainText(readfile("/var/log/" + ui->listInfo->item(selrow)->text()));
+            break;
+        }
+    } catch (const QString &msg) {
+        QMessageBox::critical(this, windowTitle(), msg);
     }
 
     lockGUI(false);

@@ -145,6 +145,9 @@
          <property name="readOnly">
           <bool>true</bool>
          </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse|Qt::TextBrowserInteraction|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+         </property>
         </widget>
        </widget>
       </item>
@@ -294,12 +297,4 @@
  <resources>
   <include location="qsi_resource.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>buttonCancel</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>close()</slot>
-  </connection>
- </connections>
 </ui>
