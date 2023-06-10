@@ -1,3 +1,9 @@
+quick-system-info-gui (23.06.03) mx; urgency=medium
+
+  * revert to using quick-system-info-mx script
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 10 Jun 2023 17:09:28 -0400
+
 quick-system-info-gui (23.06.02) mx; urgency=medium
 
   * remove depend on mx-goodies
