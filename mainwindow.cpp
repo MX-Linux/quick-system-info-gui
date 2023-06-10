@@ -402,7 +402,7 @@ QString MainWindow::readfile(const QString &logfile, bool escalate)
         }
         file.close();
     } else if (escalate) {
-        text = runCmd("pkexec /usr/lib/quick-system-info-gui/qsig-lib readadminfile /var/log/" + logfile).output;
+        text = runCmd("pkexec /usr/lib/quick-system-info-gui/qsig-lib readadminfile " + logfile).output;
     }
 
     return text.trimmed();
