@@ -71,6 +71,7 @@ private:
     void lockGUI(bool lock);
     void forumcopy();
     void plaincopy();
+    void showSavedMessage(const QString &filename, const QString &errmsg);
     QString systeminfo();
     QString apthistory();
     QString readlog(const QString &logfile);
