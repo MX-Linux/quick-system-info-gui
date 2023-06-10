@@ -4,7 +4,7 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.ui" line="115"/>
+        <location filename="../mainwindow.ui" line="109"/>
         <source>&amp;Copy for forum</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13,64 +13,64 @@
         <translation type="vanished">П</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="98"/>
+        <location filename="../mainwindow.ui" line="92"/>
         <source>Save the displayed system information to a text file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="101"/>
+        <location filename="../mainwindow.ui" line="95"/>
         <location filename="../mainwindow.cpp" line="85"/>
         <source>Save text...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="112"/>
+        <location filename="../mainwindow.ui" line="106"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="160"/>
+        <location filename="../mainwindow.ui" line="154"/>
         <source>Save the system information selected from the list to an archive file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="163"/>
+        <location filename="../mainwindow.ui" line="157"/>
         <location filename="../mainwindow.cpp" line="107"/>
         <source>&amp;Save...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="230"/>
+        <location filename="../mainwindow.ui" line="224"/>
         <source>Quit application</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="233"/>
+        <location filename="../mainwindow.ui" line="227"/>
         <source>Close</source>
         <translation>Затвори</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="240"/>
+        <location filename="../mainwindow.ui" line="234"/>
         <source>Alt+N</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="294"/>
+        <location filename="../mainwindow.ui" line="270"/>
         <source>About this application</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="297"/>
+        <location filename="../mainwindow.ui" line="273"/>
         <source>About...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="304"/>
+        <location filename="../mainwindow.ui" line="280"/>
         <source>Alt+B</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="210"/>
+        <location filename="../mainwindow.ui" line="204"/>
         <source>Help</source>
         <translation>Помош</translation>
     </message>
@@ -82,7 +82,7 @@
     <message>
         <location filename="../mainwindow.ui" line="32"/>
         <location filename="../mainwindow.cpp" line="155"/>
-        <location filename="../mainwindow.cpp" line="289"/>
+        <location filename="../mainwindow.cpp" line="310"/>
         <source>Quick System Info</source>
         <translation type="unfinished"></translation>
     </message>
@@ -122,39 +122,47 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="195"/>
+        <location filename="../mainwindow.cpp" line="191"/>
         <source>Save System Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="391"/>
+        <location filename="../mainwindow.cpp" line="251"/>
+        <source>Open folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="253"/>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="412"/>
         <source>&amp;Save (×%1)...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="186"/>
-        <location filename="../mainwindow.cpp" line="246"/>
+        <location filename="../mainwindow.cpp" line="250"/>
         <source>System information saved.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="188"/>
-        <location filename="../mainwindow.cpp" line="240"/>
+        <location filename="../mainwindow.cpp" line="258"/>
         <source>Could not save system information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="296"/>
+        <location filename="../mainwindow.cpp" line="317"/>
         <source>history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="312"/>
+        <location filename="../mainwindow.cpp" line="333"/>
         <source>%1 Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="312"/>
+        <location filename="../mainwindow.cpp" line="333"/>
         <source>Quick System Info (gui)</source>
         <translation type="unfinished"></translation>
     </message>
