@@ -170,6 +170,7 @@ void MainWindow::on_pushSaveText_clicked()
     const QStringList filters({"text/plain", "text/x-log", "application/octet-stream"});
     dialog.setMimeTypeFilters(filters); // Segmentation fault when using init list directly.
     dialog.setDefaultSuffix("txt");
+    dialog.setDirectory(getenv("HOME")); // Must be done before selectFile()
     dialog.selectFile(item->data(Qt::UserRole).toString().replace('/','+'));
     if (!dialog.exec()) return;
 
@@ -192,6 +193,7 @@ void MainWindow::on_pushSave_clicked()
     const QStringList filters({"application/zip", "application/gzip", "application/octet-stream"});
     dialog.setMimeTypeFilters(filters); // Segmentation fault when using init list directory.
     dialog.setDefaultSuffix("zip");
+    dialog.setDirectory(getenv("HOME")); // Must be done before selectFile()
     dialog.selectFile("sysinfo.zip");
     if (!dialog.exec()) return;
 
