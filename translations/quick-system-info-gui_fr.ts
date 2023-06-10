@@ -1,15 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fr">
 <context>
     <name>MainWindow</name>
     <message>
         <source>MX Welcome</source>
-        <translation type="vanished">MX Centre d&apos;accueil - MX Welcome</translation>
-    </message>
-    <message>
-        <source>Copy the system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="vanished">Copier les informations du système dans le presse-papiers, prêtes à être utilisées dans un message du forum entre les balises [CODE][/CODE].</translation>
+        <translation type="vanished">MX Centre d’accueil - MX Welcome</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="109"/>
@@ -17,53 +11,41 @@
         <translation>&amp;Copier pour le forum</translation>
     </message>
     <message>
-        <source>C</source>
-        <translation type="vanished">C</translation>
-    </message>
-    <message>
-        <source>Save the system information to a text file.</source>
-        <translation type="vanished">Sauvegarder les informations du système dans un fichier texte.</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation type="vanished">Enre&amp;gistrer</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="92"/>
         <source>Save the displayed system information to a text file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer les informations système affichées dans un fichier texte.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="95"/>
         <location filename="../mainwindow.cpp" line="85"/>
         <source>Save text...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarde du texte...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="106"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier les informations système affichées dans le presse-papiers, prêtes à être utilisées dans un message du forum entre les balises [CODE][/CODE].</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="154"/>
         <source>Save the system information selected from the list to an archive file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer les informations système sélectionnées dans la liste, dans un fichier d’archive.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="157"/>
         <location filename="../mainwindow.cpp" line="107"/>
         <source>&amp;Save...</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregi&amp;strer...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="224"/>
         <source>Quit application</source>
-        <translation>Quitter l&apos;application</translation>
+        <translation>Quitter l’application</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="227"/>
         <source>Close</source>
-        <translation>Fermer</translation>
+        <translation>Quitter</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="234"/>
@@ -78,7 +60,7 @@
     <message>
         <location filename="../mainwindow.ui" line="273"/>
         <source>About...</source>
-        <translation>À propos ...</translation>
+        <translation>À propos...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="280"/>
@@ -105,7 +87,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="55"/>
         <source>Loading...</source>
-        <translation>Chargement ...</translation>
+        <translation>Chargement...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="159"/>
@@ -120,17 +102,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="96"/>
         <source>Select &amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tout sélectionner</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="102"/>
         <source>Revert Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélection précédente</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="156"/>
         <source>Program for displaying a quick system info report</source>
-        <translation>Programme affichant le rapport d&apos;informations système</translation>
+        <translation>Programme affichant le rapport d’informations système</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="160"/>
@@ -140,17 +122,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="251"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir un dossier avec zzzFM</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="253"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Valider</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="412"/>
         <source>&amp;Save (×%1)...</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregi&amp;strer (×%1)...</translation>
     </message>
     <message>
         <source>Changelog</source>
@@ -162,7 +144,7 @@
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="vanished">&amp;Fermer</translation>
+        <translation type="vanished">&amp;Quitter</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="191"/>
@@ -177,12 +159,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="258"/>
         <source>Could not save system information.</source>
-        <translation>La sauvegarde d&apos;informations système n&apos;a pas pu aboutir</translation>
+        <translation>La sauvegarde d’informations système n’a pas pu aboutir</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="317"/>
         <source>history</source>
-        <translation type="unfinished"></translation>
+        <translation>historique</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="333"/>
@@ -204,17 +186,13 @@
         <source>Plain text copy</source>
         <translation>Copier en texte brut</translation>
     </message>
-    <message>
-        <source>Save</source>
-        <translation type="vanished">Sauvegarder</translation>
-    </message>
 </context>
 <context>
     <name>QApplication</name>
     <message>
         <location filename="../main.cpp" line="66"/>
         <source>You must run this program as normal user.</source>
-        <translation>Vous devez lancer cette application en tant qu&apos;utilisateur normal.</translation>
+        <translation>Vous devez exécuter cette application en tant qu’utilisateur normal.</translation>
     </message>
 </context>
 <context>
@@ -222,7 +200,7 @@
     <message>
         <location filename="../main.cpp" line="43"/>
         <source>This tool displays a the quick system info report in a gui.</source>
-        <translation>Cet outil affiche le rapport d&apos;informations système dans une interface graphique.</translation>
+        <translation>Cet outil affiche le rapport d’informations système dans une interface graphique.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="66"/>
@@ -248,7 +226,7 @@
     <message>
         <location filename="../about.cpp" line="63"/>
         <source>&amp;Close</source>
-        <translation>&amp;Fermer</translation>
+        <translation>&amp;Quitter</translation>
     </message>
 </context>
 </TS>

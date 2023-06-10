@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fi">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fi">
 <context>
     <name>MainWindow</name>
     <message>
@@ -10,42 +8,34 @@
     <message>
         <location filename="../mainwindow.ui" line="109"/>
         <source>&amp;Copy for forum</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation type="vanished">C</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation type="vanished">&amp;Tallenna</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="92"/>
         <source>Save the displayed system information to a text file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="95"/>
         <location filename="../mainwindow.cpp" line="85"/>
         <source>Save text...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="106"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="154"/>
         <source>Save the system information selected from the list to an archive file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="157"/>
         <location filename="../mainwindow.cpp" line="107"/>
         <source>&amp;Save...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="224"/>
@@ -92,7 +82,7 @@
         <location filename="../mainwindow.cpp" line="155"/>
         <location filename="../mainwindow.cpp" line="310"/>
         <source>Quick System Info</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="55"/>
@@ -107,22 +97,22 @@
     <message>
         <location filename="../mainwindow.cpp" line="154"/>
         <source>About Quick-System-Info-gui</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="96"/>
         <source>Select &amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="102"/>
         <source>Revert Selection</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="156"/>
         <source>Program for displaying a quick system info report</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="160"/>
@@ -132,17 +122,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="251"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Avaa kansio</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="253"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="412"/>
         <source>&amp;Save (×%1)...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Changelog</source>
@@ -159,22 +149,22 @@
     <message>
         <location filename="../mainwindow.cpp" line="191"/>
         <source>Save System Information</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="250"/>
         <source>System information saved.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="258"/>
         <source>Could not save system information.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="317"/>
         <source>history</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="333"/>
@@ -184,21 +174,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="333"/>
         <source>Quick System Info (gui)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="75"/>
         <source>Copy for forum</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="80"/>
         <source>Plain text copy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="vanished">Tallenna</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -214,7 +200,7 @@
     <message>
         <location filename="../main.cpp" line="43"/>
         <source>This tool displays a the quick system info report in a gui.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../main.cpp" line="66"/>
