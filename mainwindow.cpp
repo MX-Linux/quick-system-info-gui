@@ -25,16 +25,20 @@
 #include <cassert>
 #include <ctime>
 #include <QAction>
+#include <QCheckBox>
 #include <QDebug>
+#include <QDialog>
 #include <QDir>
 #include <QFileDialog>
 #include <QFileInfo>
+#include <QGroupBox>
+#include <QLineEdit>
 #include <QProcess>
 #include <QMessageBox>
+#include <QRadioButton>
 #include <QScreen>
 #include <QTimer>
 #include <QClipboard>
-
 #include <archive.h>
 #include <archive_entry.h>
 
@@ -88,10 +92,23 @@ void MainWindow::setup()
     saveasfile->setShortcutVisibleInContextMenu(true);
     saveasfile->setShortcut(Qt::CTRL | Qt::SHIFT | Qt::Key_S);
     connect(saveasfile, &QAction::triggered, this, &MainWindow::on_pushSaveText_clicked);
+    QAction *find = new QAction(QIcon::fromTheme("search"), tr("&Find..."), this);
+    find->setShortcutVisibleInContextMenu(true);
+    find->setShortcut(Qt::CTRL | Qt::Key_F);
+    connect(find, &QAction::triggered, this, &MainWindow::showFindDialog);
+    QAction *findnext = new QAction(QIcon::fromTheme("search"), tr("Find &Next"), this);
+    findnext->setShortcutVisibleInContextMenu(true);
+    findnext->setShortcut(Qt::Key_F3);
+    connect(findnext, &QAction::triggered, this, &MainWindow::findNext);
 
     ui->textSysInfo->addAction(forumcopyaction);
     ui->textSysInfo->addAction(plaincopyaction);
     ui->textSysInfo->addAction(saveasfile);
+    QAction *sep = new QAction(this);
+    sep->setSeparator(true);
+    ui->textSysInfo->addAction(sep);
+    ui->textSysInfo->addAction(find);
+    ui->textSysInfo->addAction(findnext);
 
     // Info list shortcuts and context menu.
     QAction *selall = new QAction(QIcon::fromTheme(QStringLiteral("edit-select-all")),
@@ -445,6 +462,75 @@ void MainWindow::listSelectDefault()
         const bool sel = defaultMatches.contains(item->data(Qt::UserRole).toString(),
             Qt::CaseInsensitive);
         item->setCheckState(sel ? Qt::Checked : Qt::Unchecked);
+    }
+}
+
+void MainWindow::showFindDialog()
+{
+    QDialog dialog(ui->textSysInfo);
+    dialog.setWindowTitle(tr("Find"));
+
+    // Search text
+    QLabel *labelFindWhat = new QLabel(tr("&Find what:"), &dialog);
+    QLineEdit *editFind = new QLineEdit(&dialog);
+    labelFindWhat->setBuddy(editFind);
+    // Find Next and Cancel buttons
+    QPushButton *pushFindNext = new QPushButton(tr("Find &Next"), &dialog);
+    QPushButton *pushCancel = new QPushButton(tr("Cancel"), &dialog);
+    pushFindNext->setDisabled(true); // Disable until there is text
+    pushFindNext->setDefault(true);
+
+    // Case sensitivity and whole words
+    QCheckBox *checkCase = new QCheckBox(tr("Match c&ase"), &dialog);
+    QCheckBox *checkWhole = new QCheckBox(tr("Match &whole word only"), &dialog);
+    checkCase->setChecked(searchFlags.testFlag(QTextDocument::FindCaseSensitively));
+    // Direction
+    QGroupBox *groupDirection = new QGroupBox(tr("Direction"), &dialog);
+    QHBoxLayout layoutDirection(groupDirection);
+    QRadioButton *radioUp = new QRadioButton(tr("&Up"), &dialog);
+    QRadioButton *radioDown = new QRadioButton(tr("&Down"), &dialog);
+    const bool up = searchFlags.testFlag(QTextDocument::FindBackward);
+    radioUp->setChecked(up);
+    radioDown->setChecked(!up);
+    layoutDirection.addWidget(radioUp);
+    layoutDirection.addWidget(radioDown);
+
+    QGridLayout layout(&dialog);
+    layout.setSizeConstraint(QLayout::SetFixedSize);
+    layout.addWidget(labelFindWhat, 0, 0);
+    layout.addWidget(editFind, 0, 1, 1, 2);
+    layout.addWidget(pushFindNext, 0, 3);
+    layout.addWidget(pushCancel, 1, 3);
+    layout.addWidget(checkCase, 1, 0, 1, 2);
+    layout.addWidget(checkWhole, 2, 0, 1, 2);
+    layout.addWidget(groupDirection, 1, 2, 2, 1);
+
+    connect(pushCancel, &QPushButton::clicked, &dialog, &QDialog::reject);
+    connect(editFind, &QLineEdit::textChanged, &dialog, [=](const QString &text) {
+        pushFindNext->setDisabled(text.isEmpty());
+    });
+    editFind->setText(searchText);
+    editFind->selectAll();
+    // The user should be able to interact with the window while searching.
+    connect(pushFindNext, &QPushButton::clicked, &dialog, [=]() {
+        searchText = editFind->text();
+        searchFlags.setFlag(QTextDocument::FindCaseSensitively, checkCase->isChecked());
+        searchFlags.setFlag(QTextDocument::FindWholeWords, checkWhole->isChecked());
+        searchFlags.setFlag(QTextDocument::FindBackward, radioUp->isChecked());
+        if (!searchText.isEmpty()) findNext();
+    });
+
+    // Start the dialog
+    QEventLoop loop;
+    connect(&dialog, &QDialog::rejected, &loop, &QEventLoop::quit);
+    dialog.show();
+    loop.exec();
+}
+void MainWindow::findNext()
+{
+    if (searchText.isEmpty()) showFindDialog();
+    else if (!ui->textSysInfo->find(searchText, searchFlags)) {
+        QMessageBox::information(this, windowTitle(), tr("Cannot find \"%1\"").arg(searchText));
     }
 }
 
