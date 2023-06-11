@@ -29,6 +29,7 @@
 #include <QDialog>
 #include <QAction>
 #include <QEvent>
+#include <QTextDocument>
 
 namespace Ui
 {
@@ -69,6 +70,8 @@ private:
     Ui::MainWindow *ui;
     QStringList defaultMatches;
     QAction *actionSave = nullptr;
+    QString searchText;
+    QTextDocument::FindFlags searchFlags;
     void lockGUI(bool lock);
     void forumcopy();
     void plaincopy();
@@ -79,6 +82,8 @@ private:
     void buildInfoList();
     void listSelectAll();
     void listSelectDefault();
+    void showFindDialog();
+    void findNext();
     bool eventFilter(QObject *watched, QEvent *event);
     void autoFitSplitter();
 };
