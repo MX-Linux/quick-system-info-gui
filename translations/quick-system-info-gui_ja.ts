@@ -19,7 +19,7 @@
         <location filename="../mainwindow.ui" line="95"/>
         <location filename="../mainwindow.cpp" line="85"/>
         <source>Save text...</source>
-        <translation>テキストを保存...</translation>
+        <translation>テキストの保存...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="106"/>
@@ -29,7 +29,7 @@
     <message>
         <location filename="../mainwindow.ui" line="154"/>
         <source>Save the system information selected from the list to an archive file.</source>
-        <translation>一覧から選択したシステム情報を書庫ファイルに保存する。</translation>
+        <translation>一覧から選択したシステム情報を書庫ファイルとして保存します。</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="157"/>
@@ -174,7 +174,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="333"/>
         <source>Quick System Info (gui)</source>
-        <translation>クイックシステム情報 (GUI)</translation>
+        <translation>クイックシステム情報 (GUI で)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="75"/>
