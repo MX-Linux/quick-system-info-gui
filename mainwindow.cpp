@@ -335,6 +335,9 @@ void MainWindow::buildInfoList()
     // Resize the splitter according to the new contents
     QApplication::processEvents(); // Allow the scroll bar to materialise
     autoFitSplitter();
+    // Stop the left pane from resizing with the window.
+    ui->splitter->setStretchFactor(0, 0);
+    ui->splitter->setStretchFactor(1, 1);
 
     // Warn on failure to obtain the log file list earlier.
     if (logrc != 0) QMessageBox::warning(this, windowTitle(), loglistout);
