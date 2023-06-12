@@ -6,7 +6,7 @@
  * Authors: Dolphin Oracle, AK-47, Adrian
  *          MX Linux <http://mxlinux.org>
  *
- * This file is part of mx-welcome.
+ * This file is part of Quick System Info.
  *
  * mx-welcome is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,8 +33,8 @@
 #include <QFileInfo>
 #include <QGroupBox>
 #include <QLineEdit>
-#include <QProcess>
 #include <QMessageBox>
+#include <QProcess>
 #include <QRadioButton>
 #include <QScreen>
 #include <QTimer>
@@ -69,7 +69,7 @@ MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent)
 MainWindow::~MainWindow() { delete ui; }
 
 // setup versious items first time program runs
-void MainWindow::setup()
+void MainWindow::setup() noexcept
 {
     // Allow user-friendly match strings.
     for(QString &match : defaultMatches) {
@@ -141,10 +141,14 @@ void MainWindow::setup()
     lockGUI(false);
 }
 
-void MainWindow::lockGUI(bool lock)
+void MainWindow::lockGUI(bool lock) noexcept
 {
-    if (ui->widget->isEnabled() == lock) {
-        ui->widget->setDisabled(lock);
+    if (ui->listInfo->isEnabled() == lock) {
+        ui->listInfo->setDisabled(lock);
+        ui->textSysInfo->setDisabled(lock);
+        ui->pushSave->setDisabled(lock);
+        ui->pushSaveText->setDisabled(lock);
+        ui->ButtonCopy->setDisabled(lock);
         if (lock) QApplication::setOverrideCursor(Qt::WaitCursor);
         else {
             ui->listInfo->setFocus();
@@ -154,23 +158,30 @@ void MainWindow::lockGUI(bool lock)
 }
 
 // Util function for getting bash command output and error code
-Result MainWindow::run(const char *program, const QStringList &args, const QString *input)
+int MainWindow::run(const char *program, const QStringList &args,
+    QByteArray *output, const QByteArray *input) noexcept
 {
     QEventLoop loop;
     QProcess proc;
     proc.setProcessChannelMode(QProcess::MergedChannels);
+    connect(&proc, &QProcess::errorOccurred, &loop, &QEventLoop::quit);
     connect(&proc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop, &QEventLoop::quit);
     proc.start(program, args);
-    if (input && !input->isEmpty()) proc.write(input->toUtf8());
+    if (input) proc.write(*input);
     proc.closeWriteChannel();
     loop.exec();
-    return {proc.exitCode(), proc.readAll().trimmed()};
+
+    const bool ok = (proc.exitStatus()==QProcess::NormalExit && proc.error()==QProcess::UnknownError);
+    if (output) {
+        *output = proc.readAll().trimmed();
+        if (!ok && output->isEmpty()) *output = proc.errorString().toUtf8();
+    }
+    return ok ? proc.exitCode() : -127;
 }
 
 // About button clicked
-void MainWindow::on_buttonAbout_clicked()
+void MainWindow::on_buttonAbout_clicked() noexcept
 {
-    this->hide();
     displayAboutMsgBox(
         tr("About Quick-System-Info-gui"),
         "<p align=\"center\"><b><h2>" + tr("Quick System Info") + "</h2></b></p><p align=\"center\">" + tr("Version: ")
@@ -178,11 +189,11 @@ void MainWindow::on_buttonAbout_clicked()
             + "</h3></p><p align=\"center\"><a href=\"http://mxlinux.org\">http://mxlinux.org</a><br /></p>"
               "<p align=\"center\">"
             + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
-        QStringLiteral("/usr/share/doc/quick-system-info-gui/license.html"), tr("License").arg(this->windowTitle()));
-    this->show();
+        QStringLiteral("/usr/share/doc/quick-system-info-gui/license.html"),
+        tr("%1 License").arg(this->windowTitle()));
 }
 
-void MainWindow::on_pushSaveText_clicked()
+void MainWindow::on_pushSaveText_clicked() noexcept
 {
     QFileDialog dialog(this);
     dialog.setAcceptMode(QFileDialog::AcceptSave);
@@ -207,7 +218,7 @@ void MainWindow::on_pushSaveText_clicked()
     lockGUI(false);
     showSavedMessage(file.fileName(), errmsg);
 }
-void MainWindow::on_pushSave_clicked()
+void MainWindow::on_pushSave_clicked() noexcept
 {
     QFileDialog dialog(this, tr("Save System Information"));
     dialog.setAcceptMode(QFileDialog::AcceptSave);
@@ -235,12 +246,7 @@ void MainWindow::on_pushSave_clicked()
             assert(item != nullptr);
             if (item->checkState() != Qt::Checked) continue;
 
-            QByteArray contents;
-            switch(row) {
-                case 0: contents = systeminfo().toUtf8(); break;
-                case 1: contents = apthistory().toUtf8(); break;
-                default: contents = readfile("/var/log/" + item->text()).toUtf8(); break;
-            }
+            const QByteArray &contents = readReport(row);
             archive_entry_set_pathname(arcentry, item->data(Qt::UserRole).toByteArray().constData());
             archive_entry_set_filetype(arcentry, AE_IFREG);
             archive_entry_set_perm(arcentry, 0644);
@@ -264,7 +270,7 @@ void MainWindow::on_pushSave_clicked()
     lockGUI(false);
     showSavedMessage(selfile, errmsg);
 }
-void MainWindow::showSavedMessage(const QString &filename, const QString &errmsg)
+void MainWindow::showSavedMessage(const QString &filename, const QString &errmsg) noexcept
 {
     QMessageBox msgbox(this);
     QPushButton *open = nullptr;
@@ -290,44 +296,30 @@ void MainWindow::showSavedMessage(const QString &filename, const QString &errmsg
     }
 }
 
-QString MainWindow::systeminfo()
+void MainWindow::buildInfoList() noexcept
 {
-    Result out = shell("/usr/bin/quick-system-info-mx -g");
-    // Deal with bugs in inxi.
-    out.output.replace("http: /", "http:/");
-    out.output.replace("https: /", "https:/");
+    QByteArray loglistout;
+    const int logrc = run("pkexec", {"/usr/lib/quick-system-info-gui/qsig-lib-list", "list"}, &loglistout);
 
-    return out.output.trimmed();
-}
-
-QString MainWindow::apthistory()
-{
-    return shell(QStringLiteral("zgrep -EH ' install | upgrade | purge | remove ' /var/log/dpkg*"
-        " | cut -f2- -d: | sort -r | sed 's/ remove / remove  /;s/ purge / purge   /'"
-        " | grep \"^\" ")).output.trimmed();
-}
-
-void MainWindow::buildInfoList()
-{
-    QString logfilelist=run("pkexec", {"/usr/lib/quick-system-info-gui/qsig-lib-list", "list"}).output;
-    QStringList logfiles = logfilelist.split("\n");
     ui->listInfo->blockSignals(true);
     ui->listInfo->clear();
-
-    // Populate with log files and sort.
-    for(QString &logfile : logfiles) {
-        QFileInfo qfi(logfile);
-        logfile.remove("/var/log/");
-        auto *item = new QListWidgetItem(logfile, ui->listInfo);
-        item->setData(Qt::UserRole, logfile);
-        // Italics for log files that require root to read.
-        if (!qfi.permission(QFile::ReadOther)) {
-            QFont ifont = item->font();
-            ifont.setItalic(true);
-            item->setFont(ifont);
+    if (logrc == 0) {
+        QStringList logfiles = QString(loglistout).split("\n");
+        // Populate with log files and sort.
+        for(QString &logfile : logfiles) {
+            QFileInfo qfi(logfile);
+            logfile.remove("/var/log/");
+            auto *item = new QListWidgetItem(logfile, ui->listInfo);
+            item->setData(Qt::UserRole, logfile);
+            // Italics for log files that require root to read.
+            if (!qfi.permission(QFile::ReadOther)) {
+                QFont ifont = item->font();
+                ifont.setItalic(true);
+                item->setFont(ifont);
+            }
         }
+        ui->listInfo->sortItems(); // Sort current list before adding special items.
     }
-    ui->listInfo->sortItems(); // Sort current list before adding special items.
 
     // Special treatment for QSI because of how important it is.
     QListWidgetItem *item = new QListWidgetItem(tr("Quick System Info"));
@@ -344,19 +336,24 @@ void MainWindow::buildInfoList()
     listSelectDefault();
     ui->listInfo->blockSignals(false);
     on_listInfo_itemChanged(); // Set up multi buttons.
-
     // Resize the splitter according to the new contents
     QApplication::processEvents(); // Allow the scroll bar to materialise
     autoFitSplitter();
+    // Stop the left pane from resizing with the window.
+    ui->splitter->setStretchFactor(0, 0);
+    ui->splitter->setStretchFactor(1, 1);
+
+    // Warn on failure to obtain the log file list earlier.
+    if (logrc != 0) QMessageBox::warning(this, windowTitle(), loglistout);
 }
 
-void MainWindow::on_ButtonHelp_clicked()
+void MainWindow::on_ButtonHelp_clicked() noexcept
 {
     const QString &url = QStringLiteral("file:///usr/share/doc/quick-system-info-gui/quick-system-info-gui.html");
-    displayDoc(url, tr("%1 Help").arg(tr("Quick System Info (gui)")));
+    displayDoc(url, tr("%1 Help").arg(tr("Quick System Info")));
 }
 
-void MainWindow::forumcopy()
+void MainWindow::forumcopy() noexcept
 {
     QClipboard *clipboard = QApplication::clipboard();
     QString text = ui->textSysInfo->textCursor().selectedText();
@@ -367,7 +364,7 @@ void MainWindow::forumcopy()
     clipboard->setText("[CODE]" + text + "[/CODE]");
 }
 
-void MainWindow::plaincopy()
+void MainWindow::plaincopy() noexcept
 {
     QClipboard *clipboard = QApplication::clipboard();
     QString text = ui->textSysInfo->textCursor().selectedText();
@@ -378,55 +375,60 @@ void MainWindow::plaincopy()
     clipboard->setText(text);
 }
 
-QString MainWindow::readfile(const QString &path, bool escalate)
+QByteArray MainWindow::readReport(int row)
 {
-    QString text;
-    QFileInfo qfi(path);
-    if (!qfi.isFile()) return text; // Treat non-existent files as empty.
-    if (qfi.permission(QFile::ReadOther)){
-        QFile file(path);
-        if (!file.open(QIODevice::ReadOnly)) throw file.errorString();
-
-        QTextStream in(&file);
-        while(!in.atEnd()) {
-            text += in.readAll();
+    QByteArray output;
+    int execrc = 0;
+    switch(row) {
+        case 0: { // Quick System Info
+            execrc = run("/usr/bin/quick-system-info-mx", {"-g"}, &output);
+            // Deal with bugs in inxi.
+            output.replace("http: /", "http:/");
+            output.replace("https: /", "https:/");
+            break;
         }
-        file.close();
-    } else if (escalate) {
-        text = run("pkexec", {"/usr/lib/quick-system-info-gui/qsig-lib", "readadminfile", path}).output;
+        case 1: { // apt history
+            execrc = shell(QStringLiteral("zgrep -EH ' install | upgrade | purge | remove ' /var/log/dpkg*"
+                " | cut -f2- -d: | sort -r | sed 's/ remove / remove  /;s/ purge / purge   /'"
+                " | grep \"^\""), &output);
+            break;
+        }
+        default: { // Other log files
+            QListWidgetItem *item = ui->listInfo->item(row);
+            assert (item != nullptr);
+            QFileInfo qfi("/var/log/" + item->data(Qt::UserRole).toString());
+            if (qfi.permission(QFile::ReadOther)){
+                QFile file(qfi.absoluteFilePath());
+                if (!file.open(QIODevice::ReadOnly)) throw file.errorString();
+                output = file.readAll().trimmed();
+                file.close();
+            } else if (qfi.isFile()) {
+                execrc = run("pkexec", {"/usr/lib/quick-system-info-gui/qsig-lib",
+                    "readadminfile", qfi.absoluteFilePath()}, &output);
+            }
+            break;
+        }
     }
-
-    return text.trimmed();
+    if (execrc != 0) throw QString(output);
+    return output;
 }
 
 // The currentRowchanged() signal occurs before the selection change is displayed.
-void MainWindow::on_listInfo_itemSelectionChanged()
+void MainWindow::on_listInfo_itemSelectionChanged() noexcept
 {
     lockGUI(true);
 
     try {
-        const int selrow = ui->listInfo->currentRow();
-        switch(selrow){
-        case 0:
-            ui->textSysInfo->setPlainText(systeminfo());
-            break;
-
-        case 1:
-            ui->textSysInfo->setPlainText(apthistory());
-            break;
-
-        default:
-            ui->textSysInfo->setPlainText(readfile("/var/log/" + ui->listInfo->item(selrow)->text()));
-            break;
-        }
+        ui->textSysInfo->setPlainText(readReport(ui->listInfo->currentRow()));
     } catch (const QString &msg) {
         QMessageBox::critical(this, windowTitle(), msg);
+        ui->textSysInfo->clear();
     }
 
     lockGUI(false);
 }
 
-void MainWindow::on_listInfo_itemChanged()
+void MainWindow::on_listInfo_itemChanged() noexcept
 {
     int nchecked = 0;
     for(int row = 0; row < ui->listInfo->count(); ++row) {
@@ -443,13 +445,13 @@ void MainWindow::on_listInfo_itemChanged()
 }
 
 // List checkbox selection presets
-void MainWindow::listSelectAll()
+void MainWindow::listSelectAll() noexcept
 {
     for(int row = 0; row < ui->listInfo->count(); ++row) {
         ui->listInfo->item(row)->setCheckState(Qt::Checked);
     }
 }
-void MainWindow::listSelectDefault()
+void MainWindow::listSelectDefault() noexcept
 {
     const int lcount = ui->listInfo->count();
     if (lcount > 0) {
@@ -465,7 +467,7 @@ void MainWindow::listSelectDefault()
     }
 }
 
-void MainWindow::showFindDialog()
+void MainWindow::showFindDialog() noexcept
 {
     QDialog dialog(ui->textSysInfo);
     dialog.setWindowTitle(tr("Find"));
@@ -526,7 +528,7 @@ void MainWindow::showFindDialog()
     dialog.show();
     loop.exec();
 }
-void MainWindow::findNext()
+void MainWindow::findNext() noexcept
 {
     if (searchText.isEmpty()) showFindDialog();
     else if (!ui->textSysInfo->find(searchText, searchFlags)) {
@@ -534,7 +536,7 @@ void MainWindow::findNext()
     }
 }
 
-bool MainWindow::eventFilter(QObject *watched, QEvent *event)
+bool MainWindow::eventFilter(QObject *watched, QEvent *event) noexcept
 {
     if (event->type() == QEvent::MouseButtonDblClick) {
         if (watched == ui->splitter->handle(1)) autoFitSplitter();
@@ -542,7 +544,7 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
     return false;
 }
 // Auto-resize splitter to fit list column.
-void MainWindow::autoFitSplitter()
+void MainWindow::autoFitSplitter() noexcept
 {
     QList<int> sizes = ui->splitter->sizes();
     if(sizes.count() > 1) {
