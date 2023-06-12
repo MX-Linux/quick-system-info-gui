@@ -69,7 +69,7 @@ MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent)
 MainWindow::~MainWindow() { delete ui; }
 
 // setup versious items first time program runs
-void MainWindow::setup()
+void MainWindow::setup() noexcept
 {
     // Allow user-friendly match strings.
     for(QString &match : defaultMatches) {
@@ -141,7 +141,7 @@ void MainWindow::setup()
     lockGUI(false);
 }
 
-void MainWindow::lockGUI(bool lock)
+void MainWindow::lockGUI(bool lock) noexcept
 {
     if (ui->listInfo->isEnabled() == lock) {
         ui->listInfo->setDisabled(lock);
@@ -158,7 +158,8 @@ void MainWindow::lockGUI(bool lock)
 }
 
 // Util function for getting bash command output and error code
-int MainWindow::run(const char *program, const QStringList &args, QByteArray *output, const QByteArray *input)
+int MainWindow::run(const char *program, const QStringList &args,
+    QByteArray *output, const QByteArray *input) noexcept
 {
     QEventLoop loop;
     QProcess proc;
@@ -179,9 +180,8 @@ int MainWindow::run(const char *program, const QStringList &args, QByteArray *ou
 }
 
 // About button clicked
-void MainWindow::on_buttonAbout_clicked()
+void MainWindow::on_buttonAbout_clicked() noexcept
 {
-    this->hide();
     displayAboutMsgBox(
         tr("About Quick-System-Info-gui"),
         "<p align=\"center\"><b><h2>" + tr("Quick System Info") + "</h2></b></p><p align=\"center\">" + tr("Version: ")
@@ -191,10 +191,9 @@ void MainWindow::on_buttonAbout_clicked()
             + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
         QStringLiteral("/usr/share/doc/quick-system-info-gui/license.html"),
         tr("%1 License").arg(this->windowTitle()));
-    this->show();
 }
 
-void MainWindow::on_pushSaveText_clicked()
+void MainWindow::on_pushSaveText_clicked() noexcept
 {
     QFileDialog dialog(this);
     dialog.setAcceptMode(QFileDialog::AcceptSave);
@@ -219,7 +218,7 @@ void MainWindow::on_pushSaveText_clicked()
     lockGUI(false);
     showSavedMessage(file.fileName(), errmsg);
 }
-void MainWindow::on_pushSave_clicked()
+void MainWindow::on_pushSave_clicked() noexcept
 {
     QFileDialog dialog(this, tr("Save System Information"));
     dialog.setAcceptMode(QFileDialog::AcceptSave);
@@ -271,7 +270,7 @@ void MainWindow::on_pushSave_clicked()
     lockGUI(false);
     showSavedMessage(selfile, errmsg);
 }
-void MainWindow::showSavedMessage(const QString &filename, const QString &errmsg)
+void MainWindow::showSavedMessage(const QString &filename, const QString &errmsg) noexcept
 {
     QMessageBox msgbox(this);
     QPushButton *open = nullptr;
@@ -297,7 +296,7 @@ void MainWindow::showSavedMessage(const QString &filename, const QString &errmsg
     }
 }
 
-void MainWindow::buildInfoList()
+void MainWindow::buildInfoList() noexcept
 {
     QByteArray loglistout;
     const int logrc = run("pkexec", {"/usr/lib/quick-system-info-gui/qsig-lib-list", "list"}, &loglistout);
@@ -348,13 +347,13 @@ void MainWindow::buildInfoList()
     if (logrc != 0) QMessageBox::warning(this, windowTitle(), loglistout);
 }
 
-void MainWindow::on_ButtonHelp_clicked()
+void MainWindow::on_ButtonHelp_clicked() noexcept
 {
     const QString &url = QStringLiteral("file:///usr/share/doc/quick-system-info-gui/quick-system-info-gui.html");
     displayDoc(url, tr("%1 Help").arg(tr("Quick System Info")));
 }
 
-void MainWindow::forumcopy()
+void MainWindow::forumcopy() noexcept
 {
     QClipboard *clipboard = QApplication::clipboard();
     QString text = ui->textSysInfo->textCursor().selectedText();
@@ -365,7 +364,7 @@ void MainWindow::forumcopy()
     clipboard->setText("[CODE]" + text + "[/CODE]");
 }
 
-void MainWindow::plaincopy()
+void MainWindow::plaincopy() noexcept
 {
     QClipboard *clipboard = QApplication::clipboard();
     QString text = ui->textSysInfo->textCursor().selectedText();
@@ -389,7 +388,7 @@ QByteArray MainWindow::readReport(int row)
             break;
         }
         case 1: { // apt history
-            shell(QStringLiteral("zgrep -EH ' install | upgrade | purge | remove ' /var/log/dpkg*"
+            execrc = shell(QStringLiteral("zgrep -EH ' install | upgrade | purge | remove ' /var/log/dpkg*"
                 " | cut -f2- -d: | sort -r | sed 's/ remove / remove  /;s/ purge / purge   /'"
                 " | grep \"^\""), &output);
             break;
@@ -415,7 +414,7 @@ QByteArray MainWindow::readReport(int row)
 }
 
 // The currentRowchanged() signal occurs before the selection change is displayed.
-void MainWindow::on_listInfo_itemSelectionChanged()
+void MainWindow::on_listInfo_itemSelectionChanged() noexcept
 {
     lockGUI(true);
 
@@ -429,7 +428,7 @@ void MainWindow::on_listInfo_itemSelectionChanged()
     lockGUI(false);
 }
 
-void MainWindow::on_listInfo_itemChanged()
+void MainWindow::on_listInfo_itemChanged() noexcept
 {
     int nchecked = 0;
     for(int row = 0; row < ui->listInfo->count(); ++row) {
@@ -446,13 +445,13 @@ void MainWindow::on_listInfo_itemChanged()
 }
 
 // List checkbox selection presets
-void MainWindow::listSelectAll()
+void MainWindow::listSelectAll() noexcept
 {
     for(int row = 0; row < ui->listInfo->count(); ++row) {
         ui->listInfo->item(row)->setCheckState(Qt::Checked);
     }
 }
-void MainWindow::listSelectDefault()
+void MainWindow::listSelectDefault() noexcept
 {
     const int lcount = ui->listInfo->count();
     if (lcount > 0) {
@@ -468,7 +467,7 @@ void MainWindow::listSelectDefault()
     }
 }
 
-void MainWindow::showFindDialog()
+void MainWindow::showFindDialog() noexcept
 {
     QDialog dialog(ui->textSysInfo);
     dialog.setWindowTitle(tr("Find"));
@@ -529,7 +528,7 @@ void MainWindow::showFindDialog()
     dialog.show();
     loop.exec();
 }
-void MainWindow::findNext()
+void MainWindow::findNext() noexcept
 {
     if (searchText.isEmpty()) showFindDialog();
     else if (!ui->textSysInfo->find(searchText, searchFlags)) {
@@ -537,7 +536,7 @@ void MainWindow::findNext()
     }
 }
 
-bool MainWindow::eventFilter(QObject *watched, QEvent *event)
+bool MainWindow::eventFilter(QObject *watched, QEvent *event) noexcept
 {
     if (event->type() == QEvent::MouseButtonDblClick) {
         if (watched == ui->splitter->handle(1)) autoFitSplitter();
@@ -545,7 +544,7 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
     return false;
 }
 // Auto-resize splitter to fit list column.
-void MainWindow::autoFitSplitter()
+void MainWindow::autoFitSplitter() noexcept
 {
     QList<int> sizes = ui->splitter->sizes();
     if(sizes.count() > 1) {
