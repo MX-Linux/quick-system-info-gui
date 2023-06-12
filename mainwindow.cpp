@@ -143,8 +143,12 @@ void MainWindow::setup()
 
 void MainWindow::lockGUI(bool lock)
 {
-    if (ui->widget->isEnabled() == lock) {
-        ui->widget->setDisabled(lock);
+    if (ui->listInfo->isEnabled() == lock) {
+        ui->listInfo->setDisabled(lock);
+        ui->textSysInfo->setDisabled(lock);
+        ui->pushSave->setDisabled(lock);
+        ui->pushSaveText->setDisabled(lock);
+        ui->ButtonCopy->setDisabled(lock);
         if (lock) QApplication::setOverrideCursor(Qt::WaitCursor);
         else {
             ui->listInfo->setFocus();
