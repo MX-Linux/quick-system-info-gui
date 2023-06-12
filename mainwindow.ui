@@ -24,7 +24,7 @@
   </property>
   <property name="baseSize">
    <size>
-    <width>800</width>
+    <width>700</width>
     <height>500</height>
    </size>
   </property>
@@ -52,16 +52,10 @@
    <item row="0" column="0">
     <widget class="QWidget" name="widget" native="true">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
-     </property>
-     <property name="baseSize">
-      <size>
-       <width>800</width>
-       <height>500</height>
-      </size>
      </property>
      <property name="styleSheet">
       <string notr="true">QTabBar::tab { height: 30px; width: 326px; } </string>
@@ -122,18 +116,8 @@
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
-        <widget class="QListWidget" name="listInfo">
-         <property name="contextMenuPolicy">
-          <enum>Qt::ActionsContextMenu</enum>
-         </property>
-        </widget>
+        <widget class="QListWidget" name="listInfo"/>
         <widget class="QPlainTextEdit" name="textSysInfo">
-         <property name="baseSize">
-          <size>
-           <width>800</width>
-           <height>500</height>
-          </size>
-         </property>
          <property name="font">
           <font>
            <family>Monospace</family>
