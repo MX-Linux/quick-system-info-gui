@@ -36,11 +36,6 @@ namespace Ui
 class MainWindow;
 }
 
-struct Result {
-    int exitCode;
-    QString output;
-};
-
 class MainWindow : public QDialog
 {
     Q_OBJECT
@@ -49,11 +44,11 @@ public:
     explicit MainWindow(const QCommandLineParser &arg_parser, QWidget *parent = nullptr);
     ~MainWindow();
 
-    Result run(const char *program, const QStringList &args = QStringList(),
-        const QString *input = nullptr);
-    inline Result shell(const QString &cmd, const QString *input = nullptr)
+    int run(const char *program, const QStringList &args = QStringList(),
+        QByteArray *output = nullptr, const QByteArray *input = nullptr);
+    inline int shell(const QString &cmd, QByteArray *output = nullptr, const QByteArray *input = nullptr)
     {
-        return run("/bin/bash", {"-c", cmd}, input);
+        return run("/bin/bash", {"-c", cmd}, output, input);
     }
 
     void setup();
@@ -76,9 +71,7 @@ private:
     void forumcopy();
     void plaincopy();
     void showSavedMessage(const QString &filename, const QString &errmsg);
-    QString systeminfo();
-    QString apthistory();
-    QString readfile(const QString &path, bool escalate = true);
+    QByteArray readReport(int row);
     void buildInfoList();
     void listSelectAll();
     void listSelectDefault();
