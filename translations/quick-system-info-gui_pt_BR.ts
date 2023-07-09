@@ -24,7 +24,7 @@
     <message>
         <location filename="../mainwindow.ui" line="106"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation>Copiar as informações do computador para a área de transferência, incluir as informações entre os códigos de marcação [CODE] e [/CODE] prontos para serem utilizadas em uma postagem no fórum.</translation>
+        <translation>Copiar as informações do computador para a área de transferência, incluir as informações entre os códigos de marcação [CODE] e [/CODE] prontos para serem utilizados em uma postagem no fórum.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="157"/>
@@ -102,13 +102,13 @@
     <message>
         <location filename="../mainwindow.cpp" line="95"/>
         <source>&amp;Find...</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Localizar...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <location filename="../mainwindow.cpp" line="478"/>
         <source>Find &amp;Next</source>
-        <translation type="unfinished"/>
+        <translation>Localizar o &amp;Próximo</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="115"/>
@@ -148,42 +148,42 @@
     <message>
         <location filename="../mainwindow.cpp" line="471"/>
         <source>Find</source>
-        <translation>Procurar</translation>
+        <translation>Localizar</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="474"/>
         <source>&amp;Find what:</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Localizar o que:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="484"/>
         <source>Match c&amp;ase</source>
-        <translation type="unfinished"/>
+        <translation>C&amp;aso coincida</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="485"/>
         <source>Match &amp;whole word only</source>
-        <translation type="unfinished"/>
+        <translation>Apenas se coincidir a &amp;palavra inteira</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="488"/>
         <source>Direction</source>
-        <translation type="unfinished"/>
+        <translation>Direção</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="490"/>
         <source>&amp;Up</source>
-        <translation type="unfinished"/>
+        <translation>Para &amp;cima</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="491"/>
         <source>&amp;Down</source>
-        <translation type="unfinished"/>
+        <translation>Para &amp;baixo</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="533"/>
         <source>Cannot find &quot;%1&quot;</source>
-        <translation type="unfinished"/>
+        <translation>Não foi possível localizar ‘%1’</translation>
     </message>
     <message>
         <source>Changelog</source>

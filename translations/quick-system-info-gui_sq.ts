@@ -13,29 +13,29 @@
     <message>
         <location filename="../mainwindow.ui" line="92"/>
         <source>Save the displayed system information to a text file.</source>
-        <translation type="unfinished"/>
+        <translation>Ruajini hollësitë e shfaqura të sistemit në një kartelë tekst.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="95"/>
         <location filename="../mainwindow.cpp" line="91"/>
         <source>Save text...</source>
-        <translation type="unfinished"/>
+        <translation>Ruajeni si tekst…</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="106"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="unfinished"/>
+        <translation>Kopjojini në të papastër hollësitë e shfaqura të sistemit, paketuar brenda etiketash [CODE][/CODE], gati për t’i përdorur në ndonjë postim forumesh.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="157"/>
         <source>Save the system information selected from the list to an archive file.</source>
-        <translation type="unfinished"/>
+        <translation>Ruani në një kartelë arkiv hollësitë e sistemit të përzgjedhura prej listës.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="160"/>
         <location filename="../mainwindow.cpp" line="126"/>
         <source>&amp;Save...</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Ruani…</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="227"/>
@@ -102,13 +102,13 @@
     <message>
         <location filename="../mainwindow.cpp" line="95"/>
         <source>&amp;Find...</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Gjeni…</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <location filename="../mainwindow.cpp" line="478"/>
         <source>Find &amp;Next</source>
-        <translation type="unfinished"/>
+        <translation>Gjej &amp;Pasuesin</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="115"/>
@@ -143,7 +143,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="437"/>
         <source>&amp;Save (×%1)...</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Ruani (×%1)…</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="471"/>
@@ -153,37 +153,37 @@
     <message>
         <location filename="../mainwindow.cpp" line="474"/>
         <source>&amp;Find what:</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Gjej çfarë:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="484"/>
         <source>Match c&amp;ase</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Siç është shkruar</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="485"/>
         <source>Match &amp;whole word only</source>
-        <translation type="unfinished"/>
+        <translation>Përkime vetëm me &amp;krejt fjalën</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="488"/>
         <source>Direction</source>
-        <translation type="unfinished"/>
+        <translation>Kah</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="490"/>
         <source>&amp;Up</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Sipër</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="491"/>
         <source>&amp;Down</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Poshtë</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="533"/>
         <source>Cannot find &quot;%1&quot;</source>
-        <translation type="unfinished"/>
+        <translation>S’gjendet dot “%1”</translation>
     </message>
     <message>
         <source>Changelog</source>

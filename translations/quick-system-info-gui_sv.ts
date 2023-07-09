@@ -35,7 +35,7 @@
         <location filename="../mainwindow.ui" line="160"/>
         <location filename="../mainwindow.cpp" line="126"/>
         <source>&amp;Save...</source>
-        <translation>&amp;Spara...</translation>
+        <translation>S&amp;para...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="227"/>
@@ -102,13 +102,13 @@
     <message>
         <location filename="../mainwindow.cpp" line="95"/>
         <source>&amp;Find...</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Hitta...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <location filename="../mainwindow.cpp" line="478"/>
         <source>Find &amp;Next</source>
-        <translation type="unfinished"/>
+        <translation>Hitta N&amp;ästa</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="115"/>
@@ -143,7 +143,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="437"/>
         <source>&amp;Save (×%1)...</source>
-        <translation>&amp;Spara (×%1)...</translation>
+        <translation>S&amp;para (×%1)...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="471"/>
@@ -153,37 +153,37 @@
     <message>
         <location filename="../mainwindow.cpp" line="474"/>
         <source>&amp;Find what:</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Hitta det :</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="484"/>
         <source>Match c&amp;ase</source>
-        <translation type="unfinished"/>
+        <translation>Matcha sk&amp;iftläge</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="485"/>
         <source>Match &amp;whole word only</source>
-        <translation type="unfinished"/>
+        <translation>Matcha enbart h&amp;ela ord</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="488"/>
         <source>Direction</source>
-        <translation type="unfinished"/>
+        <translation>Riktning</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="490"/>
         <source>&amp;Up</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Upp</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="491"/>
         <source>&amp;Down</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Ner</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="533"/>
         <source>Cannot find &quot;%1&quot;</source>
-        <translation type="unfinished"/>
+        <translation>Kan inte hitta &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Changelog</source>

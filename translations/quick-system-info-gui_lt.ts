@@ -35,7 +35,7 @@
         <location filename="../mainwindow.ui" line="160"/>
         <location filename="../mainwindow.cpp" line="126"/>
         <source>&amp;Save...</source>
-        <translation type="unfinished"/>
+        <translation>Į&amp;rašyti...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="227"/>

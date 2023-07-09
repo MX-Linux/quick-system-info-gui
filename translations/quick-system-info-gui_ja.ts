@@ -102,13 +102,13 @@
     <message>
         <location filename="../mainwindow.cpp" line="95"/>
         <source>&amp;Find...</source>
-        <translation type="unfinished"/>
+        <translation>検索(&amp;F)...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <location filename="../mainwindow.cpp" line="478"/>
         <source>Find &amp;Next</source>
-        <translation type="unfinished"/>
+        <translation>次を検索(&amp;N)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="115"/>
@@ -133,7 +133,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="274"/>
         <source>Open folder</source>
-        <translation>フォルダを開きます</translation>
+        <translation>フォルダを開く</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="276"/>
@@ -153,37 +153,37 @@
     <message>
         <location filename="../mainwindow.cpp" line="474"/>
         <source>&amp;Find what:</source>
-        <translation type="unfinished"/>
+        <translation>検索候補(&amp;F):</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="484"/>
         <source>Match c&amp;ase</source>
-        <translation type="unfinished"/>
+        <translation>一致(&amp;A)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="485"/>
         <source>Match &amp;whole word only</source>
-        <translation type="unfinished"/>
+        <translation>完全一致(&amp;W)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="488"/>
         <source>Direction</source>
-        <translation type="unfinished"/>
+        <translation>検索方向</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="490"/>
         <source>&amp;Up</source>
-        <translation type="unfinished"/>
+        <translation>上へ(&amp;U)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="491"/>
         <source>&amp;Down</source>
-        <translation type="unfinished"/>
+        <translation>下へ(&amp;D)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="533"/>
         <source>Cannot find &quot;%1&quot;</source>
-        <translation type="unfinished"/>
+        <translation>&quot;%1&quot; が見つかりませんでした</translation>
     </message>
     <message>
         <source>Changelog</source>
