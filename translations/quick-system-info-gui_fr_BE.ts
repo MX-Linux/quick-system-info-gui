@@ -29,7 +29,7 @@
     <message>
         <location filename="../mainwindow.ui" line="157"/>
         <source>Save the system information selected from the list to an archive file.</source>
-        <translation>Enregistrer les informations système sélectionnées dans la liste, dans un fichier d’archive.</translation>
+        <translation>Enregistrer les informations système sélectionnées dans la liste, vers un fichier d’archive.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="160"/>
@@ -102,13 +102,13 @@
     <message>
         <location filename="../mainwindow.cpp" line="95"/>
         <source>&amp;Find...</source>
-        <translation type="unfinished"/>
+        <translation>C&amp;hercher ...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <location filename="../mainwindow.cpp" line="478"/>
         <source>Find &amp;Next</source>
-        <translation type="unfinished"/>
+        <translation>Chercher le suiva&amp;nt</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="115"/>
@@ -133,7 +133,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="274"/>
         <source>Open folder</source>
-        <translation>Ouvrir un dossier avec zzzFM</translation>
+        <translation>Ouvrir le dossier</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="276"/>
@@ -148,42 +148,42 @@
     <message>
         <location filename="../mainwindow.cpp" line="471"/>
         <source>Find</source>
-        <translation>Trouver</translation>
+        <translation>Chercher</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="474"/>
         <source>&amp;Find what:</source>
-        <translation type="unfinished"/>
+        <translation>Chercher &amp;quoi:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="484"/>
         <source>Match c&amp;ase</source>
-        <translation type="unfinished"/>
+        <translation>Correspondre à la c&amp;asse</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="485"/>
         <source>Match &amp;whole word only</source>
-        <translation type="unfinished"/>
+        <translation>Correspondre avec le mot &amp;entier uniquement</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="488"/>
         <source>Direction</source>
-        <translation type="unfinished"/>
+        <translation>Direction</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="490"/>
         <source>&amp;Up</source>
-        <translation type="unfinished"/>
+        <translation>En ha&amp;ut</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="491"/>
         <source>&amp;Down</source>
-        <translation type="unfinished"/>
+        <translation>En &amp;bas</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="533"/>
         <source>Cannot find &quot;%1&quot;</source>
-        <translation type="unfinished"/>
+        <translation>Impossible de trouver « %1 »</translation>
     </message>
     <message>
         <source>Changelog</source>

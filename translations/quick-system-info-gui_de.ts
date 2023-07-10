@@ -13,29 +13,29 @@
     <message>
         <location filename="../mainwindow.ui" line="92"/>
         <source>Save the displayed system information to a text file.</source>
-        <translation type="unfinished"/>
+        <translation>Die angezeigten Systeminformationen in einer Textdatei. speichern</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="95"/>
         <location filename="../mainwindow.cpp" line="91"/>
         <source>Save text...</source>
-        <translation type="unfinished"/>
+        <translation>Text speichern...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="106"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="unfinished"/>
+        <translation>Kopieren sie die angezeigten Systeminformationen in die Zwischenablage, verpackt in [CODE][/CODE]-Tags, um sie in einem Forumsbeitrag zu verwenden.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="157"/>
         <source>Save the system information selected from the list to an archive file.</source>
-        <translation type="unfinished"/>
+        <translation>Die aus der Liste ausgewählten Systeminformationen in einer Archivdatei speichern.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="160"/>
         <location filename="../mainwindow.cpp" line="126"/>
         <source>&amp;Save...</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Speichern...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="227"/>
@@ -102,23 +102,23 @@
     <message>
         <location filename="../mainwindow.cpp" line="95"/>
         <source>&amp;Find...</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Suchen...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <location filename="../mainwindow.cpp" line="478"/>
         <source>Find &amp;Next</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Nächstes suchen</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="115"/>
         <source>Select &amp;All</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Alle auswählen</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="121"/>
         <source>Revert Selection</source>
-        <translation type="unfinished"/>
+        <translation>Auswahl umkehren</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="177"/>
@@ -133,7 +133,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="274"/>
         <source>Open folder</source>
-        <translation>Ausgewählten Ordner mit „zzzFM” öffnen</translation>
+        <translation>Ausgewählten Ordner</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="276"/>
@@ -143,7 +143,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="437"/>
         <source>&amp;Save (×%1)...</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Speichere (×%1)...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="471"/>
@@ -153,41 +153,41 @@
     <message>
         <location filename="../mainwindow.cpp" line="474"/>
         <source>&amp;Find what:</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Folgendes suchen:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="484"/>
         <source>Match c&amp;ase</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Groß- und Kleinschreibung beachten</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="485"/>
         <source>Match &amp;whole word only</source>
-        <translation type="unfinished"/>
+        <translation>Nur &amp;ganze Wörter</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="488"/>
         <source>Direction</source>
-        <translation type="unfinished"/>
+        <translation>Ausrichtung</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="490"/>
         <source>&amp;Up</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Hoch</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="491"/>
         <source>&amp;Down</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Runter</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="533"/>
         <source>Cannot find &quot;%1&quot;</source>
-        <translation type="unfinished"/>
+        <translation>Kann &quot;%1&quot; nicht finden</translation>
     </message>
     <message>
         <source>Changelog</source>
-        <translation type="vanished">Changelog</translation>
+        <translation type="vanished">Änderungsprotokoll</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="479"/>
@@ -216,7 +216,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="340"/>
         <source>history</source>
-        <translation type="unfinished"/>
+        <translation>Verlaufshistorie</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="356"/>

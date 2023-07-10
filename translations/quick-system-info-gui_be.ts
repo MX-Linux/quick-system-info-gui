@@ -70,7 +70,7 @@
     <message>
         <location filename="../mainwindow.ui" line="207"/>
         <source>Help</source>
-        <translation type="unfinished"/>
+        <translation>Даведка</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="176"/>
