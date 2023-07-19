@@ -13,29 +13,29 @@
     <message>
         <location filename="../mainwindow.ui" line="92"/>
         <source>Save the displayed system information to a text file.</source>
-        <translation type="unfinished"/>
+        <translation>Αποθήκευση των εμφανιζόμενων πληροφοριών σε αρχείο κειμένου.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="95"/>
         <location filename="../mainwindow.cpp" line="91"/>
         <source>Save text...</source>
-        <translation type="unfinished"/>
+        <translation>Αποθήκευση σε κείμενο...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="106"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="unfinished"/>
+        <translation>Αποθήκευση των εμφανιζόμενων πληροφοριών στο πρόχειρο, έτοιμες για ανάρτηση στο φόρουμ (μέσα σε [CODE][/CODE]).</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="157"/>
         <source>Save the system information selected from the list to an archive file.</source>
-        <translation type="unfinished"/>
+        <translation>Αποθήκευση των επιλεγμένων σε συμπιεσμένο αρχείο.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="160"/>
         <location filename="../mainwindow.cpp" line="126"/>
         <source>&amp;Save...</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Αποθήκευση...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="227"/>
@@ -102,23 +102,23 @@
     <message>
         <location filename="../mainwindow.cpp" line="95"/>
         <source>&amp;Find...</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Εύρεση...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <location filename="../mainwindow.cpp" line="478"/>
         <source>Find &amp;Next</source>
-        <translation type="unfinished"/>
+        <translation>Εύρεση ε&amp;πόμενου</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="115"/>
         <source>Select &amp;All</source>
-        <translation type="unfinished"/>
+        <translation>Επιλογή ό&amp;λων</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="121"/>
         <source>Revert Selection</source>
-        <translation type="unfinished"/>
+        <translation>Αντιστροφή επιλογής</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="177"/>
@@ -143,47 +143,47 @@
     <message>
         <location filename="../mainwindow.cpp" line="437"/>
         <source>&amp;Save (×%1)...</source>
-        <translation type="unfinished"/>
+        <translation>Απο&amp;θήκευση (×%1)...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="471"/>
         <source>Find</source>
-        <translation>Εύρημα</translation>
+        <translation>Εύρεση</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="474"/>
         <source>&amp;Find what:</source>
-        <translation type="unfinished"/>
+        <translation>Εύ&amp;ρεση του:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="484"/>
         <source>Match c&amp;ase</source>
-        <translation type="unfinished"/>
+        <translation>Ταίριασμα &amp;πεζών-κεφαλαίων</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="485"/>
         <source>Match &amp;whole word only</source>
-        <translation type="unfinished"/>
+        <translation>Ταίριασμα &amp;ολόκληρων λέξεων</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="488"/>
         <source>Direction</source>
-        <translation type="unfinished"/>
+        <translation>Κατεύθυνση</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="490"/>
         <source>&amp;Up</source>
-        <translation type="unfinished"/>
+        <translation>Ε&amp;πάνω</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="491"/>
         <source>&amp;Down</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Κάτω</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="533"/>
         <source>Cannot find &quot;%1&quot;</source>
-        <translation type="unfinished"/>
+        <translation>Δεν βρέθηκε &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Changelog</source>
@@ -192,7 +192,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="479"/>
         <source>Cancel</source>
-        <translation>Ακύρωση</translation>
+        <translation>Άκυρο</translation>
     </message>
     <message>
         <source>&amp;Close</source>
@@ -216,7 +216,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="340"/>
         <source>history</source>
-        <translation type="unfinished"/>
+        <translation>ιστορικό</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="356"/>
@@ -226,7 +226,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="356"/>
         <source>Quick System Info (gui)</source>
-        <translation>Συνοπτικές πληροφορίες συστήματος (σε γραφικό περιβάλλον)</translation>
+        <translation>Συνοπτικές πληροφορίες συστήματος (γραφικό περιβάλλον)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="81"/>
@@ -236,7 +236,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="86"/>
         <source>Plain text copy</source>
-        <translation>Αντιγραφή κειμένου</translation>
+        <translation>Αντιγραφή σε μορφή κειμένου</translation>
     </message>
 </context>
 <context>
@@ -252,7 +252,7 @@
     <message>
         <location filename="../main.cpp" line="43"/>
         <source>This tool displays a the quick system info report in a gui.</source>
-        <translation>Αυτό το εργαλείο εμφανίζει τις πληροφορίες του συστήματος συνοπτικά σε γραφικό περιβάλλον.</translation>
+        <translation>Αυτό το εργαλείο εμφανίζει συνοπτικά τις πληροφορίες του συστήματος σε γραφικό περιβάλλον.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="66"/>
