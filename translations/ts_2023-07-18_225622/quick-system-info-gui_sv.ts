@@ -1,51 +1,51 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="de">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="sv">
 <context>
     <name>MainWindow</name>
     <message>
         <source>MX Welcome</source>
-        <translation type="vanished">MX Willkommen</translation>
+        <translation type="vanished">MX Välkommen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="109"/>
         <source>&amp;Copy for forum</source>
-        <translation>&amp;Kopie für das Forum</translation>
+        <translation>&amp;Kopiera för forum</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="92"/>
         <source>Save the displayed system information to a text file.</source>
-        <translation>Die angezeigten Systeminformationen in einer Textdatei. speichern</translation>
+        <translation>Spara den visade systeminformationen till en textfil.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="95"/>
         <location filename="../mainwindow.cpp" line="91"/>
         <source>Save text...</source>
-        <translation>Text speichern...</translation>
+        <translation>Spara text...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="106"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation>Kopieren sie die angezeigten Systeminformationen in die Zwischenablage, verpackt in [CODE][/CODE]-Tags, um sie in einem Forumsbeitrag zu verwenden.</translation>
+        <translation>Kopiera den visade systeminformationen till klippbordet, omgiven av [KOD][/KOD]-taggar klara att använda i en forumpost.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="157"/>
         <source>Save the system information selected from the list to an archive file.</source>
-        <translation>Die aus der Liste ausgewählten Systeminformationen in einer Archivdatei speichern.</translation>
+        <translation>Spara systeminformationen som valts från en lista till en arkivfil.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="160"/>
         <location filename="../mainwindow.cpp" line="126"/>
         <source>&amp;Save...</source>
-        <translation>&amp;Speichern...</translation>
+        <translation>S&amp;para...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="227"/>
         <source>Quit application</source>
-        <translation>Anwendung beenden</translation>
+        <translation>Avsluta programmet</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="230"/>
         <source>Close</source>
-        <translation>Schließen</translation>
+        <translation>Stäng</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="237"/>
@@ -55,12 +55,12 @@
     <message>
         <location filename="../mainwindow.ui" line="273"/>
         <source>About this application</source>
-        <translation>Über diese Anwendung</translation>
+        <translation>Om detta program</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="276"/>
         <source>About...</source>
-        <translation>Über...</translation>
+        <translation>Om...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="283"/>
@@ -70,7 +70,7 @@
     <message>
         <location filename="../mainwindow.ui" line="207"/>
         <source>Help</source>
-        <translation>Hilfe</translation>
+        <translation>Hjälp</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="176"/>
@@ -82,12 +82,12 @@
         <location filename="../mainwindow.cpp" line="176"/>
         <location filename="../mainwindow.cpp" line="333"/>
         <source>Quick System Info</source>
-        <translation>Quick System Info</translation>
+        <translation>Snabb Systeminformation</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="61"/>
         <source>Loading...</source>
-        <translation>Lade…</translation>
+        <translation>Laddar...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
@@ -97,43 +97,43 @@
     <message>
         <location filename="../mainwindow.cpp" line="175"/>
         <source>About Quick-System-Info-gui</source>
-        <translation>über Quick-System-Info-gui</translation>
+        <translation>Om Quick-System-Info-gui</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="95"/>
         <source>&amp;Find...</source>
-        <translation>&amp;Suchen...</translation>
+        <translation>&amp;Hitta...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <location filename="../mainwindow.cpp" line="478"/>
         <source>Find &amp;Next</source>
-        <translation>&amp;Nächstes suchen</translation>
+        <translation>Hitta N&amp;ästa</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="115"/>
         <source>Select &amp;All</source>
-        <translation>&amp;Alle auswählen</translation>
+        <translation>Välj &amp;Alla</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="121"/>
         <source>Revert Selection</source>
-        <translation>Auswahl umkehren</translation>
+        <translation>Ta bort Val</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="177"/>
         <source>Program for displaying a quick system info report</source>
-        <translation>Programm zur Anzeige eines Systeminformationsberichts / Quick System Info</translation>
+        <translation>Program för att visa en snabb systeminformations-rapport</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="181"/>
         <source>License</source>
-        <translation>Lizenz</translation>
+        <translation>Licens</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="274"/>
         <source>Open folder</source>
-        <translation>Ausgewählten Ordner mit „zzzFM” öffnen</translation>
+        <translation>Öppna katalog</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="276"/>
@@ -143,100 +143,100 @@
     <message>
         <location filename="../mainwindow.cpp" line="437"/>
         <source>&amp;Save (×%1)...</source>
-        <translation>&amp;Speichere (×%1)...</translation>
+        <translation>S&amp;para (×%1)...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="471"/>
         <source>Find</source>
-        <translation>Suchen</translation>
+        <translation>Hitta</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="474"/>
         <source>&amp;Find what:</source>
-        <translation>&amp;Folgendes suchen:</translation>
+        <translation>&amp;Hitta det :</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="484"/>
         <source>Match c&amp;ase</source>
-        <translation>&amp;Groß- und Kleinschreibung beachten</translation>
+        <translation>Matcha sk&amp;iftläge</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="485"/>
         <source>Match &amp;whole word only</source>
-        <translation>Nur &amp;ganze Wörter</translation>
+        <translation>Matcha enbart h&amp;ela ord</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="488"/>
         <source>Direction</source>
-        <translation>Ausrichtung</translation>
+        <translation>Riktning</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="490"/>
         <source>&amp;Up</source>
-        <translation>&amp;Hoch</translation>
+        <translation>&amp;Upp</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="491"/>
         <source>&amp;Down</source>
-        <translation>&amp;Runter</translation>
+        <translation>&amp;Ner</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="533"/>
         <source>Cannot find &quot;%1&quot;</source>
-        <translation>Kann &quot;%1&quot; nicht finden</translation>
+        <translation>Kan inte hitta &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Changelog</source>
-        <translation type="vanished">Änderungsprotokoll</translation>
+        <translation type="vanished">Ändringslogg</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="479"/>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="vanished">&amp;Schließen</translation>
+        <translation type="vanished">&amp;Stäng</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="212"/>
         <source>Save System Information</source>
-        <translation>Systeminformation speichern</translation>
+        <translation>Spara Systeminformation</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="273"/>
         <source>System information saved.</source>
-        <translation>Systeminformationen gespeichert.</translation>
+        <translation>Systeminformation sparad.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="281"/>
         <source>Could not save system information.</source>
-        <translation>Systeminformationen konnten nicht gespeichert werden.</translation>
+        <translation>Kunde inte spara systeminformation.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="340"/>
         <source>history</source>
-        <translation>Verlaufshistorie</translation>
+        <translation>historia</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="356"/>
         <source>%1 Help</source>
-        <translation>%1 Hilfe</translation>
+        <translation>%1 Hjälp</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="356"/>
         <source>Quick System Info (gui)</source>
-        <translation>Quick System Info (gui)</translation>
+        <translation>Snabb Systeminformation (gui)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="81"/>
         <source>Copy for forum</source>
-        <translation>Kopie für das Forum</translation>
+        <translation>Kopiera för forum</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="86"/>
         <source>Plain text copy</source>
-        <translation>Klartextkopie</translation>
+        <translation>Kopiera ren text</translation>
     </message>
 </context>
 <context>
@@ -244,7 +244,7 @@
     <message>
         <location filename="../main.cpp" line="66"/>
         <source>You must run this program as normal user.</source>
-        <translation>Diese Anwendung muss als normaler Benutzer ausgeführt werden.</translation>
+        <translation>Du måste köra det här programmet som vanlig användare.</translation>
     </message>
 </context>
 <context>
@@ -252,33 +252,33 @@
     <message>
         <location filename="../main.cpp" line="43"/>
         <source>This tool displays a the quick system info report in a gui.</source>
-        <translation>Dieses Tool zeigt einen schnellen Systeminformationsbericht in einer Benutzeroberfläche an.</translation>
+        <translation>Detta verktyg visar systeminformation i ett grafiskt användargränssnitt.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="66"/>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation>Fel</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="40"/>
         <source>License</source>
-        <translation>Lizenz</translation>
+        <translation>Licens</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="41"/>
         <location filename="../about.cpp" line="51"/>
         <source>Changelog</source>
-        <translation>Änderungsprotokoll</translation>
+        <translation>Ändringslogg</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="42"/>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="63"/>
         <source>&amp;Close</source>
-        <translation>&amp;Schließen</translation>
+        <translation>&amp;Stäng</translation>
     </message>
 </context>
 </TS>

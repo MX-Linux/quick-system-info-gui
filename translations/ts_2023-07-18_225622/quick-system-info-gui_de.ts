@@ -133,7 +133,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="274"/>
         <source>Open folder</source>
-        <translation>Ausgewählten Ordner mit „zzzFM” öffnen</translation>
+        <translation>Ausgewählten Ordner</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="276"/>
