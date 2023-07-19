@@ -331,8 +331,9 @@ void MainWindow::buildInfoList() noexcept
     // Special apt history info
     item = new QListWidgetItem("apt " + tr("history"));
     item->setData(Qt::UserRole, "apthistory.txt");
-    ui->listInfo->insertItem(1, item);
-
+    if (QFile("/var/log/dpkg.log").exists()){
+        ui->listInfo->insertItem(1, item);
+    }
     listSelectDefault();
     ui->listInfo->blockSignals(false);
     on_listInfo_itemChanged(); // Set up multi buttons.
