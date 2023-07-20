@@ -192,7 +192,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="479"/>
         <source>Cancel</source>
-        <translation>Отменить</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>&amp;Close</source>
