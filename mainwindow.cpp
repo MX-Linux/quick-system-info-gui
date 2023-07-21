@@ -331,7 +331,7 @@ void MainWindow::buildInfoList() noexcept
     // Special apt history info
     item = new QListWidgetItem("apt " + tr("history"));
     item->setData(Qt::UserRole, "apthistory.txt");
-    if (QFile("/var/log/dpkg.log").exists()){
+    if (QFile::exists("/var/log/dpkg.log")){
         ui->listInfo->insertItem(1, item);
     }
     listSelectDefault();
