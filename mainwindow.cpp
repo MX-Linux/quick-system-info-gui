@@ -47,7 +47,7 @@
 #include "ui_mainwindow.h"
 #include "version.h"
 
-MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent)
+MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent) noexcept
     : QDialog(parent)
     , ui(new Ui::MainWindow)
 {
