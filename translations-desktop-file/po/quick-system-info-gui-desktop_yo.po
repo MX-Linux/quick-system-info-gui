@@ -3,10 +3,6 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
-# Translators:
-# Dolphin Oracle <dolphinoracle@gmail.com>, 2022
-# anticapitalista <anticapitalista@riseup.net>, 2023
-# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -14,23 +10,22 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-04 12:16-0400\n"
 "PO-Revision-Date: 2022-12-10 04:09+0000\n"
-"Last-Translator: anticapitalista <anticapitalista@riseup.net>, 2023\n"
-"Language-Team: Greek (https://app.transifex.com/anticapitalista/teams/10162/el/)\n"
+"Language-Team: Yoruba (https://app.transifex.com/anticapitalista/teams/10162/yo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: el\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: yo\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #. The desktop entry name will be displayed within the menu.
 #: desktop-in/Quick_System_Info.desktop.in:6
 msgid "Quick System Info"
-msgstr "Συνοπτικές πληροφορίες συστήματος"
+msgstr ""
 
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/Quick_System_Info.desktop.in:8
 msgid "inxi -Fxxxrza"
-msgstr "inxi -Fxxxrza"
+msgstr ""
 
 #: desktop-in/Quick_System_Info.desktop.in:16
 msgid "qsi;quick;system;info;"
