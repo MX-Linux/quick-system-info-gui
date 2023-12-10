@@ -1,3 +1,9 @@
+quick-system-info-gui (23.09.01) mx; urgency=medium
+
+  * update desktop file
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 04 Sep 2023 14:07:41 -0400
+
 quick-system-info-gui (23.08.01) mx; urgency=medium
 
   * Qt file object adjustmen
