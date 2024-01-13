@@ -5,7 +5,7 @@
     <name>MainWindow</name>
     <message>
         <source>MX Welcome</source>
-        <translation type="vanished">MX dobrodošli</translation>
+        <translation type="vanished">MX pozdrav</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="74"/>

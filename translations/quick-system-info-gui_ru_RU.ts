@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de">
+<TS version="2.1" language="ru_RU">
 <context>
     <name>MainWindow</name>
     <message>
         <source>MX Welcome</source>
-        <translation type="vanished">MX Willkommen</translation>
+        <translation type="vanished">MX Приветствие</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="74"/>
         <source>&amp;Copy for forum</source>
-        <translation>&amp;Kopie für das Forum</translation>
+        <translation>&amp;Копировать для форума</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="43"/>
         <source>Save the displayed system information to a text file.</source>
-        <translation>Die angezeigten Systeminformationen in einer Textdatei. speichern</translation>
+        <translation>Сохранить информацию о системе в текстовый файл.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
         <location filename="../mainwindow.cpp" line="91"/>
         <source>Save text...</source>
-        <translation>Text speichern...</translation>
+        <translation>Сохранить текст…</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="71"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation>Kopieren Sie die angezeigten Systeminformationen in die Zwischenablage, verpackt in [CODE][/CODE]-Tags, um sie in einem Forumsbeitrag zu verwenden.</translation>
+        <translation>Копировать в буфер обмена отчёт о системе, упакованный в теги [CODE][/CODE] и готовый к отправке на форум.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="57"/>
         <source>Save the system information selected from the list to an archive file.</source>
-        <translation>Die aus der Liste ausgewählten Systeminformationen in einer Archivdatei speichern.</translation>
+        <translation>Сохраните выбранную информацию о системе из списка в архивный файл.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="60"/>
         <location filename="../mainwindow.cpp" line="126"/>
         <source>&amp;Save...</source>
-        <translation>&amp;Speichern...</translation>
+        <translation>&amp;Сохранить…</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="129"/>
         <source>Quit application</source>
-        <translation>Anwendung beenden</translation>
+        <translation>Выйти из приложения</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="132"/>
         <source>Close</source>
-        <translation>Schließen</translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="139"/>
@@ -57,12 +57,12 @@
     <message>
         <location filename="../mainwindow.ui" line="181"/>
         <source>About this application</source>
-        <translation>Über diese Anwendung</translation>
+        <translation>Об этом приложении</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="184"/>
         <source>About...</source>
-        <translation>Über...</translation>
+        <translation>О программе...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="191"/>
@@ -72,12 +72,12 @@
     <message>
         <location filename="../mainwindow.ui" line="115"/>
         <source>Help</source>
-        <translation>Hilfe</translation>
+        <translation>Помощь</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="187"/>
         <source>Version: </source>
-        <translation>Version:</translation>
+        <translation>Версия: </translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
@@ -85,12 +85,12 @@
         <location filename="../mainwindow.cpp" line="325"/>
         <location filename="../mainwindow.cpp" line="354"/>
         <source>Quick System Info</source>
-        <translation>Quick System Info</translation>
+        <translation>Краткий отчёт о системе</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="61"/>
         <source>Loading...</source>
-        <translation>Lade…</translation>
+        <translation>Загрузка...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="191"/>
@@ -100,37 +100,37 @@
     <message>
         <location filename="../mainwindow.cpp" line="186"/>
         <source>About Quick-System-Info-gui</source>
-        <translation>über Quick-System-Info-gui</translation>
+        <translation>О Quick-System-Info-gui</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="95"/>
         <source>&amp;Find...</source>
-        <translation>&amp;Suchen...</translation>
+        <translation>&amp;Найти…</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <location filename="../mainwindow.cpp" line="481"/>
         <source>Find &amp;Next</source>
-        <translation>&amp;Nächstes suchen</translation>
+        <translation>Найти &amp;Далее</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="115"/>
         <source>Select &amp;All</source>
-        <translation>&amp;Alle auswählen</translation>
+        <translation>Выделить &amp;все</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="121"/>
         <source>Revert Selection</source>
-        <translation>Auswahl umkehren</translation>
+        <translation>Отменить выделение</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="188"/>
         <source>Program for displaying a quick system info report</source>
-        <translation>Programm zur Anzeige eines Systeminformationsberichts / Quick System Info</translation>
+        <translation>Программа отображения краткого отчёта о системе</translation>
     </message>
     <message>
         <source>License</source>
-        <translation type="vanished">Lizenz</translation>
+        <translation type="vanished">Лицензия</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="193"/>
@@ -140,109 +140,109 @@
     <message>
         <location filename="../mainwindow.cpp" line="280"/>
         <source>Open folder</source>
-        <translation>Ausgewählten Ordner mit „zzzFM” öffnen</translation>
+        <translation>Открыть каталог</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="282"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>ОК</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="440"/>
         <source>&amp;Save (×%1)...</source>
-        <translation>&amp;Speichere (×%1)...</translation>
+        <translation>&amp;Сохранить (×%1)...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="474"/>
         <source>Find</source>
-        <translation>Suchen</translation>
+        <translation>Найти</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="477"/>
         <source>&amp;Find what:</source>
-        <translation>&amp;Folgendes suchen:</translation>
+        <translation>&amp;Найти что:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="487"/>
         <source>Match c&amp;ase</source>
-        <translation>&amp;Groß- und Kleinschreibung beachten</translation>
+        <translation>Соответствие д&amp;ело</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="488"/>
         <source>Match &amp;whole word only</source>
-        <translation>Nur &amp;ganze Wörter</translation>
+        <translation>Соответствие &amp;только целому слову</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="491"/>
         <source>Direction</source>
-        <translation>Ausrichtung</translation>
+        <translation>Направление</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="493"/>
         <source>&amp;Up</source>
-        <translation>&amp;Hoch</translation>
+        <translation>&amp;Вверх</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="494"/>
         <source>&amp;Down</source>
-        <translation>&amp;Runter</translation>
+        <translation>&amp;Вниз</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="536"/>
         <source>Cannot find &quot;%1&quot;</source>
-        <translation>Kann &quot;%1&quot; nicht finden</translation>
+        <translation>Не удаётся найти «%1»</translation>
     </message>
     <message>
         <source>Changelog</source>
-        <translation type="vanished">Änderungsprotokoll</translation>
+        <translation type="vanished">Список изменений</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="482"/>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="vanished">&amp;Schließen</translation>
+        <translation type="vanished">&amp;Закрыть</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="223"/>
         <source>Save System Information</source>
-        <translation>Systeminformation speichern</translation>
+        <translation>Сохранить информацию о системе</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="279"/>
         <source>System information saved.</source>
-        <translation>Systeminformationen gespeichert.</translation>
+        <translation>Информация о системе сохранена.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="287"/>
         <source>Could not save system information.</source>
-        <translation>Systeminformationen konnten nicht gespeichert werden.</translation>
+        <translation>Не удалось сохранить информацию о системе.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="332"/>
         <source>history</source>
-        <translation>Verlaufshistorie</translation>
+        <translation>история</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="354"/>
         <source>%1 Help</source>
-        <translation>%1 Hilfe</translation>
+        <translation>%1 Справка</translation>
     </message>
     <message>
         <source>Quick System Info (gui)</source>
-        <translation type="vanished">Quick System Info (gui)</translation>
+        <translation type="vanished">Краткий отчёт о системе (графическая оболочка)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="81"/>
         <source>Copy for forum</source>
-        <translation>Kopie für das Forum</translation>
+        <translation>Копировать для форума</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="86"/>
         <source>Plain text copy</source>
-        <translation>Klartextkopie</translation>
+        <translation>Копия обычного текста</translation>
     </message>
 </context>
 <context>
@@ -250,7 +250,7 @@
     <message>
         <location filename="../main.cpp" line="66"/>
         <source>You must run this program as normal user.</source>
-        <translation>Diese Anwendung muss als normaler Benutzer ausgeführt werden.</translation>
+        <translation>Вы должны запустить эту программу как обычный пользователь.</translation>
     </message>
 </context>
 <context>
@@ -258,33 +258,33 @@
     <message>
         <location filename="../main.cpp" line="43"/>
         <source>This tool displays a the quick system info report in a gui.</source>
-        <translation>Dieses Tool zeigt einen schnellen Systeminformationsbericht in einer Benutzeroberfläche an.</translation>
+        <translation>Этот инструмент отображает краткий отчёт о системе в графической оболочке.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="66"/>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="40"/>
         <source>License</source>
-        <translation>Lizenz</translation>
+        <translation>Лицензия</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="41"/>
         <location filename="../about.cpp" line="51"/>
         <source>Changelog</source>
-        <translation>Änderungsprotokoll</translation>
+        <translation>Список изменений</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="42"/>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="63"/>
         <source>&amp;Close</source>
-        <translation>&amp;Schließen</translation>
+        <translation>&amp;Закрыть</translation>
     </message>
 </context>
 </TS>
