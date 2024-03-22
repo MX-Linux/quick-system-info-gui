@@ -95,7 +95,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="191"/>
         <source>Copyright (c) MX Linux</source>
-        <translation>Copyright (c) MX Linux</translation>
+        <translation>Avtorska zaščita (c) MX Linux</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="186"/>
