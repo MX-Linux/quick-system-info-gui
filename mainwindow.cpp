@@ -339,6 +339,7 @@ void MainWindow::buildInfoList() noexcept
     on_listInfo_itemChanged(); // Set up multi buttons.
     // Resize the splitter according to the new contents
     QApplication::processEvents(); // Allow the scroll bar to materialise
+    ui->tabWidget->setCurrentIndex(0);
     autoFitSplitter();
     // Stop the left pane from resizing with the window.
     ui->splitter->setStretchFactor(0, 0);
