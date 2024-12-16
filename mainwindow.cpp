@@ -62,6 +62,8 @@ MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent) no
     resize(QGuiApplication::primaryScreen()->availableGeometry().size() * 0.6);
     ui->listInfo->setContextMenuPolicy(Qt::ActionsContextMenu);
     defaultMatches = arg_parser.positionalArguments();
+    //don't show journald tab if not running systemd
+    systemd_check();
     // This fires the lengthy setup routine after the window is displayed.
     QTimer::singleShot(0, this, &MainWindow::setup);
 }
@@ -74,8 +76,7 @@ void MainWindow::setup() noexcept
     // Allow user-friendly match strings.
     for(QString &match : defaultMatches) {
         if (!match.contains('.')) match.append(".txt");
-    }
-
+    }  
     // Log text box shortcuts and context menu
     QAction *forumcopyaction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy-symbolic")),
         tr("Copy for forum"), this);
@@ -339,6 +340,7 @@ void MainWindow::buildInfoList() noexcept
     on_listInfo_itemChanged(); // Set up multi buttons.
     // Resize the splitter according to the new contents
     QApplication::processEvents(); // Allow the scroll bar to materialise
+    ui->tabWidget->setCurrentIndex(0);
     autoFitSplitter();
     // Stop the left pane from resizing with the window.
     ui->splitter->setStretchFactor(0, 0);
@@ -564,3 +566,123 @@ void MainWindow::autoFitSplitter() noexcept
         ui->splitter->setSizes(sizes);
     }
 }
+
+void MainWindow::systemd_check()
+{   QByteArray output;
+    int test = run("ps",{"-p","1","-o","comm="},&output);
+    QString systemd = "systemd";
+    if (test == 0){
+        if (QString(output) != systemd){
+            ui->tabWidget->removeTab(1);
+        } else {
+            journald_setup();
+        }
+    }
+}
+
+void MainWindow::journald_setup()
+{   QByteArray output;
+    QStringList bootlist;
+
+    //set default options
+    ui->comboBoxJournaldPriority->setCurrentIndex(3);
+    ui->comboBoxJournaldSystemUser->setCurrentIndex(1);
+
+    int test = run("journalctl",{"--list-boots","--no-pager","-q",},&output);
+    if (test == 0){
+        bootlist = QString(output).split("\n");
+        bootlist.sort();
+        for(int i = 0; i < bootlist.size(); ++i) {
+            QString item = static_cast<QString>(bootlist[i]).trimmed();
+        }
+        ui->comboBoxJournaldListBoots->addItems(bootlist);
+    }
+    journald_setup_done = true;
+}
+
+void MainWindow::on_tabWidget_currentChanged(int index)
+{   //qDebug() << "current index is " << index;
+
+    if (index == 1) {
+        run_journalctl_report();
+    }
+}
+
+void MainWindow::run_journalctl_report(){
+
+    QByteArray output;
+    QString text;
+    QString searchoption;
+    if (!ui->lineEditJournaldSearch->text().isEmpty()) {
+        searchoption="--unit=" + ui->lineEditJournaldSearch->text();
+    }
+    //run journalctl command corresponding to current selections
+    //journalctl --boot=UUID --user:system --priority=adminLevel --grep PATTERN
+    QString bootoption = ui->comboBoxJournaldListBoots->currentText().section(" ",1,1);
+    QString adminlevel;
+    if (ui->comboBoxJournaldSystemUser->currentIndex() == 1) {
+        adminlevel = "user";
+    } else {
+        adminlevel = "system";
+    }
+    QString priority = ui->comboBoxJournaldPriority->currentText();
+
+    //qDebug() << "bootoption is " << bootoption;
+    //qDebug() << "adminLevel is " << adminlevel;
+    //qDebug() << "priority is " << priority;
+    int test=0;
+    if (adminlevel == "user"){
+        if (searchoption.isEmpty()){
+            test = run("journalctl",{"--boot=" + bootoption, "--" + adminlevel ,"--priority=" + priority,"--no-pager","-q"},&output);
+        } else {
+            test = run("journalctl",{"--boot=" + bootoption, "--" + adminlevel ,"--priority=" + priority,"--no-pager","-q",searchoption,"--case-sensitive=false"},&output);
+        }
+    } else {
+        if (searchoption.isEmpty()){
+            test = run("pkexec",{"/usr/lib/quick-system-info-gui/qsig-lib","journalctl_command","journalctl","--boot=" + bootoption, "--" + adminlevel ,"--priority=" + priority,"--no-pager","-q"},&output);
+        } else {
+            test = run("pkexec",{"/usr/lib/quick-system-info-gui/qsig-lib","journalctl_command","journalctl","--boot=" + bootoption, "--" + adminlevel ,"--priority=" + priority,"--no-pager","-q",searchoption,"--case-sensitive=false"},&output);
+        }
+    }
+    //qDebug() << "output is " << QString(output);
+    //qDebug() << "test is " << test;
+    if (test == 0){
+        text = QString(output);
+        if (text.isEmpty()) text = tr("No journal entries found at this admin and priority level","no journal entries found at the options specified");
+    } else {
+        text = tr("Error running journalctl command","error report for journalctl command");
+    }
+    ui->plainTextEditJournald->setPlainText(text);
+}
+
+void MainWindow::on_comboBoxJournaldListBoots_activated(int index)
+{
+    if (journald_setup_done) {
+        run_journalctl_report();
+    }
+}
+
+
+void MainWindow::on_comboBoxJournaldPriority_activated(int index)
+{
+    if (journald_setup_done) {
+        run_journalctl_report();
+    }
+}
+
+
+void MainWindow::on_comboBoxJournaldSystemUser_activated(int index)
+{
+    if (journald_setup_done) {
+        run_journalctl_report();
+    }
+}
+
+
+void MainWindow::on_toolButtonReloadSearch_clicked()
+{
+    if (journald_setup_done) {
+        run_journalctl_report();
+    }
+}
+
