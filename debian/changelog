@@ -1,3 +1,10 @@
+quick-system-info-gui (24.12.01) mx; urgency=medium
+
+  * test build
+  * add journald viewer when users are running systemd as pid 1
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 16 Dec 2024 17:52:29 -0500
+
 quick-system-info-gui (24.04.01) mx; urgency=medium
 
   * remove redundant file check so that logs in elevated directories can be read
