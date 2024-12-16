@@ -9,6 +9,10 @@ zcat --force "$FILE"*
 
 }
 
+journalctl_command(){
+    "$@"
+}
+
 main()
 {
 
@@ -17,6 +21,8 @@ case $1 in
                     FILE="$2"
     ;;
     journalctl_command) ACTION="$@"
+    ;;
+    *) exit 1
     ;;
 esac
 
