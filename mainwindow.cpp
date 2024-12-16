@@ -58,8 +58,6 @@ MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent) no
     connect(ui->buttonCancel, &QPushButton::clicked, this, &MainWindow::close);
     ui->textSysInfo->setWordWrapMode(QTextOption::NoWrap);
     ui->textSysInfo->setContextMenuPolicy(Qt::ActionsContextMenu);
-    ui->plainTextEditJournald->setWordWrapMode(QTextOption::NoWrap);
-    ui->plainTextEditJournald->setContextMenuPolicy(Qt::ActionsContextMenu);
     ui->textSysInfo->setPlainText(tr("Loading..."));
     resize(QGuiApplication::primaryScreen()->availableGeometry().size() * 0.6);
     ui->listInfo->setContextMenuPolicy(Qt::ActionsContextMenu);
@@ -113,13 +111,15 @@ void MainWindow::setup() noexcept
     ui->textSysInfo->addAction(find);
     ui->textSysInfo->addAction(findnext);
 
-    //add actions to jourald
-    ui->plainTextEditJournald->addAction(forumcopyaction);
-    ui->plainTextEditJournald->addAction(plaincopyaction);
-    ui->plainTextEditJournald->addAction(saveasfile);
-    ui->plainTextEditJournald->addAction(sep);
-    ui->plainTextEditJournald->addAction(find);
-    ui->plainTextEditJournald->addAction(findnext);
+    //add actions to journald if set up
+    if (journald_setup_done) {
+        ui->plainTextEditJournald->addAction(forumcopyaction);
+        ui->plainTextEditJournald->addAction(plaincopyaction);
+        ui->plainTextEditJournald->addAction(saveasfile);
+        ui->plainTextEditJournald->addAction(sep);
+        ui->plainTextEditJournald->addAction(find);
+        ui->plainTextEditJournald->addAction(findnext);
+    }
 
     // Info list shortcuts and context menu.
     QAction *selall = new QAction(QIcon::fromTheme(QStringLiteral("edit-select-all")),
@@ -619,6 +619,10 @@ void MainWindow::systemd_check()
 void MainWindow::journald_setup()
 {   QByteArray output;
     QStringList bootlist;
+
+    //set some word wrap modes
+    ui->plainTextEditJournald->setWordWrapMode(QTextOption::NoWrap);
+    ui->plainTextEditJournald->setContextMenuPolicy(Qt::ActionsContextMenu);
 
     //set default options
     //priority levels 1-7.  4 is somewhat usefull for user level, 3 usually empty
