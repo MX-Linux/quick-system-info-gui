@@ -58,6 +58,8 @@ MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent) no
     connect(ui->buttonCancel, &QPushButton::clicked, this, &MainWindow::close);
     ui->textSysInfo->setWordWrapMode(QTextOption::NoWrap);
     ui->textSysInfo->setContextMenuPolicy(Qt::ActionsContextMenu);
+    ui->plainTextEditJournald->setWordWrapMode(QTextOption::NoWrap);
+    ui->plainTextEditJournald->setContextMenuPolicy(Qt::ActionsContextMenu);
     ui->textSysInfo->setPlainText(tr("Loading..."));
     resize(QGuiApplication::primaryScreen()->availableGeometry().size() * 0.6);
     ui->listInfo->setContextMenuPolicy(Qt::ActionsContextMenu);
@@ -110,6 +112,14 @@ void MainWindow::setup() noexcept
     ui->textSysInfo->addAction(sep);
     ui->textSysInfo->addAction(find);
     ui->textSysInfo->addAction(findnext);
+
+    //add actions to jourald
+    ui->plainTextEditJournald->addAction(forumcopyaction);
+    ui->plainTextEditJournald->addAction(plaincopyaction);
+    ui->plainTextEditJournald->addAction(saveasfile);
+    ui->plainTextEditJournald->addAction(sep);
+    ui->plainTextEditJournald->addAction(find);
+    ui->plainTextEditJournald->addAction(findnext);
 
     // Info list shortcuts and context menu.
     QAction *selall = new QAction(QIcon::fromTheme(QStringLiteral("edit-select-all")),
@@ -488,6 +498,7 @@ void MainWindow::listSelectDefault() noexcept
 void MainWindow::showFindDialog() noexcept
 {
     QDialog dialog(ui->textSysInfo);
+    if (ui->tabWidget->currentIndex() == 1 ) QDialog dialog(ui->plainTextEditJournald);
     dialog.setWindowTitle(tr("Find"));
 
     // Search text
@@ -548,9 +559,19 @@ void MainWindow::showFindDialog() noexcept
 }
 void MainWindow::findNext() noexcept
 {
-    if (searchText.isEmpty()) showFindDialog();
-    else if (!ui->textSysInfo->find(searchText, searchFlags)) {
-        QMessageBox::information(this, windowTitle(), tr("Cannot find \"%1\"").arg(searchText));
+    if (searchText.isEmpty()) {
+        showFindDialog();
+    } else {
+        if (ui->tabWidget->currentIndex() == 0){
+            if (!ui->textSysInfo->find(searchText, searchFlags)) {
+                QMessageBox::information(this, windowTitle(), tr("Cannot find \"%1\"").arg(searchText));
+            }
+        }
+        if (ui->tabWidget->currentIndex() == 1){
+            if (!ui->plainTextEditJournald->find(searchText, searchFlags)) {
+                QMessageBox::information(this, windowTitle(), tr("Cannot find \"%1\"").arg(searchText));
+            }
+        }
     }
 }
 
