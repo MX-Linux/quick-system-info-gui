@@ -105,13 +105,13 @@
     <message>
         <location filename="../mainwindow.cpp" line="95"/>
         <source>&amp;Find...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vind...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <location filename="../mainwindow.cpp" line="481"/>
         <source>Find &amp;Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoek &amp;Volgende</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="115"/>
@@ -160,7 +160,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="477"/>
         <source>&amp;Find what:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vind wat:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="487"/>
@@ -175,22 +175,22 @@
     <message>
         <location filename="../mainwindow.cpp" line="491"/>
         <source>Direction</source>
-        <translation type="unfinished"></translation>
+        <translation>Richting</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="493"/>
         <source>&amp;Up</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Omhoog</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="494"/>
         <source>&amp;Down</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Omlaag</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="536"/>
         <source>Cannot find &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan &quot;%1&quot; niet vinden</translation>
     </message>
     <message>
         <source>Changelog</source>

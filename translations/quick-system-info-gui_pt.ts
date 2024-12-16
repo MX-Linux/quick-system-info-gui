@@ -116,7 +116,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="115"/>
         <source>Select &amp;All</source>
-        <translation>Selecionar $Tudo</translation>
+        <translation>Selecionar &amp;Tudo</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="121"/>
@@ -175,7 +175,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="491"/>
         <source>Direction</source>
-        <translation>Direção</translation>
+        <translation>Direcção</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="493"/>
@@ -223,7 +223,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="332"/>
         <source>history</source>
-        <translation>história</translation>
+        <translation>histórico</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="354"/>
@@ -232,7 +232,7 @@
     </message>
     <message>
         <source>Quick System Info (gui)</source>
-        <translation type="vanished">Informação rápida sobre o sisema (GUI)</translation>
+        <translation type="vanished">Informação rápida sobre o sistema (GUI)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="81"/>
