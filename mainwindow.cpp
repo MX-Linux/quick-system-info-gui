@@ -601,7 +601,7 @@ void MainWindow::journald_setup()
 }
 
 void MainWindow::on_tabWidget_currentChanged(int index)
-{   qDebug() << "current index is " << index;
+{   //qDebug() << "current index is " << index;
 
     if (index == 1) {
         run_journalctl_report();
@@ -627,17 +627,25 @@ void MainWindow::run_journalctl_report(){
     }
     QString priority = ui->comboBoxJournaldPriority->currentText();
 
-    qDebug() << "bootoption is " << bootoption;
-    qDebug() << "adminLevel is " << adminlevel;
-    qDebug() << "priority is " << priority;
+    //qDebug() << "bootoption is " << bootoption;
+    //qDebug() << "adminLevel is " << adminlevel;
+    //qDebug() << "priority is " << priority;
     int test=0;
-    if (searchoption.isEmpty()){
-        test = run("journalctl",{"--boot=" + bootoption, "--" + adminlevel ,"--priority=" + priority,"--no-pager","-q"},&output);
+    if (adminlevel == "user"){
+        if (searchoption.isEmpty()){
+            test = run("journalctl",{"--boot=" + bootoption, "--" + adminlevel ,"--priority=" + priority,"--no-pager","-q"},&output);
+        } else {
+            test = run("journalctl",{"--boot=" + bootoption, "--" + adminlevel ,"--priority=" + priority,"--no-pager","-q",searchoption,"--case-sensitive=false"},&output);
+        }
     } else {
-        test = run("journalctl",{"--boot=" + bootoption, "--" + adminlevel ,"--priority=" + priority,"--no-pager","-q",searchoption,"--case-sensitive=false"},&output);
+        if (searchoption.isEmpty()){
+            test = run("pkexec",{"/usr/lib/quick-system-info-gui/qsig-lib","journalctl_command","journalctl","--boot=" + bootoption, "--" + adminlevel ,"--priority=" + priority,"--no-pager","-q"},&output);
+        } else {
+            test = run("pkexec",{"/usr/lib/quick-system-info-gui/qsig-lib","journalctl_command","journalctl","--boot=" + bootoption, "--" + adminlevel ,"--priority=" + priority,"--no-pager","-q",searchoption,"--case-sensitive=false"},&output);
+        }
     }
     //qDebug() << "output is " << QString(output);
-    qDebug() << "test is " << test;
+    //qDebug() << "test is " << test;
     if (test == 0){
         text = QString(output);
         if (text.isEmpty()) text = tr("No journal entries found at this admin and priority level","no journal entries found at the options specified");
