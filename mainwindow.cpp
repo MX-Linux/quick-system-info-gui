@@ -210,12 +210,19 @@ void MainWindow::on_pushSaveText_clicked() noexcept
     lockGUI(true);
     QString errmsg;
     QFile file(dialog.selectedFiles().at(0));
-    if (file.open(QFile::Truncate | QFile::WriteOnly)) {
-        const QByteArray &text = ui->textSysInfo->toPlainText().toUtf8();
-        if (file.write(text) != text.size()) errmsg = file.errorString();
-        file.close();
+    if (ui->tabWidget->currentIndex() == 0){
+        if (file.open(QFile::Truncate | QFile::WriteOnly)) {
+            const QByteArray &text = ui->textSysInfo->toPlainText().toUtf8();
+            if (file.write(text) != text.size()) errmsg = file.errorString();
+            file.close();
+        }
+    } else {
+        if (file.open(QFile::Truncate | QFile::WriteOnly)) {
+            const QByteArray &text = ui->plainTextEditJournald->toPlainText().toUtf8();
+            if (file.write(text) != text.size()) errmsg = file.errorString();
+            file.close();
+        }
     }
-
     lockGUI(false);
     showSavedMessage(file.fileName(), errmsg);
 }
@@ -327,7 +334,7 @@ void MainWindow::buildInfoList() noexcept
     QFont ifont = item->font();
     ifont.setBold(true);
     item->setFont(ifont);
-    item->setData(Qt::UserRole, "inxi.txt");
+    item->setData(Qt::UserRole, "quick-system-info.txt");
     ui->listInfo->insertItem(0, item);
     // Special apt history info
     item = new QListWidgetItem("apt " + tr("history"));
