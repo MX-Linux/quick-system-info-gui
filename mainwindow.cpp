@@ -498,6 +498,7 @@ void MainWindow::listSelectDefault() noexcept
 void MainWindow::showFindDialog() noexcept
 {
     QDialog dialog(ui->textSysInfo);
+    if (ui->tabWidget->currentIndex() == 1 ) QDialog dialog(ui->plainTextEditJournald);
     dialog.setWindowTitle(tr("Find"));
 
     // Search text
@@ -558,9 +559,19 @@ void MainWindow::showFindDialog() noexcept
 }
 void MainWindow::findNext() noexcept
 {
-    if (searchText.isEmpty()) showFindDialog();
-    else if (!ui->textSysInfo->find(searchText, searchFlags)) {
-        QMessageBox::information(this, windowTitle(), tr("Cannot find \"%1\"").arg(searchText));
+    if (searchText.isEmpty()) {
+        showFindDialog();
+    } else {
+        if (ui->tabWidget->currentIndex() == 0){
+            if (!ui->textSysInfo->find(searchText, searchFlags)) {
+                QMessageBox::information(this, windowTitle(), tr("Cannot find \"%1\"").arg(searchText));
+            }
+        }
+        if (ui->tabWidget->currentIndex() == 1){
+            if (!ui->plainTextEditJournald->find(searchText, searchFlags)) {
+                QMessageBox::information(this, windowTitle(), tr("Cannot find \"%1\"").arg(searchText));
+            }
+        }
     }
 }
 
