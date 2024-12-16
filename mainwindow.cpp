@@ -359,11 +359,19 @@ void MainWindow::on_ButtonHelp_clicked() noexcept
 void MainWindow::forumcopy() noexcept
 {
     QClipboard *clipboard = QApplication::clipboard();
-    QString text = ui->textSysInfo->textCursor().selectedText();
-    text.replace(QChar(0x2029), "\n");
-    if (text.isEmpty()) {
-        text = ui->textSysInfo->toPlainText();
+    QString text;
+    if (ui->tabWidget->currentIndex() == 0){
+        text = ui->textSysInfo->textCursor().selectedText();
+        if (text.isEmpty()) {
+            text = ui->textSysInfo->toPlainText();
+        }
+    } else {
+        text = ui->plainTextEditJournald->textCursor().selectedText();
+        if (text.isEmpty()) {
+            text = ui->plainTextEditJournald->toPlainText();
+        }
     }
+    text.replace(QChar(0x2029), "\n");
     clipboard->setText("[CODE]" + text + "[/CODE]");
 }
 
