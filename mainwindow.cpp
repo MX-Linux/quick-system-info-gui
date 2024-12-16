@@ -160,6 +160,7 @@ void MainWindow::lockGUI(bool lock) noexcept
         ui->pushSave->setDisabled(lock);
         ui->pushSaveText->setDisabled(lock);
         ui->ButtonCopy->setDisabled(lock);
+        ui->tabWidget->setDisabled(lock);
         if (lock) QApplication::setOverrideCursor(Qt::WaitCursor);
         else {
             ui->listInfo->setFocus();
