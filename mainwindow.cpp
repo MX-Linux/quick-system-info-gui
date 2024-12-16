@@ -585,51 +585,54 @@ void MainWindow::journald_setup()
     QStringList bootlist;
 
     //set default options
-    ui->comboBoxJournaldPriority->setCurrentIndex(3);
+    //priority levels 1-7.  4 is somewhat usefull for user level, 3 usually empty
+    ui->comboBoxJournaldPriority->setCurrentIndex(4);
+
+    //index 1 is user level, which requires no root permissions.  index 0 is system (root) level
     ui->comboBoxJournaldSystemUser->setCurrentIndex(1);
 
     int test = run("journalctl",{"--list-boots","--no-pager","-q",},&output);
     if (test == 0){
         bootlist = QString(output).split("\n");
         bootlist.sort();
+        //trim strings because journalctl output has leading spaces
         for(int i = 0; i < bootlist.size(); ++i) {
             QString item = static_cast<QString>(bootlist[i]).trimmed();
         }
         ui->comboBoxJournaldListBoots->addItems(bootlist);
     }
+    //flag that setup has been done, now changes in combo boxes will instantly change report
     journald_setup_done = true;
-}
-
-void MainWindow::on_tabWidget_currentChanged(int index)
-{   //qDebug() << "current index is " << index;
-
-    if (index == 1) {
-        run_journalctl_report();
-    }
 }
 
 void MainWindow::run_journalctl_report(){
 
     QByteArray output;
     QString text;
+
+    //searchoption is for the --unit=UNIT parameter, which works to filter by service
     QString searchoption;
     if (!ui->lineEditJournaldSearch->text().isEmpty()) {
         searchoption="--unit=" + ui->lineEditJournaldSearch->text();
     }
-    //run journalctl command corresponding to current selections
-    //journalctl --boot=UUID --user:system --priority=adminLevel --grep PATTERN
+    //bootoption works off UUID of selection in boot list combbox
     QString bootoption = ui->comboBoxJournaldListBoots->currentText().section(" ",1,1);
+
+    //user or system, using indexes so translations can work
     QString adminlevel;
     if (ui->comboBoxJournaldSystemUser->currentIndex() == 1) {
         adminlevel = "user";
     } else {
         adminlevel = "system";
     }
+    //log level.  higher the number of priority level, the more information presented
     QString priority = ui->comboBoxJournaldPriority->currentText();
 
     //qDebug() << "bootoption is " << bootoption;
     //qDebug() << "adminLevel is " << adminlevel;
     //qDebug() << "priority is " << priority;
+
+    //no pkexec needed if user level, otherwise use pkexec to run a report with elevated rights
     int test=0;
     if (adminlevel == "user"){
         if (searchoption.isEmpty()){
@@ -646,6 +649,9 @@ void MainWindow::run_journalctl_report(){
     }
     //qDebug() << "output is " << QString(output);
     //qDebug() << "test is " << test;
+
+    //if command succesful, but not output to display, say so
+    //show error if non 0 exit
     if (test == 0){
         text = QString(output);
         if (text.isEmpty()) text = tr("No journal entries found at this admin and priority level","no journal entries found at the options specified");
@@ -655,6 +661,17 @@ void MainWindow::run_journalctl_report(){
     ui->plainTextEditJournald->setPlainText(text);
 }
 
+//actions when report is run
+//run journalctl reports when tab changes to journald tab
+//or when any option combo box is edited
+//or when search reload button is used
+void MainWindow::on_tabWidget_currentChanged(int index)
+{   //qDebug() << "current index is " << index;
+
+    if (index == 1) {
+        run_journalctl_report();
+    }
+}
 void MainWindow::on_comboBoxJournaldListBoots_activated(int index)
 {
     if (journald_setup_done) {
