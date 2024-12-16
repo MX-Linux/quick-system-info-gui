@@ -684,7 +684,12 @@ void MainWindow::on_tabWidget_currentChanged(int index)
 {   //qDebug() << "current index is " << index;
 
     if (index == 1) {
+        //hide save files button as it has no place on this tab
+        ui->pushSave->hide();
         run_journalctl_report();
+    } else {
+        //show pushSave
+        ui->pushSave->show();
     }
 }
 void MainWindow::on_comboBoxJournaldListBoots_activated(int index)
