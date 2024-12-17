@@ -632,14 +632,15 @@ void MainWindow::journald_setup()
     //index 1 is user level, which requires no root permissions.  index 0 is system (root) level
     ui->comboBoxJournaldSystemUser->setCurrentIndex(1);
 
-    int test = run("journalctl",{"--list-boots","--no-pager","-q",},&output);
+    int test = run("journalctl",{"--list-boots","--no-pager","-q","-r"},&output);
     if (test == 0){
         bootlist = QString(output).split("\n");
-        bootlist.sort();
+        //bootlist.sort();
         //trim strings because journalctl output has leading spaces
         for(int i = 0; i < bootlist.size(); ++i) {
             QString item = static_cast<QString>(bootlist[i]).trimmed();
         }
+        bootlist.prepend(tr("Current Boot"));
         ui->comboBoxJournaldListBoots->addItems(bootlist);
     }
     //flag that setup has been done, now changes in combo boxes will instantly change report
@@ -658,34 +659,39 @@ void MainWindow::run_journalctl_report(){
     }
     //bootoption works off UUID of selection in boot list combbox
     QString bootoption = ui->comboBoxJournaldListBoots->currentText().section(" ",1,1);
+    if (ui->comboBoxJournaldListBoots->currentIndex() == 0){
+        bootoption = "--boot";
+    } else {
+        bootoption.prepend("--boot=");
+    }
 
     //user or system, using indexes so translations can work
     QString adminlevel;
     if (ui->comboBoxJournaldSystemUser->currentIndex() == 1) {
-        adminlevel = "user";
+        adminlevel = "--user";
     } else {
-        adminlevel = "system";
+        adminlevel = "--system";
     }
     //log level.  higher the number of priority level, the more information presented
-    QString priority = ui->comboBoxJournaldPriority->currentText();
+    QString priority = ui->comboBoxJournaldPriority->currentText().prepend("--priority=");
 
-    //qDebug() << "bootoption is " << bootoption;
-    //qDebug() << "adminLevel is " << adminlevel;
-    //qDebug() << "priority is " << priority;
+    qDebug() << "bootoption is " << bootoption;
+    qDebug() << "adminLevel is " << adminlevel;
+    qDebug() << "priority is " << priority;
 
     //no pkexec needed if user level, otherwise use pkexec to run a report with elevated rights
     int test=0;
-    if (adminlevel == "user"){
+    if (adminlevel == "--user"){
         if (searchoption.isEmpty()){
-            test = run("journalctl",{"--boot=" + bootoption, "--" + adminlevel ,"--priority=" + priority,"--no-pager","-q"},&output);
+            test = run("journalctl",{bootoption,adminlevel,priority,"--no-pager","-q"},&output);
         } else {
-            test = run("journalctl",{"--boot=" + bootoption, "--" + adminlevel ,"--priority=" + priority,"--no-pager","-q",searchoption,"--case-sensitive=false"},&output);
+            test = run("journalctl",{bootoption,adminlevel,priority,"--no-pager","-q",searchoption,"--case-sensitive=false"},&output);
         }
     } else {
         if (searchoption.isEmpty()){
-            test = run("pkexec",{"/usr/lib/quick-system-info-gui/qsig-lib","journalctl_command","journalctl","--boot=" + bootoption, "--" + adminlevel ,"--priority=" + priority,"--no-pager","-q"},&output);
+            test = run("pkexec",{"/usr/lib/quick-system-info-gui/qsig-lib","journalctl_command","journalctl",bootoption,adminlevel,priority,"--no-pager","-q"},&output);
         } else {
-            test = run("pkexec",{"/usr/lib/quick-system-info-gui/qsig-lib","journalctl_command","journalctl","--boot=" + bootoption, "--" + adminlevel ,"--priority=" + priority,"--no-pager","-q",searchoption,"--case-sensitive=false"},&output);
+            test = run("pkexec",{"/usr/lib/quick-system-info-gui/qsig-lib","journalctl_command","journalctl",bootoption,adminlevel,priority,"--no-pager","-q",searchoption,"--case-sensitive=false"},&output);
         }
     }
     //qDebug() << "output is " << QString(output);
