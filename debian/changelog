@@ -1,3 +1,10 @@
+quick-system-info-gui (24.12.05) mx; urgency=medium
+
+  * run journalctl such that journal directory is not needed
+  * if initial population of boot choices fails, run again as admin
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 18 Dec 2024 16:39:48 -0500
+
 quick-system-info-gui (24.12.04) mx; urgency=medium
 
   * if journal storage is missing, default to --system mode

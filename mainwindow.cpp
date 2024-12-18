@@ -631,9 +631,9 @@ void MainWindow::journald_setup()
     //set system if /var/log/journal doesn't exist
     //and remove user item
 
-    if (QDir("/var/log/journal").exists()) {
+    test = run("journalctl",{"--list-boots","--no-pager","-q","-r"},&output);
+    if (test == 0) {
             ui->comboBoxJournaldSystemUser->setCurrentIndex(1);
-            test = run("journalctl",{"--list-boots","--no-pager","-q","-r"},&output);
         } else {
             ui->comboBoxJournaldSystemUser->setCurrentIndex(0);
             ui->comboBoxJournaldSystemUser->removeItem(1);
