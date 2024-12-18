@@ -1,0 +1,7 @@
+workflow:
+  steps:
+    - trigger_services:
+        project: home:quick-system-info-gui
+        package: %{SCM_REPOSITORY_NAME}
+  filters:
+    event: tag_push
