@@ -618,7 +618,7 @@ void MainWindow::systemd_check()
 void MainWindow::journald_setup()
 {   QByteArray output;
     QStringList bootlist;
-
+    int test = 0;
     //set some word wrap modes
     ui->plainTextEditJournald->setWordWrapMode(QTextOption::NoWrap);
     ui->plainTextEditJournald->setContextMenuPolicy(Qt::ActionsContextMenu);
@@ -630,7 +630,7 @@ void MainWindow::journald_setup()
     //index 1 is user level, which requires no root permissions.  index 0 is system (root) level
     //set system if /var/log/journal doesn't exist
     //and remove user item
-    int test = 0;
+
     if (QDir("/var/log/journal").exists()) {
             ui->comboBoxJournaldSystemUser->setCurrentIndex(1);
             test = run("journalctl",{"--list-boots","--no-pager","-q","-r"},&output);
