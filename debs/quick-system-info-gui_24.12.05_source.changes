@@ -1,0 +1,46 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Format: 1.8
+Date: Wed, 18 Dec 2024 16:39:48 -0500
+Source: quick-system-info-gui
+Architecture: source
+Version: 24.12.05
+Distribution: mx
+Urgency: medium
+Maintainer: dolphin oracle <dolphinoracle@gmail.com>
+Changed-By: Dolphin Oracle <dolphinoracle@gmail.com>
+Changes:
+ quick-system-info-gui (24.12.05) mx; urgency=medium
+ .
+   * run journalctl such that journal directory is not needed
+   * if initial population of boot choices fails, run again as admin
+Checksums-Sha1:
+ 873e4f615d892c64664e38128a8112ad121e6220 1543 quick-system-info-gui_24.12.05.dsc
+ 01e8019eeff4eab861ef93c51504ecb0cc69b1ef 284592 quick-system-info-gui_24.12.05.tar.xz
+ 6638e64a162a139d87c8ed15b9b8f54da2e647ae 11585 quick-system-info-gui_24.12.05_source.buildinfo
+Checksums-Sha256:
+ eda80137572d650136e0a03c492ee34e555b30069576ab656ed9e85bd8ca2f68 1543 quick-system-info-gui_24.12.05.dsc
+ d55fbc5e3b927e466208435962d5ba59244b5f5a0fbcd73cdffadafdaf62bdb8 284592 quick-system-info-gui_24.12.05.tar.xz
+ 36e508daa7781e94a4d093dcce700eb4b3028bd39d5e961104b98ec402238e17 11585 quick-system-info-gui_24.12.05_source.buildinfo
+Files:
+ 789dcd740b10dcca6164b3ad620fa1c9 1543 admin optional quick-system-info-gui_24.12.05.dsc
+ a3fa11759f07ddc7ab9a51858ae05361 284592 admin optional quick-system-info-gui_24.12.05.tar.xz
+ 78222f72ea5ba459cc23daa8b5e07057 11585 admin optional quick-system-info-gui_24.12.05_source.buildinfo
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEE9i7eqjrnCpyZ2sQYm2ih6Lm2N1wFAmdjQsIACgkQm2ih6Lm2
+N1ymuBAAvx+UtnzavGW012/+VDEp1+B9yGGCfjd3YERwYa3iFtKl/R70sFWm/5Li
+x2JJmHgKaqjpwv/uSw7PzaF16C3KvXzMDck+y5DY3Xt1jA4wayuqdPBqyHKMs3me
+u5wjjvSZeLOVyg0vFuUMfM6gzc+E1S/zJR79klA108FiDh0APmczkKeRXDT6zT2k
+0ZhF9TtlydGNwavA7TGiIZoFh/MgdnkRch9RnsEVCspl3AM0KyTf+u/tk+erHIzR
+nH3OcuHISMQx6yUUnn408ZiEyt6HWPhZzPHUlXxhkgKM2Xr39kpEWzffQkujvdMx
+eC/EFFHfd+p0g7MyJLbLOuF0f72ZVMT9lHPLKy5t9X3Dojuwp5d4ieMVbHp4j9Fb
+/r3AGneibnT3zwncddS5QqWJOd56l4smiQDE4wzehvISoK1jqk5EBOzggw+r0ayD
+UJCa+bxBITehns4WlbKcvMaKunPJUAWHo62qIjM7nYSGg+coLF/UT61Jx4cB+QZF
+rwHBygnaAodzV7C+6bPVXn5tZhT1Jj2Z2T0WQMKw8sjQyVyYlQA1l7phkPXvHWbH
+o6FnuoS+C+UbvMwVJicqWjSF2KHTpIY86yH8HA0rAGyafV5URE33xhP+Cyl+1ARg
+pyH5jcrj9enBVqlLdWJ10lUYhJESLFMpEyut8TcRfzdEpXnBUY4=
+=Mc+D
+-----END PGP SIGNATURE-----
