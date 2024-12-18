@@ -611,8 +611,6 @@ void MainWindow::systemd_check()
     if (test == 0){
         if (QString(output) != systemd){
             ui->tabWidget->removeTab(1);
-        } else {
-            journald_setup();
         }
     }
 }
@@ -630,9 +628,18 @@ void MainWindow::journald_setup()
     ui->comboBoxJournaldPriority->setCurrentIndex(4);
 
     //index 1 is user level, which requires no root permissions.  index 0 is system (root) level
-    ui->comboBoxJournaldSystemUser->setCurrentIndex(1);
+    //set system if /var/log/journal doesn't exist
+    //and remove user item
+    int test = 0;
+    if (QDir("/var/log/journal").exists()) {
+            ui->comboBoxJournaldSystemUser->setCurrentIndex(1);
+            test = run("journalctl",{"--list-boots","--no-pager","-q","-r"},&output);
+        } else {
+            ui->comboBoxJournaldSystemUser->setCurrentIndex(0);
+            ui->comboBoxJournaldSystemUser->removeItem(1);
+            test = run("pkexec",{"/usr/lib/quick-system-info-gui/qsig-lib","journalctl_command","journalctl","--list-boots","--no-pager","-q","-r"},&output);
+    }
 
-    int test = run("journalctl",{"--list-boots","--no-pager","-q","-r"},&output);
     if (test == 0){
         bootlist = QString(output).split("\n");
         //bootlist.sort();
@@ -712,10 +719,15 @@ void MainWindow::run_journalctl_report(){
 //run journalctl reports when tab changes to journald tab
 //or when any option combo box is edited
 //or when search reload button is used
+//run journald setup if hasn't happened yet.
+
 void MainWindow::on_tabWidget_currentChanged(int index)
 {   //qDebug() << "current index is " << index;
 
     if (index == 1) {
+        if (!journald_setup_done) {
+            journald_setup();
+        }
         //hide save files button as it has no place on this tab
         ui->pushSave->hide();
         run_journalctl_report();
