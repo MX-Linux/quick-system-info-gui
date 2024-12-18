@@ -210,11 +210,11 @@
    <item row="0" column="0" colspan="4">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="QSI">
       <attribute name="title">
-       <string>QSI</string>
+       <string notr="true" extracomment="short forum for Quick Sytem Info">QSI</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
@@ -251,7 +251,7 @@
      </widget>
      <widget class="QWidget" name="Journald">
       <attribute name="title">
-       <string>Journald</string>
+       <string extracomment="systemd journalctl tab">Journald</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="0">

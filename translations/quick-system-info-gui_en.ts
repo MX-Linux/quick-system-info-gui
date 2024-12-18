@@ -70,13 +70,9 @@
         <translation>Alt+B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="217"/>
-        <source>QSI</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="254"/>
         <source>Journald</source>
+        <extracomment>systemd journalctl tab</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
