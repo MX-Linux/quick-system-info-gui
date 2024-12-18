@@ -1,3 +1,9 @@
+quick-system-info-gui (24.12.04) mx; urgency=medium
+
+  * if journal storage is missing, default to --system mode
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 17 Dec 2024 19:14:59 -0500
+
 quick-system-info-gui (24.12.02) mx; urgency=medium
 
   * modify boot listings

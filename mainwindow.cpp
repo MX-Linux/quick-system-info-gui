@@ -647,7 +647,6 @@ void MainWindow::journald_setup()
         for(int i = 0; i < bootlist.size(); ++i) {
             QString item = static_cast<QString>(bootlist[i]).trimmed();
         }
-        bootlist.prepend(tr("Current Boot"));
         ui->comboBoxJournaldListBoots->addItems(bootlist);
     }
     //flag that setup has been done, now changes in combo boxes will instantly change report
