@@ -1,3 +1,9 @@
+quick-system-info-gui (24.12.07) mx; urgency=medium
+
+  * check /run/log/journal/$machine-id for system/user check
+
+ -- Dolphin Oracle <dolphin@mx>  Thu, 19 Dec 2024 14:53:17 -0500
+
 quick-system-info-gui (24.12.06) mx; urgency=medium
 
   * modify system/user check
