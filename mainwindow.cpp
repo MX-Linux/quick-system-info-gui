@@ -628,16 +628,17 @@ void MainWindow::journald_setup()
     ui->comboBoxJournaldPriority->setCurrentIndex(4);
 
     //index 1 is user level, which requires no root permissions.  index 0 is system (root) level
-    //set system if /var/log/journal doesn't exist
-    //and remove user item
+    //set system if /run/log/journal exists, as that indicates either /var/log/journal is missing or volatile storage in use
+    //either way user permissions won't be suffiencent to list boots properly, so elevate and and remove user item option.
 
-    test = run("journalctl",{"--list-boots","--no-pager","-q","-r"},&output);
-    if (test == 0) {
-            ui->comboBoxJournaldSystemUser->setCurrentIndex(1);
-        } else {
-            ui->comboBoxJournaldSystemUser->setCurrentIndex(0);
-            ui->comboBoxJournaldSystemUser->removeItem(1);
-            test = run("pkexec",{"/usr/lib/quick-system-info-gui/qsig-lib","journalctl_command","journalctl","--list-boots","--no-pager","-q","-r"},&output);
+    if (QDir("/run/log/journal").exists()) {
+        ui->comboBoxJournaldSystemUser->setCurrentIndex(0);
+        ui->comboBoxJournaldSystemUser->removeItem(1);
+        test = run("pkexec",{"/usr/lib/quick-system-info-gui/qsig-lib","journalctl_command","journalctl","--list-boots","--no-pager","-q","-r"},&output);
+    } else {
+        test = run("journalctl",{"--list-boots","--no-pager","-q","-r"},&output);
+        ui->comboBoxJournaldSystemUser->setCurrentIndex(1);
+
     }
 
     if (test == 0){
