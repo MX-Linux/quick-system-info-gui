@@ -628,10 +628,18 @@ void MainWindow::journald_setup()
     ui->comboBoxJournaldPriority->setCurrentIndex(4);
 
     //index 1 is user level, which requires no root permissions.  index 0 is system (root) level
-    //set system if /run/log/journal exists, as that indicates either /var/log/journal is missing or volatile storage in use
+    //set system if /run/log/journal/$(machine-id) exists, as that indicates either /var/log/journal is missing or volatile storage in use
     //either way user permissions won't be suffiencent to list boots properly, so elevate and and remove user item option.
 
-    if (QDir("/run/log/journal").exists()) {
+    //harvest machine-id
+    QString machine_id;
+    test = run("cat",{"/etc/machine-id"},&output);
+    if (test == 0){
+        machine_id = output;
+    }
+    qDebug() << "machine ID is" << machine_id;
+
+    if (QDir("/run/log/journal/" + machine_id).exists()) {
         ui->comboBoxJournaldSystemUser->setCurrentIndex(0);
         ui->comboBoxJournaldSystemUser->removeItem(1);
         test = run("pkexec",{"/usr/lib/quick-system-info-gui/qsig-lib","journalctl_command","journalctl","--list-boots","--no-pager","-q","-r"},&output);
