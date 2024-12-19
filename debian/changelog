@@ -1,3 +1,9 @@
+quick-system-info-gui (24.12.06) mx; urgency=medium
+
+  * modify system/user check
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 19 Dec 2024 08:20:46 -0500
+
 quick-system-info-gui (24.12.05) mx; urgency=medium
 
   * run journalctl such that journal directory is not needed
