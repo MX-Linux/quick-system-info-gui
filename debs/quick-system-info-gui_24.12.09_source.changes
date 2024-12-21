@@ -1,0 +1,46 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Format: 1.8
+Date: Fri, 20 Dec 2024 19:12:25 -0500
+Source: quick-system-info-gui
+Architecture: source
+Version: 24.12.09
+Distribution: mx
+Urgency: medium
+Maintainer: dolphin oracle <dolphinoracle@gmail.com>
+Changed-By: Dolphin Oracle <dolphinoracle@gmail.com>
+Changes:
+ quick-system-info-gui (24.12.09) mx; urgency=medium
+ .
+   * update translations
+   * remove bogus "lastlog"
+Checksums-Sha1:
+ 3116e265865646db2795d5e97052307025404d90 1543 quick-system-info-gui_24.12.09.dsc
+ dd90cade54ed6a7577724ddf8f0bba8ca108073c 579200 quick-system-info-gui_24.12.09.tar.xz
+ 5c9924c2e535f69f6640ac013812c85f759795b4 11585 quick-system-info-gui_24.12.09_source.buildinfo
+Checksums-Sha256:
+ 20bf0afb880440064912b01e9bf7f94caafa325030306c6a199e16c67265a205 1543 quick-system-info-gui_24.12.09.dsc
+ 7c93dc5a6b04aa978334299bcd54d672ebc7ec347aaf99a6d4f55fa73936b45d 579200 quick-system-info-gui_24.12.09.tar.xz
+ fb489d21a671f8c1fbc24de2fd4576060fcc241a0dcb240b0ef9263c57ae134e 11585 quick-system-info-gui_24.12.09_source.buildinfo
+Files:
+ dfa8e42ac3e191819c58982a9c5bc719 1543 admin optional quick-system-info-gui_24.12.09.dsc
+ f2d220d71fd85a5e8bb99a3ea8e55204 579200 admin optional quick-system-info-gui_24.12.09.tar.xz
+ 8b87321b6e18b71cde8d45df6161d62f 11585 admin optional quick-system-info-gui_24.12.09_source.buildinfo
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEE9i7eqjrnCpyZ2sQYm2ih6Lm2N1wFAmdmCC8ACgkQm2ih6Lm2
+N1wr1A/+NlZH9dP1pDFHYxupMK4lQA3VwGzwlkATsGNuQRw8PGDSw6jK3UgXU3JP
++v8TYO0fdRkpWekcaDHFZqTW7crIkcxGh8FbHLXAB9H+LVzhFGVga93sRsHPD7bm
+YbPZ7qRuQ5zwzHsQNEZ+ZhBT7L4DHRNcGWeibFktKWRN8+45t5Avx3CXt1lJfRvl
+1/Z5f/6XRaKxRgY15fbFvS0XSjtMx1d607QQy0X6e98uWh9jGQRoGZvdNE73mR6d
+0/9/JeVzL05qk1f3UnjgpuyaTyIxSyp/s1oPb/n3hTLve1xSqLzuPXewchlCO0hi
+GsE5OResCp45ES4Fdqt/Mf17cJiZ/HyWnG7Lc5HXznHRVgwwr0fCb9RuIimr7l1e
+E+DDO4mZT8TyGY6xIuEO1tVegQhZl1d51noAs5HWCPD7nMJsslwOoxMTzQ11XTSV
+cwbd/UErb4QKyin9ChmetRsg0jpcYVHAOkzeqMUZhP1rY7jnMVJTPcSlRR0I8kuX
+dRJf+JZm32192NyvY7uS3sEJpLaW600Dvgh1p5SO24BnvteQ/1Jsd00kZ+QGMtAq
+awmXb3f5vu6deISOrLK80Q6gWpKS//VQmMSc4l7DJKC6TycSZLQwUOTnbwKjqzbB
+ofzyG8zOU9Tg5EK6uA8xJy8Hu5SISYMPn/1vJ7nqr1Ht+tJhgmI=
+=AJBP
+-----END PGP SIGNATURE-----
