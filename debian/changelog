@@ -1,3 +1,10 @@
+quick-system-info-gui (24.12.09) mx; urgency=medium
+
+  * update translations
+  * remove bogus "lastlog"
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 20 Dec 2024 19:12:25 -0500
+
 quick-system-info-gui (24.12.08) mx; urgency=medium
 
   * rebuild
