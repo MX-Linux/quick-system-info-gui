@@ -41,6 +41,7 @@
 #include <QClipboard>
 #include <archive.h>
 #include <archive_entry.h>
+#include <QByteArray>
 
 #include "about.h"
 #include "mainwindow.h"
@@ -438,8 +439,11 @@ QByteArray MainWindow::readReport(int row)
             break;
         }
     }
-    if (execrc != 0) throw QString(output);
-    return output;
+    QRegularExpression ansiEscapeRegex("\x1B\\[[0-9;]*[mG]");
+
+    if (execrc != 0) throw (output);
+    return QString::fromUtf8(output).remove(ansiEscapeRegex).toUtf8();
+
 }
 
 // The currentRowchanged() signal occurs before the selection change is displayed.

@@ -1,3 +1,9 @@
+quick-system-info-gui (25.04.01mx25) mx; urgency=medium
+
+  * qt6
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 21 Apr 2025 21:19:15 -0400
+
 quick-system-info-gui (24.12.09) mx; urgency=medium
 
   * update translations
