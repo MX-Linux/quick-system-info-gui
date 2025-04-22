@@ -1,0 +1,25 @@
+Format: 1.8
+Date: Mon, 21 Apr 2025 21:19:15 -0400
+Source: quick-system-info-gui
+Architecture: source
+Version: 25.04.01mx25
+Distribution: mx
+Urgency: medium
+Maintainer: dolphin oracle <dolphinoracle@gmail.com>
+Changed-By: Dolphin Oracle <dolphinoracle@gmail.com>
+Changes:
+ quick-system-info-gui (25.04.01mx25) mx; urgency=medium
+ .
+   * qt6
+Checksums-Sha1:
+ 09f4393c0854e41df3566d25d5a45f79dfd26d1e 713 quick-system-info-gui_25.04.01mx25.dsc
+ 74d0ac55fd0b5ff825d1d8b08e92ac020e3e4986 287028 quick-system-info-gui_25.04.01mx25.tar.xz
+ 805e023a7dd612d428cf43ca3f7cd43cf3ac6f04 10449 quick-system-info-gui_25.04.01mx25_amd64.buildinfo
+Checksums-Sha256:
+ b680b6d30ede0cbd7baa33bff0886e40172a1281bd628307d5aff21ca93d9ef3 713 quick-system-info-gui_25.04.01mx25.dsc
+ 0988ac935a21a33bdfea93ec7734e30c8b7965fbaf1f9eb65ffb2ce881e43ca2 287028 quick-system-info-gui_25.04.01mx25.tar.xz
+ 371460a7dd991e2831f8ca9ac2bd516b0e1b706cbae2d6ac6c0f20f1d87cb689 10449 quick-system-info-gui_25.04.01mx25_amd64.buildinfo
+Files:
+ 3a1c0cd037d4127ce940d4ef2916700f 713 admin optional quick-system-info-gui_25.04.01mx25.dsc
+ d1cec19116dced58ac7004eab006feac 287028 admin optional quick-system-info-gui_25.04.01mx25.tar.xz
+ b8b618c95487e749d7d8bdc62d480289 10449 admin optional quick-system-info-gui_25.04.01mx25_amd64.buildinfo
