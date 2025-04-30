@@ -27,7 +27,12 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = quick-system-info-gui
 TEMPLATE = app
-
+CONFIG += debug_and_release warn_on strict_c++
+CONFIG(release, debug|release) {
+    DEFINES += NDEBUG
+    QMAKE_CXXFLAGS += -flto=auto
+    QMAKE_LFLAGS += -flto=auto
+}
 
 SOURCES += main.cpp\
     about.cpp \
