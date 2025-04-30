@@ -730,10 +730,16 @@ void MainWindow::tabWidget_currentChanged(int index) noexcept
     if (index == 1) {
         if (!journald_setup_done) {
             journald_setup();
+
+            QAction *actionJournaldSearch = new QAction(QIcon::fromTheme(QStringLiteral("search")),
+                                                        tr("Search for this service"), ui->lineEditJournaldSearch);
+            ui->lineEditJournaldSearch->addAction(actionJournaldSearch, QLineEdit::TrailingPosition);
+            actionJournaldSearch->setShortcut(Qt::Key_Return);
+            actionJournaldSearch->setShortcutContext(Qt::WidgetShortcut);
             connect(ui->comboBoxJournaldListBoots, &QComboBox::activated, this, &MainWindow::run_journalctl_report);
             connect(ui->comboBoxJournaldPriority, &QComboBox::activated, this, &MainWindow::run_journalctl_report);
             connect(ui->comboBoxJournaldSystemUser, &QComboBox::activated, this, &MainWindow::run_journalctl_report);
-            connect(ui->toolButtonReloadSearch, &QToolButton::clicked, this, &MainWindow::run_journalctl_report);
+            connect(actionJournaldSearch, &QAction::triggered, this, &MainWindow::run_journalctl_report);
         }
         //hide save files button as it has no place on this tab
         ui->pushSave->hide();
