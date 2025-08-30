@@ -24,6 +24,7 @@
 
 #include <cassert>
 #include <ctime>
+#include <QCoreApplication>
 #include <QAction>
 #include <QCheckBox>
 #include <QDebug>
@@ -46,13 +47,11 @@
 #include "about.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "version.h"
 
 MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent) noexcept
     : QDialog(parent)
     , ui(new Ui::MainWindow)
 {
-    qDebug().noquote() << QCoreApplication::applicationName() << "version:" << VERSION;
     ui->setupUi(this);
     lockGUI(true);
     setWindowFlags(Qt::Window); // for the close, min and max buttons
@@ -756,7 +755,7 @@ void MainWindow::pushAbout_clicked() noexcept
     displayAboutMsgBox(
         tr("About Quick-System-Info-gui"),
         "<p align=\"center\"><b><h2>" + tr("Quick System Info") + "</h2></b></p><p align=\"center\">" + tr("Version: ")
-            + VERSION + "</p><p align=\"center\"><h3>" + tr("Program for displaying a quick system info report")
+            + qApp->applicationVersion() + "</p><p align=\"center\"><h3>" + tr("Program for displaying a quick system info report")
             + "</h3></p><p align=\"center\"><a href=\"http://mxlinux.org\">http://mxlinux.org</a><br /></p>"
               "<p align=\"center\">"
             + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
