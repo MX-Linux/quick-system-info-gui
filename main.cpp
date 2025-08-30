@@ -33,9 +33,15 @@
 #include "mainwindow.h"
 #include <unistd.h>
 
+// VERSION should come from compilation options.
+#ifndef VERSION
+    #define VERSION "?.?.?.?"
+#endif
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+    app.setApplicationVersion(QStringLiteral(VERSION));
     app.setWindowIcon(QIcon::fromTheme(app.applicationName()));
     app.setOrganizationName("MX-Linux");
 

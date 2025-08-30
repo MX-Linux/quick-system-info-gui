@@ -1,6 +1,6 @@
 quick-system-info-gui
-# C++ objects and libs
 
+# C++ objects and libs
 *.slo
 *.lo
 *.o
@@ -12,7 +12,6 @@ quick-system-info-gui
 *.dylib
 
 # Qt-es
-
 /.qmake.cache
 /.qmake.stash
 *.pro.user
@@ -24,10 +23,10 @@ moc_*.cpp
 moc_*.h
 qrc_*.cpp
 ui_*.h
+Makefile*
 *build-*
 
 # QtCreator
-
 *.autosave
 
 # QtCtreator Qml
@@ -36,6 +35,19 @@ ui_*.h
 
 # QtCtreator CMake
 CMakeLists.txt.user*
-
-# Auto-generated makefile
+CMakeCache.txt
+CMakeFiles/*
 Makefile
+cmake_install.cmake
+compile_commands.json
+.qt/*
+_build_/*
+
+# Debian folder
+debian/.debhelper/
+debian/files
+debian/*.log
+debian/*.substvars
+
+# Transifex ignore
+.tx/
