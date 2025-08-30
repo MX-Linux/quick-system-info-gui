@@ -1,9 +1,9 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="da">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ka">
 <context>
     <name>MainWindow</name>
     <message>
         <source>MX Welcome</source>
-        <translation type="vanished">MX Velkomst</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="33"/>
@@ -40,12 +40,12 @@
     <message>
         <location filename="../mainwindow.ui" line="102"/>
         <source>Quit application</source>
-        <translation>Afslut programmet</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="105"/>
         <source>Close</source>
-        <translation>Luk</translation>
+        <translation>დახურვა</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="112"/>
@@ -55,17 +55,17 @@
     <message>
         <location filename="../mainwindow.ui" line="154"/>
         <source>About this application</source>
-        <translation>Om programmet</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="157"/>
         <source>About...</source>
-        <translation>Om...</translation>
+        <translation>შესახებ...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="164"/>
         <source>Alt+B</source>
-        <translation>Alt+O</translation>
+        <translation>Alt+B</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="254"/>
@@ -83,13 +83,13 @@
         <location filename="../mainwindow.ui" line="270"/>
         <source>System</source>
         <extracomment>system level log</extracomment>
-        <translation>System</translation>
+        <translation>სისტემა</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="275"/>
         <source>User</source>
         <extracomment>user level log</extracomment>
-        <translation type="unfinished"/>
+        <translation>მომხმარებელი</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="283"/>
@@ -117,12 +117,12 @@
     <message>
         <location filename="../mainwindow.ui" line="88"/>
         <source>Help</source>
-        <translation>Hjælp</translation>
+        <translation>დახმარება</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="199"/>
         <source>Version: </source>
-        <translation>Version: </translation>
+        <translation>ვერსია:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
@@ -130,17 +130,17 @@
         <location filename="../mainwindow.cpp" line="344"/>
         <location filename="../mainwindow.cpp" line="374"/>
         <source>Quick System Info</source>
-        <translation>Hurtig systeminfo</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="61"/>
         <source>Loading...</source>
-        <translation type="unfinished"/>
+        <translation>იტვირთება...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="203"/>
         <source>Copyright (c) MX Linux</source>
-        <translation>Ophavsret (c) MX Linux</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="198"/>
@@ -175,22 +175,22 @@
     </message>
     <message>
         <source>License</source>
-        <translation type="vanished">Licens</translation>
+        <translation type="vanished">ლიცენზია</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="205"/>
         <source>%1 License</source>
-        <translation>%1-licens</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="299"/>
         <source>Open folder</source>
-        <translation>Åbn mappe</translation>
+        <translation>გახსენით საქაღალდე</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="301"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>დიახ</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="468"/>
@@ -200,7 +200,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="503"/>
         <source>Find</source>
-        <translation type="unfinished"/>
+        <translation>ძებნა</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="506"/>
@@ -252,16 +252,16 @@
     </message>
     <message>
         <source>Changelog</source>
-        <translation type="vanished">Ændringslog</translation>
+        <translation type="vanished">ცვლილებების ჟურნალი</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="511"/>
         <source>Cancel</source>
-        <translation>Annuller</translation>
+        <translation>გაუქმება</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="vanished">&amp;Luk</translation>
+        <translation type="vanished">&amp;დახურვა</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="242"/>
@@ -286,7 +286,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="374"/>
         <source>%1 Help</source>
-        <translation>%1-hjælp</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="82"/>
@@ -304,7 +304,7 @@
     <message>
         <location filename="../main.cpp" line="66"/>
         <source>You must run this program as normal user.</source>
-        <translation>Du skal køre programmet som normal bruger.</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -317,28 +317,28 @@
     <message>
         <location filename="../main.cpp" line="66"/>
         <source>Error</source>
-        <translation>Fejl</translation>
+        <translation>შეცდომა</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="40"/>
         <source>License</source>
-        <translation>Licens</translation>
+        <translation>ლიცენზია</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="41"/>
         <location filename="../about.cpp" line="51"/>
         <source>Changelog</source>
-        <translation>Ændringslog</translation>
+        <translation>ცვლილებების ჟურნალი</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="42"/>
         <source>Cancel</source>
-        <translation>Annuller</translation>
+        <translation>გაუქმება</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="63"/>
         <source>&amp;Close</source>
-        <translation>&amp;Luk</translation>
+        <translation>&amp;დახურვა</translation>
     </message>
 </context>
 </TS>
