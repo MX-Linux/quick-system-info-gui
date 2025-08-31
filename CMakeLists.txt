@@ -23,11 +23,6 @@ qt_add_executable(quick-system-info-gui
 	qsi_resource.qrc
 )
 
-qt_add_translations(quick-system-info-gui TS_FILES
-	"translations/quick-system-info-gui_en.ts"
-	LRELEASE_OPTIONS -compress -nounfinished -removeidentical -silent
-)
-
 target_link_libraries(quick-system-info-gui PRIVATE
 	Qt::Core
 	Qt::Gui
@@ -37,6 +32,7 @@ target_link_libraries(quick-system-info-gui PRIVATE
 
 build_compilation_setup(quick-system-info-gui)
 build_version_definition(quick-system-info-gui VERSION)
+build_translation_files(quick-system-info-gui translations)
 
 include(GNUInstallDirs)
 install(TARGETS quick-system-info-gui
