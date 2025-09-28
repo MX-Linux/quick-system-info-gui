@@ -4,16 +4,16 @@ Hash: SHA512
 Format: 1.0
 Source: quick-system-info-gui
 Architecture: source
-Version: 25.09.01
+Version: 25.09.02
 Checksums-Md5:
- 1abc83c8307fe31f34b106c45a3fac30 1626 quick-system-info-gui_25.09.01.dsc
+ 67062d4f9cdf6d138b707871444a887d 1626 quick-system-info-gui_25.09.02.dsc
 Checksums-Sha1:
- b7358e51d3aca2ec40120d727b8f22a05a1108a1 1626 quick-system-info-gui_25.09.01.dsc
+ 47eed23b87d194da8740ef517d44f1bed7ee962c 1626 quick-system-info-gui_25.09.02.dsc
 Checksums-Sha256:
- 52af9c48e3f11ae3ec3549ae3a8ff36a2ca9de1018eb37c427a96ce31a88696e 1626 quick-system-info-gui_25.09.01.dsc
+ 4d35246ef88c8e05d84fe89298c9e90c047bfd3d48b81da0a457ac4c0480544b 1626 quick-system-info-gui_25.09.02.dsc
 Build-Origin: Debian
 Build-Architecture: amd64
-Build-Date: Mon, 22 Sep 2025 21:31:49 -0400
+Build-Date: Sun, 28 Sep 2025 10:26:51 -0400
 Installed-Build-Depends:
  assistant-qt6 (= 6.8.2-5),
  autoconf (= 2.72-3.1),
@@ -325,7 +325,7 @@ Installed-Build-Depends:
  libzstd-dev (= 1.5.7+dfsg-1),
  libzstd1 (= 1.5.7+dfsg-1),
  linguist-qt6 (= 6.8.2-5),
- linux-libc-dev (= 6.12.43-1),
+ linux-libc-dev (= 6.12.48-1),
  llvm-19-linker-tools (= 1:19.1.7-3+b1),
  m4 (= 1.4.19-8),
  make (= 4.4.1-2),
@@ -383,21 +383,21 @@ Installed-Build-Depends:
 Environment:
  DEB_BUILD_OPTIONS="parallel=16"
  LANG="en_US.UTF-8"
- SOURCE_DATE_EPOCH="1758591020"
+ SOURCE_DATE_EPOCH="1759069531"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEE9i7eqjrnCpyZ2sQYm2ih6Lm2N1wFAmjR+LUACgkQm2ih6Lm2
-N1wCnBAAoJ5nDcuG7j/fcUX8VH2b5vaVaF0D/mrkMqgY/9qyW9Iuw8XQRypwLlSF
-OTelQTYXKKfPkyM2fs7DZjyPb+poR9muaQ8zFinNlx5kJg8n0QQphQmCvDOhbk/Z
-RCB8JRusoe/oCxxs8sLNFWAfuE+vfW3oMHoHRb7M3Q2ogSxd6BWe4WcmJU1qDInJ
-g105GtCn1RsICa/6mCsM9ga9GzwVOt4PXAdgY5g0fjDmkri+rXFh1+/3ca3UHCkp
-qk/4cOh+1fg+/s71m6VNbwP/3ygaqUgwS6mm3R+5OMS8zu06+WxtsPKGpU1eNEaX
-ex22krfCa8EbRlgESKYlJhNSP8jdfgnhGzyRDhv5zIq/mwMU83q1U+Q658iLRJJA
-/MUfg19IwUa5ILVMKoNk+K/oUBXkeohi4GIh9fhFPuJdFCGGUYkrMXbb91IkQ+kc
-b9B/tbZnX1h8jrx0OVTmrnRBpq+wuSmFsPLQaZgyqifh9zxoWpRtyq9rStXSle9m
-dHOEglgsopnrRysiB5KYxWpUz9YGEPTajfySAYdBH6GEn3jhqsk2O4GBXGfC+CS9
-TZN7djrQ4ciV0Mm8nqv+JLt8VUSpsLyQwn/Wl533HOMItg+QFrM4YzYy4waBiwQs
-oToJ5Aasl9oZq8tXTFLYOIuzZ4b1rCdWceGNou5szhk4ABCT1ac=
-=KxOV
+iQIzBAEBCgAdFiEE9i7eqjrnCpyZ2sQYm2ih6Lm2N1wFAmjZRbMACgkQm2ih6Lm2
+N1zNTRAA0MWOkZiAfuFzR8g9T5+Kt29R046QuwWNPhl7y88ZqpRMcVpLBd4ZDnD9
+20JDC1xF8Vgt7CV74KOqRXTr0b3pcKaGRs7PInwu9Q7V5+llutMZ0IFkuZwYjiw3
+yZYktiBqjxmujtifAADhLsk01ipjV6PWmedAGDS5ydRvLnf8ExE9enOVgvL1zH1L
++Hyk7banArqj2uN4bXvNDam2aX5T0WosuEljIEJmiPNSti/9wt/LIcRk/TliCprj
+xuBSeQC80CyFa15jeRDkuTH3SxT5B57HVjudofM0CnIiX8CQw7oOGeyT+yJ+EqmN
+oDTZTBNjGm7HCxCC37VqKuLJj/WX+luuqWISgdxBP2AjLPS3RNF/6TIVDQ1oLrZQ
+wSOHiQMS4PIXshbT4zGMQWLBd2apEsIXvAxedqe9Mkg0E5LtPECrQeFvtzq48OEb
+1z5RIhMzinx4Im4s6Tng21e0LiK3kQQVZea3upfMEGV9uwQGyQ/dpOKzOvsiuZmk
+q6j9IgmX2LPHW7NeaEk7KP9JjePuKK9aFHosaYDBkLawq2EnSdIoLvA7Jjb8YSlJ
+xWCYJk/MIm3IA1DtLGzUc1Mcy5D3A85KSHTvElDsD8YjFc2Z83UBMt4+prjCObhn
+DQ4UAgm5cBrB1OExOIEZFT+Zm33h+sxtsEGOmkW2PWMtGhliIdE=
+=M/iD
 -----END PGP SIGNATURE-----
