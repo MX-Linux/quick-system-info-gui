@@ -191,7 +191,15 @@ int MainWindow::run(const char *program, const QStringList &args,
     proc.start(program, args);
     if (input) proc.write(*input);
     proc.closeWriteChannel();
+    QTimer timeout;
+    timeout.setSingleShot(true);
+    connect(&timeout, &QTimer::timeout, [&]() {
+        proc.kill();
+        loop.quit();
+    });
+    timeout.start(30000);
     loop.exec();
+    timeout.stop();
 
     const bool ok = (proc.exitStatus()==QProcess::NormalExit && proc.error()==QProcess::UnknownError);
     if (output) {
