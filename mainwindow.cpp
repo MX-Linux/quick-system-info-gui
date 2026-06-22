@@ -424,10 +424,10 @@ QByteArray MainWindow::readReport(int row)
     switch(row) {
         case 0: { // Quick System Info
             // Try different system info commands depending on what's available
-            if (QFile::exists("/usr/bin/inxi")) {
-                execrc = run("/usr/bin/inxi", {"--tty", "-c", "0", "-F"}, &output);
-            } else if (QFile::exists("/usr/bin/quick-system-info-mx")) {
+            if (QFile::exists("/usr/bin/quick-system-info-mx")) {
                 execrc = run("/usr/bin/quick-system-info-mx", {"-g"}, &output);
+            } else if (QFile::exists("/usr/bin/inxi")) {
+                    execrc = run("/usr/bin/inxi", {"--tty", "-c", "0", "-F"}, &output);
             } else {
                 output = "System information tool not found. Please install 'inxi' package.";
                 execrc = 1;
