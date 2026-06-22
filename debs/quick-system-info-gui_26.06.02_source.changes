@@ -1,0 +1,25 @@
+Format: 1.8
+Date: Mon, 22 Jun 2026 12:46:16 -0400
+Source: quick-system-info-gui
+Architecture: source
+Version: 26.06.02
+Distribution: mx
+Urgency: medium
+Maintainer: dolphin oracle <dolphinoracle@gmail.com>
+Changed-By: Dolphin Oracle <demo@mx1>
+Changes:
+ quick-system-info-gui (26.06.02) mx; urgency=medium
+ .
+   * prefer quick-system-info-mx wrapper over straight inxi
+Checksums-Sha1:
+ fefc8458b55ed61bf0cf63c98512b9692c5cb4fb 743 quick-system-info-gui_26.06.02.dsc
+ 0ac0e498f3ce1e8931b82d6a17c8c3a87ae64f71 592540 quick-system-info-gui_26.06.02.tar.xz
+ 44439ae6b18f63037456d79c9d40591e55270a59 11338 quick-system-info-gui_26.06.02_source.buildinfo
+Checksums-Sha256:
+ 6781de27bc73af398a4bbbb686e8c42fa2875aff9e7ba5473c251c56ee0340ac 743 quick-system-info-gui_26.06.02.dsc
+ 9ce4db2e5493b42001ec19be2ec2c10f2b23c9e514f1ea1f3c2919aa3c8d4946 592540 quick-system-info-gui_26.06.02.tar.xz
+ 6e02237c37b557ad0c3c52b1d147f453c4cbb3a95a448e6e464b421fbf25c57a 11338 quick-system-info-gui_26.06.02_source.buildinfo
+Files:
+ f92c5be9287121d63078fc0fcee1efd3 743 admin optional quick-system-info-gui_26.06.02.dsc
+ bd19b1fc6d76b52c4db7619e06d427a8 592540 admin optional quick-system-info-gui_26.06.02.tar.xz
+ d7cabd613888f3425283fa70be27831a 11338 admin optional quick-system-info-gui_26.06.02_source.buildinfo
