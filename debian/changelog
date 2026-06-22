@@ -1,3 +1,9 @@
+quick-system-info-gui (26.06.02) mx; urgency=medium
+
+  * prefer quick-system-info-mx wrapper over straight inxi 
+
+ -- Dolphin Oracle <demo@mx1>  Mon, 22 Jun 2026 12:46:16 -0400
+
 quick-system-info-gui (26.06.01) mx; urgency=medium
 
   * add timout to run command
