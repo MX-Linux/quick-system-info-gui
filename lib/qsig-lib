@@ -17,16 +17,16 @@ main()
 {
 
 case $1 in
-    readadminfile)  ACTION="$1"
+    readadminfile)  ACTION=("$1")
                     FILE="$2"
     ;;
-    journalctl_command) ACTION="$@"
+    journalctl_command) ACTION=("$@")
     ;;
     *) exit 1
     ;;
 esac
 
-$ACTION
+"${ACTION[@]}"
 }
 
 main "$@"
