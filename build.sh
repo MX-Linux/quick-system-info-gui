@@ -4,10 +4,15 @@ set -e
 
 # Parse arguments
 ARCH_BUILD=false
+DEBIAN_BUILD=false
 while [[ $# -gt 0 ]]; do
     case $1 in
         --arch)
             ARCH_BUILD=true
+            shift
+            ;;
+        --debian)
+            DEBIAN_BUILD=true
             shift
             ;;
         *)
@@ -15,6 +20,30 @@ while [[ $# -gt 0 ]]; do
             ;;
     esac
 done
+
+if [ "$DEBIAN_BUILD" = true ]; then
+    echo "Building Debian package..."
+    debuild -us -uc
+
+    echo "Creating debs directory and moving debian artifacts..."
+    mkdir -p debs
+    mv ../quick-system-info-gui_*.deb debs/ 2>/dev/null || true
+    mv ../quick-system-info-gui_*.changes debs/ 2>/dev/null || true
+    mv ../quick-system-info-gui_*.dsc debs/ 2>/dev/null || true
+    mv ../quick-system-info-gui_*.tar.* debs/ 2>/dev/null || true
+    mv ../quick-system-info-gui_*.buildinfo debs/ 2>/dev/null || true
+
+    echo "Cleaning build directory and debian artifacts..."
+    rm -rf _build_
+    rm -f debian/*.debhelper.log debian/*.substvars debian/files
+    rm -rf debian/.debhelper/ debian/quick-system-info-gui/ obj-*/
+    rm -f translations/*.qm
+    rm -f ../quick-system-info-gui_*.build ../quick-system-info-gui_*.buildinfo 2>/dev/null || true
+
+    echo "Debian package build completed!"
+    echo "Debian artifacts moved to debs/ directory"
+    exit 0
+fi
 
 if [ "$ARCH_BUILD" = true ]; then
     echo "Building Arch package..."
@@ -100,6 +129,7 @@ case "${1:-all}" in
 		echo "Usage: $0 [options] [command]"
 		echo "Options:"
 		echo "  --arch       - Build tar.zst package for Arch Linux and place in build/"
+		echo "  --debian     - Build Debian package and place artifacts in debs/"
 		echo "Commands:"
 		echo "  clean        - Ultimate clean (rm -rf build)"
 		echo "  configure    - Configure only"
