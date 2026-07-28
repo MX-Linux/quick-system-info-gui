@@ -537,8 +537,11 @@ void MainWindow::listSelectDefault() noexcept
 
 void MainWindow::showFindDialog() noexcept
 {
-    QDialog dialog(ui->textSysInfo);
-    if (ui->tabWidget->currentIndex() == 1 ) QDialog dialog(ui->plainTextEditJournald);
+    QWidget *parentWidget = ui->textSysInfo;
+    if (ui->tabWidget->currentIndex() == 1) {
+        parentWidget = ui->plainTextEditJournald;
+    }
+    QDialog dialog(parentWidget);
     dialog.setWindowTitle(tr("Find"));
 
     // Search text
