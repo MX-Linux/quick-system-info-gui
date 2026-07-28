@@ -288,12 +288,13 @@ show_push_instructions() {
 # Main script
 main() {
     local version=""
+    local mode="release"
     local tag_status="created"
 
     while [ $# -gt 0 ]; do
         case "$1" in
             --update|--force)
-                print_warning "$1 is no longer needed; existing tags are handled automatically"
+                mode="update"
                 ;;
             --*)
                 print_error "Unknown option: $1"
@@ -326,6 +327,14 @@ main() {
     print_step "Validating version format..."
     version=$(validate_version "$version")
     print_success "Version format valid: $version"
+
+    if [ "$mode" = "update" ]; then
+        print_step "Update-only mode enabled: skipping tag checks and creation"
+        update_aur_package "$version" "Update AUR package to $version"
+        show_push_instructions "$version" "existing"
+        print_success "AUR update complete (no tag created)"
+        return 0
+    fi
 
     local current_branch
     current_branch=$(git branch --show-current)
