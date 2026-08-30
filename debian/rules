@@ -1,10 +1,11 @@
 #!/usr/bin/make -f
 
 override_dh_auto_configure:
-	cmake --preset default
+	cmake --preset default --fresh
 
 override_dh_auto_clean:
 	dh_auto_clean
+	rm -rf _build_/
 
 override_dh_auto_build:
 	cmake --build --preset default
