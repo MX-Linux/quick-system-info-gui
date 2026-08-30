@@ -1,14 +1,14 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ru">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ko">
 <context>
     <name>MainWindow</name>
     <message>
         <source>MX Welcome</source>
-        <translation type="vanished">MX Приветствие</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="33"/>
         <source>&amp;Copy for forum</source>
-        <translation>&amp;Копировать для форума</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="47"/>
@@ -19,7 +19,7 @@
         <location filename="../mainwindow.ui" line="50"/>
         <location filename="../mainwindow.cpp" line="92"/>
         <source>Save text...</source>
-        <translation>Сохранить текст…</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="30"/>
@@ -35,32 +35,32 @@
         <location filename="../mainwindow.ui" line="202"/>
         <location filename="../mainwindow.cpp" line="137"/>
         <source>&amp;Save...</source>
-        <translation>&amp;Сохранить…</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="102"/>
         <source>Quit application</source>
-        <translation>Выход</translation>
+        <translation>종료</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="105"/>
         <source>Close</source>
-        <translation>Закрыть</translation>
+        <translation>닫기</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="112"/>
         <source>Alt+N</source>
-        <translation>Alt+N</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="154"/>
         <source>About this application</source>
-        <translation>Об этом приложении</translation>
+        <translation>이 애플리케이션 정보</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="157"/>
         <source>About...</source>
-        <translation>О программе...</translation>
+        <translation>About...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="164"/>
@@ -83,13 +83,13 @@
         <location filename="../mainwindow.ui" line="270"/>
         <source>System</source>
         <extracomment>system level log</extracomment>
-        <translation>Система</translation>
+        <translation>시스템</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="275"/>
         <source>User</source>
         <extracomment>user level log</extracomment>
-        <translation>Пользователь</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="283"/>
@@ -112,17 +112,17 @@
     <message>
         <location filename="../mainwindow.ui" line="351"/>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="88"/>
         <source>Help</source>
-        <translation>Справка</translation>
+        <translation>도움말</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="199"/>
         <source>Version: </source>
-        <translation>Версия: </translation>
+        <translation>버전:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
@@ -130,27 +130,27 @@
         <location filename="../mainwindow.cpp" line="344"/>
         <location filename="../mainwindow.cpp" line="374"/>
         <source>Quick System Info</source>
-        <translation>Краткий отчёт о системе</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="61"/>
         <source>Loading...</source>
-        <translation>Загрузка...</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="203"/>
         <source>Copyright (c) MX Linux</source>
-        <translation>Авторское право (c) MX Linux</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="198"/>
         <source>About Quick-System-Info-gui</source>
-        <translation>О Quick-System-Info-gui</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="96"/>
         <source>&amp;Find...</source>
-        <translation>&amp;Найти…</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="100"/>
@@ -161,36 +161,36 @@
     <message>
         <location filename="../mainwindow.cpp" line="126"/>
         <source>Select &amp;All</source>
-        <translation>Выделить &amp;все</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="132"/>
         <source>Revert Selection</source>
-        <translation>Отменить выделение</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="200"/>
         <source>Program for displaying a quick system info report</source>
-        <translation>Программа отображения краткого отчёта о системе</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>License</source>
-        <translation type="vanished">Лицензия</translation>
+        <translation type="vanished">라이센스</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="205"/>
         <source>%1 License</source>
-        <translation>%1 Лицензия</translation>
+        <translation>%1 라이센스</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="299"/>
         <source>Open folder</source>
-        <translation>Открыть каталог</translation>
+        <translation>폴더 열기</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="301"/>
         <source>OK</source>
-        <translation>ОК</translation>
+        <translation>확인</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="468"/>
@@ -200,7 +200,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="503"/>
         <source>Find</source>
-        <translation>Найти</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="506"/>
@@ -220,23 +220,23 @@
     <message>
         <location filename="../mainwindow.cpp" line="520"/>
         <source>Direction</source>
-        <translation>Направление</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="522"/>
         <source>&amp;Up</source>
-        <translation>&amp;Вверх</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="523"/>
         <source>&amp;Down</source>
-        <translation>В&amp;низ</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="568"/>
         <location filename="../mainwindow.cpp" line="573"/>
         <source>Cannot find &quot;%1&quot;</source>
-        <translation>Не удаётся найти «%1»</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="710"/>
@@ -252,51 +252,51 @@
     </message>
     <message>
         <source>Changelog</source>
-        <translation type="vanished">Список изменений</translation>
+        <translation type="vanished">변경 로그</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="511"/>
         <source>Cancel</source>
-        <translation>Отмена</translation>
+        <translation>취소</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="vanished">&amp;Закрыть</translation>
+        <translation type="vanished">닫기(&amp;C)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="242"/>
         <source>Save System Information</source>
-        <translation>Сохранить информацию о системе</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="298"/>
         <source>System information saved.</source>
-        <translation>Информация о системе сохранена.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="306"/>
         <source>Could not save system information.</source>
-        <translation>Не удалось сохранить информацию о системе.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="351"/>
         <source>history</source>
-        <translation>история</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="374"/>
         <source>%1 Help</source>
-        <translation>%1 Справка</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="82"/>
         <source>Copy for forum</source>
-        <translation>Копировать для форума</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="87"/>
         <source>Plain text copy</source>
-        <translation>Копия обычного текста</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -304,7 +304,7 @@
     <message>
         <location filename="../main.cpp" line="66"/>
         <source>You must run this program as normal user.</source>
-        <translation>Вы должны запустить эту программу как обычный пользователь.</translation>
+        <translation>이 프로그램은 일반 사용자로 실행해야 합니다.</translation>
     </message>
 </context>
 <context>
@@ -312,33 +312,33 @@
     <message>
         <location filename="../main.cpp" line="43"/>
         <source>This tool displays a the quick system info report in a gui.</source>
-        <translation>Этот инструмент отображает краткий отчёт о системе в графической оболочке.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../main.cpp" line="66"/>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation>에러</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="40"/>
         <source>License</source>
-        <translation>Лицензия</translation>
+        <translation>라이센스</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="41"/>
         <location filename="../about.cpp" line="51"/>
         <source>Changelog</source>
-        <translation>Список изменений</translation>
+        <translation>변경 로그</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="42"/>
         <source>Cancel</source>
-        <translation>Отмена</translation>
+        <translation>취소</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="63"/>
         <source>&amp;Close</source>
-        <translation>Закрыть</translation>
+        <translation>닫기(&amp;C)</translation>
     </message>
 </context>
 </TS>
