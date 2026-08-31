@@ -65,7 +65,6 @@ Icon=mx-qsi
 Path=
 Terminal=false
 StartupNotify=false
-Type=Application
 Categories=System;X-MX-Utilities
 Keywords[ca]=qsi;quick;system;info;
 Keywords[de]=qsi;quick;system;info;System;Informationen;

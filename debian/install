@@ -3,7 +3,7 @@ actions/*				usr/share/polkit-1/actions
 *.desktop				usr/share/applications
 lib/*					usr/lib/quick-system-info-gui/
 _build_/*.qm				usr/share/quick-system-info-gui/locale
-icons/*					usr/share/icons/hicolor/48x48/apps
+icons/*					usr/share/icons/hicolor/256x256/apps
 help/*.html			usr/share/doc/quick-system-info-gui/
 
 help/*.png			usr/share/doc/quick-system-info-gui/

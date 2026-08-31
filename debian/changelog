@@ -3,7 +3,8 @@ quick-system-info-gui (26.08) mx; urgency=medium
   * show the application in the correct MX Utilities menu category
   * install the command reference and documentation images with Debian packages
   * preserve spaces and other special characters in Journald filters
-  * open the Find dialog relative to the currently selected report, including Journald reports
+  * open the Find dialog relative to the currently selected report, including
+    Journald reports
   * display rotated system logs in chronological order
 
  -- Adrian <adrian@mxlinux.org>  Sun, 30 Aug 2026 10:31:38 -0400
@@ -12,7 +13,7 @@ quick-system-info-gui (26.06.02) mx; urgency=medium
 
   * prefer quick-system-info-mx wrapper over straight inxi 
 
- -- Dolphin Oracle <demo@mx1>  Mon, 22 Jun 2026 12:46:16 -0400
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 22 Jun 2026 12:46:16 -0400
 
 quick-system-info-gui (26.06.01) mx; urgency=medium
 
@@ -84,7 +85,7 @@ quick-system-info-gui (24.12.07) mx; urgency=medium
 
   * check /run/log/journal/$machine-id for system/user check
 
- -- Dolphin Oracle <dolphin@mx>  Thu, 19 Dec 2024 14:53:17 -0500
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 19 Dec 2024 14:53:17 -0500
 
 quick-system-info-gui (24.12.06) mx; urgency=medium
 

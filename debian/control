@@ -15,6 +15,9 @@ Standards-Version: 4.5.1
 
 Package: quick-system-info-gui
 Architecture: any
-Depends: mx-goodies (>= 22.08.02), grep, inxi, libarchive13, ${misc:Depends}, ${shlibs:Depends}
+Depends: mx-goodies (>= 22.08.02), inxi, libarchive13, ${misc:Depends}, ${shlibs:Depends}
 Recommends:  mx-launcher-l10n
-Description: A utility to show quick-system-info (inxi, etc...) in a gui
+Description: graphical utility for viewing system information
+ Quick System Info provides a graphical interface for viewing hardware and
+ operating-system details collected by inxi. It can also display relevant
+ package-management and system-journal reports.
