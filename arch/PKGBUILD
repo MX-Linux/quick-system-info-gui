@@ -53,7 +53,7 @@ package() {
 
     install -Dm644 Quick_System_Info.desktop "${pkgdir}/usr/share/applications/Quick_System_Info.desktop"
 
-    install -Dm644 icons/mx-qsi.png "${pkgdir}/usr/share/icons/hicolor/48x48/apps/mx-qsi.png"
+    install -Dm644 icons/mx-qsi.png "${pkgdir}/usr/share/icons/hicolor/256x256/apps/mx-qsi.png"
 
     # Root helpers invoked through pkexec; the polkit policy below hard-codes
     # these two paths.
