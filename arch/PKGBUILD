@@ -11,7 +11,7 @@
 
 pkgname=quick-system-info-gui
 pkgver=26.08
-pkgrel=2
+pkgrel=3
 pkgdesc="A utility to show quick-system-info (inxi, etc...) in a gui"
 arch=('x86_64' 'i686')
 url="https://github.com/MX-Linux/quick-system-info-gui"
