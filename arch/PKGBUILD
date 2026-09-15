@@ -67,7 +67,10 @@ package() {
 
     install -dm755 "${pkgdir}/usr/share/doc/quick-system-info-gui"
 
-    install -Dm644 "help"/*.1 "${pkgdir}/usr/share/man/man1/" 2>/dev/null || true
+    # -t is required: "install -D" treats its last argument as a file
+    # path even with one source, so this failed with "cannot create regular
+    # file '.../man1/': Not a directory" and the suppression hid it.
+    install -Dm644 -t "${pkgdir}/usr/share/man/man1/" "help"/*.1
     for help_file in help/*.html help/*.jpg help/*.png help/*.css; do
         [ -f "$help_file" ] && install -Dm644 "$help_file" "${pkgdir}/usr/share/doc/quick-system-info-gui//$(basename "$help_file")"
     done
