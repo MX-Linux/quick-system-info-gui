@@ -30,6 +30,8 @@
 #include <QTranslator>
 #include <QMessageBox>
 
+#include <memory>
+
 #include "mainwindow.h"
 #include <unistd.h>
 
@@ -40,40 +42,50 @@
 
 int main(int argc, char *argv[])
 {
-    if (qEnvironmentVariableIsEmpty("DISPLAY") && qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY")
-        && qEnvironmentVariableIsEmpty("QT_QPA_PLATFORM")) {
-        qWarning("quick-system-info-gui: no display available (DISPLAY and WAYLAND_DISPLAY are both unset); "
-                "a graphical session is required to run this program.");
-        return EXIT_FAILURE;
+    const QByteArray option = argc == 2 ? QByteArray(argv[1]) : QByteArray();
+    const bool informational = option == "-h" || option == "--help" || option == "--help-all"
+                               || option == "-v" || option == "--version";
+    std::unique_ptr<QCoreApplication> app;
+    if (informational) {
+        app = std::make_unique<QCoreApplication>(argc, argv);
+    } else {
+        if (qEnvironmentVariableIsEmpty("DISPLAY") && qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY")
+            && qEnvironmentVariableIsEmpty("QT_QPA_PLATFORM")) {
+            qWarning("quick-system-info-gui: no display available (DISPLAY and WAYLAND_DISPLAY are both unset); "
+                    "a graphical session is required to run this program.");
+            return EXIT_FAILURE;
+        }
+
+        app = std::make_unique<QApplication>(argc, argv);
     }
 
-    QApplication app(argc, argv);
-    app.setApplicationVersion(QStringLiteral(VERSION));
-    app.setWindowIcon(QIcon::fromTheme(app.applicationName()));
-    app.setOrganizationName("MX-Linux");
+    app->setApplicationVersion(QStringLiteral(VERSION));
+    app->setOrganizationName("MX-Linux");
 
     QCommandLineParser parser;
     parser.setApplicationDescription(QObject::tr("This tool displays a the quick system info report in a gui."));
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.process(app);
+    parser.process(*app);
+
+    QApplication::setWindowIcon(QIcon::fromTheme(app->applicationName()));
 
     QTranslator qtTran;
     if (qtTran.load(QLocale::system(), "qt", "_", QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
-        app.installTranslator(&qtTran);
+        app->installTranslator(&qtTran);
 
     QTranslator qtBaseTran;
     if (qtBaseTran.load("qtbase_" + QLocale::system().name(), QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
-        app.installTranslator(&qtBaseTran);
+        app->installTranslator(&qtBaseTran);
 
     QTranslator appTran;
-    if (appTran.load(app.applicationName() + "_" + QLocale::system().name(), "/usr/share/" + app.applicationName() + "/locale"))
-        app.installTranslator(&appTran);
+    if (appTran.load(app->applicationName() + "_" + QLocale::system().name(), "/usr/share/" + app->applicationName() + "/locale"))
+        app->installTranslator(&appTran);
 
     if (getuid() != 0) {
         MainWindow w(parser);
         w.show();
-        return app.exec();
+        return QApplication::exec();
     } else {
         QApplication::beep();
         QMessageBox::critical(nullptr, QObject::tr("Error"), QApplication::tr("You must run this program as normal user."));
