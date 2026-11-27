@@ -2,7 +2,7 @@
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 
 override_dh_auto_configure:
-	cmake --preset default --fresh
+	CXXFLAGS="$(CXXFLAGS) $(CPPFLAGS)" cmake --preset default --fresh
 
 override_dh_auto_clean:
 	dh_auto_clean
