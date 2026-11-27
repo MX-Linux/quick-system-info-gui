@@ -229,19 +229,11 @@ void MainWindow::pushSaveText_clicked() noexcept
 
     lockGUI(true);
     QString errmsg;
-    QFile file(dialog.selectedFiles().at(0));
-    if (ui->tabWidget->currentIndex() == 0){
-        if (file.open(QFile::Truncate | QFile::WriteOnly)) {
-            const QByteArray &text = ui->textSysInfo->toPlainText().toUtf8();
-            if (file.write(text) != text.size()) errmsg = file.errorString();
-            file.close();
-        }
-    } else {
-        if (file.open(QFile::Truncate | QFile::WriteOnly)) {
-            const QByteArray &text = ui->plainTextEditJournald->toPlainText().toUtf8();
-            if (file.write(text) != text.size()) errmsg = file.errorString();
-            file.close();
-        }
+    QSaveFile file(dialog.selectedFiles().at(0));
+    auto *editor = ui->tabWidget->currentIndex() == 0 ? ui->textSysInfo : ui->plainTextEditJournald;
+    const QByteArray text = editor->toPlainText().toUtf8();
+    if (!file.open(QIODevice::WriteOnly) || file.write(text) != text.size() || !file.commit()) {
+        errmsg = file.errorString();
     }
     lockGUI(false);
     showSavedMessage(file.fileName(), errmsg);
