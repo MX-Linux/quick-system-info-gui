@@ -30,6 +30,11 @@ target_link_libraries(quick-system-info-gui PRIVATE
 	archive
 )
 
+option(APPIMAGE_BUILD "Build the relocatable AppImage" OFF)
+if(APPIMAGE_BUILD)
+    target_compile_definitions(quick-system-info-gui PRIVATE APPIMAGE_BUILD)
+endif()
+
 build_compilation_setup(quick-system-info-gui)
 build_version_definition(quick-system-info-gui VERSION)
 build_translation_files(quick-system-info-gui translations)

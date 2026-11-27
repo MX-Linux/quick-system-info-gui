@@ -39,11 +39,13 @@
 #include <QRadioButton>
 #include <QScreen>
 #include <QTimer>
+#include <QUrl>
 #include <QClipboard>
 #include <archive.h>
 #include <archive_entry.h>
 #include <QByteArray>
 
+#include "apppaths.h"
 #include "about.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -180,7 +182,7 @@ void MainWindow::lockGUI(bool lock) noexcept
 }
 
 // Util function for getting bash command output and error code
-int MainWindow::run(const char *program, const QStringList &args,
+int MainWindow::run(const QString &program, const QStringList &args,
     QByteArray *output, const QByteArray *input) noexcept
 {
     QEventLoop loop;
@@ -321,10 +323,26 @@ void MainWindow::showSavedMessage(const QString &filename, const QString &errmsg
     }
 }
 
+int MainWindow::runLogHelper(QStringList args, QByteArray *output) noexcept
+{
+#ifdef APPIMAGE_BUILD
+    // pkexec starts a fresh mount of the image under the authorized user.
+    args.prepend(QStringLiteral("--log-helper"));
+    args.prepend(qEnvironmentVariable("APPIMAGE"));
+#else
+    const QString helper = args.first() == "list" ? "qsig-lib-list" : "qsig-lib";
+    if (args.first() == "journalctl_command") {
+        args.insert(1, QStringLiteral("journalctl"));
+    }
+    args.prepend(appPath("lib/quick-system-info-gui/" + helper));
+#endif
+    return run("pkexec", args, output);
+}
+
 void MainWindow::buildInfoList() noexcept
 {
     QByteArray loglistout;
-    const int logrc = run("pkexec", {"/usr/lib/quick-system-info-gui/qsig-lib-list", "list"}, &loglistout);
+    const int logrc = runLogHelper({"list"}, &loglistout);
 
     ui->listInfo->blockSignals(true);
     ui->listInfo->clear();
@@ -424,10 +442,12 @@ QByteArray MainWindow::readReport(int row)
     switch(row) {
         case 0: { // Quick System Info
             // Try different system info commands depending on what's available
-            if (QFile::exists("/usr/bin/quick-system-info-mx")) {
-                execrc = run("/usr/bin/quick-system-info-mx", {"-g"}, &output);
-            } else if (QFile::exists("/usr/bin/inxi")) {
-                    execrc = run("/usr/bin/inxi", {"--tty", "-c", "0", "-F"}, &output);
+            const QString mxReport = appPath("bin/quick-system-info-mx");
+            const QString inxi = appPath("bin/inxi");
+            if (QFile::exists(mxReport)) {
+                execrc = run(mxReport, {"-g"}, &output);
+            } else if (QFile::exists(inxi)) {
+                execrc = run(inxi, {"--tty", "-c", "0", "-F"}, &output);
             } else {
                 output = "System information tool not found. Please install 'inxi' package.";
                 execrc = 1;
@@ -465,8 +485,7 @@ QByteArray MainWindow::readReport(int row)
                 output = file.readAll().trimmed();
                 file.close();
             } else {
-                execrc = run("pkexec", {"/usr/lib/quick-system-info-gui/qsig-lib",
-                    "readadminfile", qfi.absoluteFilePath()}, &output);
+                execrc = runLogHelper({"readadminfile", qfi.absoluteFilePath()}, &output);
             }
             break;
         }
@@ -683,7 +702,7 @@ void MainWindow::journald_setup()
     if (QDir("/run/log/journal/" + machine_id).exists()) {
         ui->comboBoxJournaldSystemUser->setCurrentIndex(0);
         ui->comboBoxJournaldSystemUser->removeItem(1);
-        test = run("pkexec",{"/usr/lib/quick-system-info-gui/qsig-lib","journalctl_command","journalctl","--list-boots","--no-pager","-q","-r"},&output);
+        test = runLogHelper({"journalctl_command","--list-boots","--no-pager","-q","-r"},&output);
     } else {
         test = run("journalctl",{"--list-boots","--no-pager","-q","-r"},&output);
         ui->comboBoxJournaldSystemUser->setCurrentIndex(1);
@@ -748,9 +767,9 @@ void MainWindow::run_journalctl_report()
         }
     } else {
         if (searchoption.isEmpty()){
-            test = run("pkexec",{"/usr/lib/quick-system-info-gui/qsig-lib","journalctl_command","journalctl",bootoption,adminlevel,priority,"--no-pager","-q"},&output);
+            test = runLogHelper({"journalctl_command",bootoption,adminlevel,priority,"--no-pager","-q"},&output);
         } else {
-            test = run("pkexec",{"/usr/lib/quick-system-info-gui/qsig-lib","journalctl_command","journalctl",bootoption,adminlevel,priority,"--no-pager","-q",searchoption,"--case-sensitive=false"},&output);
+            test = runLogHelper({"journalctl_command",bootoption,adminlevel,priority,"--no-pager","-q",searchoption,"--case-sensitive=false"},&output);
         }
     }
     //qDebug() << "output is " << QString(output);
@@ -808,12 +827,12 @@ void MainWindow::pushAbout_clicked() noexcept
             + "</h3></p><p align=\"center\"><a href=\"http://mxlinux.org\">http://mxlinux.org</a><br /></p>"
               "<p align=\"center\">"
             + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
-        QStringLiteral("/usr/share/doc/quick-system-info-gui/license.html"),
+        appPath("share/doc/quick-system-info-gui/license.html"),
         tr("%1 License").arg(this->windowTitle()));
 }
 
 void MainWindow::pushHelp_clicked() noexcept
 {
-    const QString &url = QStringLiteral("file:///usr/share/doc/quick-system-info-gui/quick-system-info-gui.html");
+    const QString url = QUrl::fromLocalFile(appPath("share/doc/quick-system-info-gui/quick-system-info-gui.html")).toString();
     displayDoc(url, tr("%1 Help").arg(tr("Quick System Info")));
 }

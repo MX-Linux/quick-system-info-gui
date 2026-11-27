@@ -32,6 +32,7 @@
 
 #include <memory>
 
+#include "apppaths.h"
 #include "mainwindow.h"
 #include <unistd.h>
 
@@ -79,7 +80,7 @@ int main(int argc, char *argv[])
         app->installTranslator(&qtBaseTran);
 
     QTranslator appTran;
-    if (appTran.load(app->applicationName() + "_" + QLocale::system().name(), "/usr/share/" + app->applicationName() + "/locale"))
+    if (appTran.load(app->applicationName() + "_" + QLocale::system().name(), appPath("share/" + app->applicationName() + "/locale")))
         app->installTranslator(&appTran);
 
     if (getuid() != 0) {

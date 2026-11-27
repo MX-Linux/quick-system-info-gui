@@ -44,7 +44,7 @@ public:
     explicit MainWindow(const QCommandLineParser &arg_parser, QWidget *parent = nullptr) noexcept;
     ~MainWindow();
 
-    int run(const char *program, const QStringList &args = QStringList(),
+    int run(const QString &program, const QStringList &args = QStringList(),
         QByteArray *output = nullptr, const QByteArray *input = nullptr) noexcept;
     inline int shell(const QString &cmd,
         QByteArray *output = nullptr, const QByteArray *input = nullptr) noexcept
@@ -66,6 +66,7 @@ private:
     void plaincopy() noexcept;
     void showSavedMessage(const QString &filename, const QString &errmsg) noexcept;
     QByteArray readReport(int row) noexcept(false);
+    int runLogHelper(QStringList args, QByteArray *output) noexcept;
     void buildInfoList() noexcept;
     void listSelectAll() noexcept;
     void listSelectDefault() noexcept;
