@@ -1,44 +1,27 @@
-name: Continous Integration
+name: Build
 
 on:
   push:
-    branches:
-      - 'master'
+    branches: [main]
   pull_request:
-    branches:
-    - 'master'
+    branches: [main]
 
-defaults:
-  run:
-    shell: bash
-
-env:
-  SOURCE_DIR:   ${{ github.workspace }}
-  QT_VERSION:   6.5.2
+permissions:
+  contents: read
 
 jobs:
   build:
-    runs-on:  ubuntu-latest
-
+    runs-on: ubuntu-24.04
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v3
-        with:
-          version:      ${{ env.QT_VERSION }}
-          host:         linux
-          target:       desktop
-          # arch:         gcc_64
-          dir:          ${{ runner.temp }}
-          setup-python: false
-              
-      - name: Create build directory
-        run:  mkdir ${{ env.SOURCE_DIR }}/build
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build qt6-base-dev qt6-tools-dev qt6-tools-dev-tools libarchive-dev
 
-      - name: Build
-        working-directory: ${{ env.SOURCE_DIR }}/build
-        run:  |
-              qmake6 -r ${{ env.SOURCE_DIR }}/*.pro
-              make             
+      - name: Build with the default CMake preset
+        run: cmake --workflow --preset default
+
+      - name: Check the executable
+        run: _build_/Release/quick-system-info-gui --version
