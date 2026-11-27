@@ -21,12 +21,18 @@ makedepends=('cmake' 'ninja' 'qt6-tools')
 source=("${pkgname}_${pkgver}.tar.xz")
 sha256sums=('SKIP')
 
-# dpkg-source packed this tarball from a directory called "src", so that - not
-# ${pkgname}-${pkgver} - is what it unpacks to.
-_srcdir="src"
+# Debian source archives and GitHub tag archives can use different root names.
+_enter_source() {
+    local projects=("$srcdir"/*/CMakeLists.txt)
+    if (( ${#projects[@]} != 1 )) || [[ ! -f ${projects[0]} ]]; then
+        printf 'Expected one extracted CMake project in %s\n' "$srcdir" >&2
+        return 1
+    fi
+    cd -- "${projects[0]%/CMakeLists.txt}"
+}
 
 build() {
-    cd "${srcdir}/${_srcdir}"
+    _enter_source || return 1
 
     rm -rf build
 
@@ -41,7 +47,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${_srcdir}"
+    _enter_source || return 1
 
     DESTDIR="$pkgdir" cmake --install build
 
