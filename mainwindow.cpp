@@ -482,10 +482,8 @@ QByteArray MainWindow::readReport(int row)
         case LogFile: {
             QFileInfo qfi("/var/log/" + item->data(Qt::UserRole).toString());
             if (qfi.permission(QFile::ReadOther)){
-                QFile file(qfi.absoluteFilePath());
-                if (!file.open(QIODevice::ReadOnly)) throw file.errorString();
-                output = file.readAll().trimmed();
-                file.close();
+                execrc = run(appPath("lib/quick-system-info-gui/qsig-lib"),
+                             {"readadminfile", qfi.absoluteFilePath()}, &output);
             } else {
                 execrc = runLogHelper({"readadminfile", qfi.absoluteFilePath()}, &output);
             }
