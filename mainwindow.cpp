@@ -128,15 +128,7 @@ void MainWindow::setup() noexcept
     ui->textSysInfo->addAction(find);
     ui->textSysInfo->addAction(findnext);
 
-    //add actions to journald if set up
-    if (journald_setup_done) {
-        ui->plainTextEditJournald->addAction(forumcopyaction);
-        ui->plainTextEditJournald->addAction(plaincopyaction);
-        ui->plainTextEditJournald->addAction(saveasfile);
-        ui->plainTextEditJournald->addAction(sep);
-        ui->plainTextEditJournald->addAction(find);
-        ui->plainTextEditJournald->addAction(findnext);
-    }
+    ui->plainTextEditJournald->addActions(ui->textSysInfo->actions());
 
     // Info list shortcuts and context menu.
     QAction *selall = new QAction(QIcon::fromTheme(QStringLiteral("edit-select-all")),
@@ -437,11 +429,10 @@ void MainWindow::forumcopy() noexcept
 void MainWindow::plaincopy() noexcept
 {
     QClipboard *clipboard = QApplication::clipboard();
-    QString text = ui->textSysInfo->textCursor().selectedText();
+    auto *editor = ui->tabWidget->currentIndex() == 0 ? ui->textSysInfo : ui->plainTextEditJournald;
+    QString text = editor->textCursor().selectedText();
     text.replace(QChar(0x2029), "\n");
-    if (text.isEmpty()) {
-        text = ui->textSysInfo->toPlainText();
-    }
+    if (text.isEmpty()) text = editor->toPlainText();
     clipboard->setText(text);
 }
 
