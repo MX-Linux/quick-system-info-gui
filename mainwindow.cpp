@@ -24,6 +24,7 @@
 
 #include <cassert>
 #include <ctime>
+#include <memory>
 #include <QCoreApplication>
 #include <QAction>
 #include <QCheckBox>
@@ -184,34 +185,43 @@ int MainWindow::run(const QString &program, const QStringList &args,
     QByteArray *output, const QByteArray *input) noexcept
 {
     QEventLoop loop;
-    QProcess proc;
-    proc.setProcessChannelMode(QProcess::MergedChannels);
-    connect(&proc, &QProcess::errorOccurred, &loop, &QEventLoop::quit);
-    connect(&proc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop, &QEventLoop::quit);
-    proc.start(program, args);
-    if (input) proc.write(*input);
-    proc.closeWriteChannel();
+    auto proc = std::make_unique<QProcess>();
+    proc->setProcessChannelMode(QProcess::MergedChannels);
+    connect(proc.get(), &QProcess::errorOccurred, &loop, &QEventLoop::quit);
+    connect(proc.get(), QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop, &QEventLoop::quit);
+    proc->start(program, args);
+    if (input) proc->write(*input);
+    proc->closeWriteChannel();
     QTimer timeout;
     bool timedOut = false;
     timeout.setSingleShot(true);
     connect(&timeout, &QTimer::timeout, [&]() {
         timedOut = true;
-        proc.kill();
+        proc->kill();
+        loop.quit();
     });
     timeout.start(30000);
     loop.exec();
     timeout.stop();
 
     if (timedOut) {
+        // A privileged helper can outlive kill(). Its destructor would wait here.
+        if (proc->state() != QProcess::NotRunning) {
+            auto *pending = proc.release();
+            pending->closeReadChannel(QProcess::StandardOutput);
+            connect(pending, &QProcess::stateChanged, pending, [pending](QProcess::ProcessState state) {
+                if (state == QProcess::NotRunning) pending->deleteLater();
+            });
+        }
         if (output) *output = tr("The report command timed out.").toUtf8();
         return -1;
     }
-    const bool ok = (proc.exitStatus()==QProcess::NormalExit && proc.error()==QProcess::UnknownError);
+    const bool ok = (proc->exitStatus()==QProcess::NormalExit && proc->error()==QProcess::UnknownError);
     if (output) {
-        *output = proc.readAll().trimmed();
-        if (!ok && output->isEmpty()) *output = proc.errorString().toUtf8();
+        *output = proc->readAll().trimmed();
+        if (!ok && output->isEmpty()) *output = proc->errorString().toUtf8();
     }
-    return ok ? proc.exitCode() : -127;
+    return ok ? proc->exitCode() : -127;
 }
 
 void MainWindow::pushSaveText_clicked() noexcept
