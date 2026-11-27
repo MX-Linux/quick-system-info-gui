@@ -40,6 +40,32 @@ build_version_definition(quick-system-info-gui VERSION)
 build_translation_files(quick-system-info-gui translations)
 
 include(GNUInstallDirs)
+file(RELATIVE_PATH bindir_to_prefix "${CMAKE_INSTALL_FULL_BINDIR}" "${CMAKE_INSTALL_PREFIX}")
+target_compile_definitions(quick-system-info-gui PRIVATE QSI_PREFIX_FROM_BIN="${bindir_to_prefix}")
+
 install(TARGETS quick-system-info-gui
 	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+
+install(PROGRAMS lib/qsig-lib lib/qsig-lib-list DESTINATION lib/${PROJECT_NAME})
+install(FILES Quick_System_Info.desktop DESTINATION share/applications)
+install(FILES icons/mx-qsi.png DESTINATION share/icons/hicolor/256x256/apps)
+install(FILES help/license.html help/quick-system-info-gui.html help/1.png help/2.png
+    DESTINATION share/doc/${PROJECT_NAME})
+install(FILES help/quick-system-info-gui.1 DESTINATION share/man/man1)
+
+# Polkit matches the absolute executable path. Expand the final prefix during
+# installation so that --prefix and staged package installations both work.
+set(policy org.mxlinux.quick-system-info-gui.policy)
+install(CODE "
+    file(READ \"${CMAKE_CURRENT_SOURCE_DIR}/actions/${policy}\" policy_text)
+    string(REPLACE \"/usr/lib/quick-system-info-gui/\" \"\${CMAKE_INSTALL_PREFIX}/lib/quick-system-info-gui/\"
+        policy_text \"\${policy_text}\")
+    file(WRITE \"${CMAKE_CURRENT_BINARY_DIR}/${policy}\" \"\${policy_text}\")
+")
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${policy}" DESTINATION share/polkit-1/actions)
+
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS debian/changelog)
+execute_process(COMMAND gzip -nc "${CMAKE_CURRENT_SOURCE_DIR}/debian/changelog"
+    OUTPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/changelog.gz" COMMAND_ERROR_IS_FATAL ANY)
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/changelog.gz" DESTINATION share/doc/${PROJECT_NAME})

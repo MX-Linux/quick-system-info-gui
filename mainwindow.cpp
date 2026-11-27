@@ -448,8 +448,8 @@ QByteArray MainWindow::readReport(int row)
     switch (item->data(ReportKindRole).toInt()) {
         case SystemInfo: { // Quick System Info
             // Try different system info commands depending on what's available
-            const QString mxReport = appPath("bin/quick-system-info-mx");
-            const QString inxi = appPath("bin/inxi");
+            const QString mxReport = reportToolPath("quick-system-info-mx");
+            const QString inxi = reportToolPath("inxi");
             if (QFile::exists(mxReport)) {
                 execrc = run(mxReport, {"-g"}, &output);
             } else if (QFile::exists(inxi)) {

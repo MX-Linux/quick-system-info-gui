@@ -87,6 +87,7 @@ function(build_translation_files target ts_dir)
 		LRELEASE_OPTIONS -compress -nounfinished -removeidentical -silent
 		QM_FILES_OUTPUT_VARIABLE qm_files # Stop qm files being embedded into the executable.
 	)
+	install(FILES ${qm_files} DESTINATION share/${target}/locale)
 endfunction()
 
 function(build_deferred_setup)

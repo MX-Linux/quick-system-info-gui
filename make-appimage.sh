@@ -94,10 +94,7 @@ install -Dm644 "$work/mx-goodies/usr/share/doc/mx-goodies/copyright" "$prefix/sh
 for package in inxi gettext-base; do
     install -Dm644 "/usr/share/doc/$package/copyright" "$prefix/share/doc/$package/copyright"
 done
-install -Dm755 -t "$prefix/lib/$app" lib/qsig-lib lib/qsig-lib-list
-install -Dm644 -t "$prefix/share/$app/locale" "$build"/"$app"_*.qm
-install -Dm644 -t "$prefix/share/doc/$app" LICENSE help/*.html help/*.png
-gzip -nc debian/changelog > "$prefix/share/doc/$app/changelog.gz"
+install -Dm644 -t "$prefix/share/doc/$app" LICENSE
 
 qt_plugins=$(qmake6 -query QT_INSTALL_PLUGINS)
 plugins=$prefix/plugins
