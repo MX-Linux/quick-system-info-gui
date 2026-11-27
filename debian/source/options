@@ -10,3 +10,6 @@ tar-ignore = "_build_"
 # CMake build trees and locally built Arch packages.
 tar-ignore = build
 tar-ignore = build-*
+
+# Source and binary packages produced by earlier releases.
+tar-ignore = debs
