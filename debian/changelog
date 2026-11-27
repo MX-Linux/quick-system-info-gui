@@ -1,3 +1,22 @@
+quick-system-info-gui (26.11) mx; urgency=medium
+
+  * run Quick System Info from an x86-64 AppImage with the MX report tools
+    and offline help included
+  * use --help and --version without a graphical session
+  * keep the previous file if saving a report or archive fails, and show an
+    error if the new file could not be saved
+  * offer .tar.gz when saving a gzip-compressed report archive
+  * show an error when a report takes longer than 30 seconds to collect
+  * show the selected log even when package history is unavailable
+  * include older entries from rotated logs the user can read
+  * use Find, Find Next and plain-text copy in the Journal tab
+  * keep the latest journal filter results on screen when an earlier search
+    takes longer to finish
+  * limit what the log viewer can do with administrator permission to
+    reading system logs and querying the journal
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 27 Nov 2026 17:38:22 -0500
+
 quick-system-info-gui (26.08) mx; urgency=medium
 
   * show the application in the correct MX Utilities menu category
