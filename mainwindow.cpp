@@ -729,6 +729,7 @@ void MainWindow::run_journalctl_report()
         return;
     }
 
+    const auto request = ++journalRequest;
     QByteArray output;
     QString text;
 
@@ -774,6 +775,8 @@ void MainWindow::run_journalctl_report()
             test = runLogHelper({"journalctl_command",bootoption,adminlevel,priority,"--no-pager","-q",searchoption,"--case-sensitive=false"},&output);
         }
     }
+    // A filter change can start a newer request inside run()'s event loop.
+    if (request != journalRequest) return;
     //qDebug() << "output is " << QString(output);
     //qDebug() << "test is " << test;
 

@@ -60,6 +60,7 @@ private:
     QAction *actionSave = nullptr;
     QString searchText;
     bool journald_setup_done = false;
+    quint64 journalRequest = 0;
     QTextDocument::FindFlags searchFlags;
     void lockGUI(bool lock) noexcept;
     void forumcopy() noexcept;
