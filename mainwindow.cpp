@@ -38,6 +38,7 @@
 #include <QProcess>
 #include <QRadioButton>
 #include <QScreen>
+#include <QSaveFile>
 #include <QTimer>
 #include <QUrl>
 #include <QClipboard>
@@ -260,13 +261,16 @@ void MainWindow::pushSave_clicked() noexcept
     struct archive *arc = nullptr;
     struct archive_entry *arcentry = nullptr;
     QString errmsg;
-    const QByteArray &selfile = dialog.selectedFiles().at(0).toUtf8();
+    const QString filename = dialog.selectedFiles().at(0);
+    QSaveFile destination(filename);
+    bool saved = false;
     try {
         arc = archive_write_new();
         arcentry = archive_entry_new();
         if (!arc || !arcentry) throw true;
-        if (archive_write_set_format_filter_by_ext(arc, selfile.constData()) != ARCHIVE_OK) throw false;
-        if (archive_write_open_filename(arc, selfile.constData()) != ARCHIVE_OK) throw false;
+        if (archive_write_set_format_filter_by_ext(arc, QFile::encodeName(filename).constData()) != ARCHIVE_OK) throw false;
+        if (!destination.open(QIODevice::WriteOnly)) throw destination.errorString();
+        if (archive_write_open_fd(arc, destination.handle()) != ARCHIVE_OK) throw false;
 
         for (int row = 0; row < ui->listInfo->count(); ++row) {
             const QListWidgetItem *item = ui->listInfo->item(row);
@@ -285,6 +289,8 @@ void MainWindow::pushSave_clicked() noexcept
             archive_entry_clear(arcentry);
         }
         if (archive_write_close(arc) != ARCHIVE_OK) throw false;
+        if (!destination.commit()) throw destination.errorString();
+        saved = true;
     } catch(bool sys) {
         if (!arc || sys) errmsg = strerror(errno);
         else errmsg = archive_error_string(arc);
@@ -297,7 +303,8 @@ void MainWindow::pushSave_clicked() noexcept
     if (arc) archive_write_free(arc);
 
     lockGUI(false);
-    showSavedMessage(selfile, errmsg);
+    if (errmsg.isEmpty() && !saved) errmsg = tr("Could not finish writing the archive.");
+    showSavedMessage(filename, errmsg);
 }
 void MainWindow::showSavedMessage(const QString &filename, const QString &errmsg) noexcept
 {
