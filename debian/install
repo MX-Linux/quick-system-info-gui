@@ -1,4 +1,3 @@
-_build_/Release/quick-system-info-gui	usr/bin
 actions/*				usr/share/polkit-1/actions
 *.desktop				usr/share/applications
 lib/*					usr/lib/quick-system-info-gui/

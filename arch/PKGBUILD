@@ -43,7 +43,7 @@ build() {
 package() {
     cd "${srcdir}/${_srcdir}"
 
-    install -Dm755 build/quick-system-info-gui "${pkgdir}/usr/bin/quick-system-info-gui"
+    DESTDIR="$pkgdir" cmake --install build
 
     # "install -D" with several sources needs -t, and then creates the
     # destination directory itself, so the separate install -dm755 is gone. No
