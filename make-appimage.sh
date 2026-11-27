@@ -128,8 +128,7 @@ if [ "${1:-}" = --log-helper ]; then
     shift
     case "${1:-}" in
         list) exec "$prefix/lib/quick-system-info-gui/qsig-lib-list" list ;;
-        readadminfile) exec "$prefix/lib/quick-system-info-gui/qsig-lib" "$@" ;;
-        journalctl_command) shift; exec /usr/bin/journalctl --no-pager "$@" ;;
+        readadminfile|journalctl_command) exec "$prefix/lib/quick-system-info-gui/qsig-lib" "$@" ;;
         *) exit 2 ;;
     esac
 fi

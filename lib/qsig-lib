@@ -43,7 +43,20 @@ readadminfile(){
 }
 
 journalctl_command(){
-    "$@"
+    # Older packaged GUIs supplied the executable name as the first argument.
+    if [[ ${1:-} == journalctl ]]; then shift; fi
+    if [[ $# == 4 && $1 == --list-boots && $2 == --no-pager && $3 == -q && $4 == -r ]]; then
+        exec /usr/bin/journalctl --list-boots --no-pager -q -r
+    fi
+    [[ $# == 5 || $# == 7 ]] || return 2
+    [[ $1 == --boot || $1 =~ ^--boot=[[:xdigit:]]{32}$ ]] || return 2
+    [[ $2 == --system && $3 =~ ^--priority=[0-7]$ && $4 == --no-pager && $5 == -q ]] || return 2
+    local args=("$1" --system "$3" --no-pager -q)
+    if [[ $# == 7 ]]; then
+        [[ $6 == --unit=?* && $7 == --case-sensitive=false ]] || return 2
+        args+=("$6" --case-sensitive=false)
+    fi
+    exec /usr/bin/journalctl "${args[@]}"
 }
 
 main()

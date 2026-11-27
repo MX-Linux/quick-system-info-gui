@@ -331,9 +331,6 @@ int MainWindow::runLogHelper(QStringList args, QByteArray *output) noexcept
     args.prepend(qEnvironmentVariable("APPIMAGE"));
 #else
     const QString helper = args.first() == "list" ? "qsig-lib-list" : "qsig-lib";
-    if (args.first() == "journalctl_command") {
-        args.insert(1, QStringLiteral("journalctl"));
-    }
     args.prepend(appPath("lib/quick-system-info-gui/" + helper));
 #endif
     return run("pkexec", args, output);
