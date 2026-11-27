@@ -194,15 +194,20 @@ int MainWindow::run(const QString &program, const QStringList &args,
     if (input) proc.write(*input);
     proc.closeWriteChannel();
     QTimer timeout;
+    bool timedOut = false;
     timeout.setSingleShot(true);
     connect(&timeout, &QTimer::timeout, [&]() {
+        timedOut = true;
         proc.kill();
-        loop.quit();
     });
     timeout.start(30000);
     loop.exec();
     timeout.stop();
 
+    if (timedOut) {
+        if (output) *output = tr("The report command timed out.").toUtf8();
+        return -1;
+    }
     const bool ok = (proc.exitStatus()==QProcess::NormalExit && proc.error()==QProcess::UnknownError);
     if (output) {
         *output = proc.readAll().trimmed();
