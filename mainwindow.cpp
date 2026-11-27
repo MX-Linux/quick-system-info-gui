@@ -50,6 +50,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+namespace {
+enum ReportKind { LogFile, SystemInfo, DpkgHistory, PacmanHistory };
+constexpr int ReportKindRole = Qt::UserRole + 1;
+}
+
 MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent) noexcept
     : QDialog(parent)
     , ui(new Ui::MainWindow)
@@ -349,13 +354,14 @@ void MainWindow::buildInfoList() noexcept
     ui->listInfo->blockSignals(true);
     ui->listInfo->clear();
     if (logrc == 0) {
-        QStringList logfiles = QString(loglistout).split("\n");
+        QStringList logfiles = QString(loglistout).split('\n', Qt::SkipEmptyParts);
         // Populate with log files and sort.
         for(QString &logfile : logfiles) {
             QFileInfo qfi(logfile);
             logfile.remove("/var/log/");
             auto *item = new QListWidgetItem(logfile, ui->listInfo);
             item->setData(Qt::UserRole, logfile);
+            item->setData(ReportKindRole, LogFile);
             // Italics for log files that require root to read.
             if (!qfi.permission(QFile::ReadOther)) {
                 QFont ifont = item->font();
@@ -372,24 +378,26 @@ void MainWindow::buildInfoList() noexcept
     ifont.setBold(true);
     item->setFont(ifont);
     item->setData(Qt::UserRole, "quick-system-info.txt");
+    item->setData(ReportKindRole, SystemInfo);
     ui->listInfo->insertItem(0, item);
     // Special package manager history info
     QString historyLabel;
-    bool hasHistoryLog = false;
+    ReportKind historyKind = LogFile;
     QFileInfo dpkg_log("/var/log/dpkg.log");
     QFileInfo pacman_log("/var/log/pacman.log");
 
     if (dpkg_log.exists() && dpkg_log.size() > 0) {
         historyLabel = "apt " + tr("history");
-        hasHistoryLog = true;
+        historyKind = DpkgHistory;
     } else if (pacman_log.exists() && pacman_log.size() > 0) {
         historyLabel = "pacman " + tr("history");
-        hasHistoryLog = true;
+        historyKind = PacmanHistory;
     }
 
-    if (hasHistoryLog) {
+    if (!historyLabel.isEmpty()) {
         item = new QListWidgetItem(historyLabel);
         item->setData(Qt::UserRole, "pmhistory.txt");
+        item->setData(ReportKindRole, historyKind);
         ui->listInfo->insertItem(1, item);
     }
     listSelectDefault();
@@ -441,8 +449,10 @@ QByteArray MainWindow::readReport(int row)
 {
     QByteArray output;
     int execrc = 0;
-    switch(row) {
-        case 0: { // Quick System Info
+    const auto *item = ui->listInfo->item(row);
+    assert(item != nullptr);
+    switch (item->data(ReportKindRole).toInt()) {
+        case SystemInfo: { // Quick System Info
             // Try different system info commands depending on what's available
             const QString mxReport = appPath("bin/quick-system-info-mx");
             const QString inxi = appPath("bin/inxi");
@@ -459,27 +469,17 @@ QByteArray MainWindow::readReport(int row)
             output.replace("https: /", "https:/");
             break;
         }
-        case 1: { // package manager history
-            // Check if we're on a Debian-based system (dpkg) or Arch-based (pacman)
-            if (QFile::exists("/var/log/dpkg.log")) {
-                // Debian/Ubuntu style
-                execrc = shell(QStringLiteral("zgrep -EH ' install | upgrade | purge | remove ' /var/log/dpkg*"
-                    " | cut -f2- -d: | sort -r | sed 's/ remove / remove  /;s/ purge / purge   /'"
-                    " | grep \"^\""), &output);
-            } else if (QFile::exists("/var/log/pacman.log")) {
-                // Arch Linux style
-                execrc = shell(QStringLiteral("grep -E ' installed | upgraded | removed ' /var/log/pacman.log"
-                    " | sort -r | sed 's/\\[.*\\] \\[.*\\] //;s/ installed / installed  /;s/ upgraded / upgraded  /;s/ removed / removed   /'"
-                    " | grep \"^\""), &output);
-            } else {
-                output = "Package manager log not found.";
-                execrc = 1;
-            }
+        case DpkgHistory:
+            execrc = shell(QStringLiteral("zgrep -EH ' install | upgrade | purge | remove ' /var/log/dpkg*"
+                " | cut -f2- -d: | sort -r | sed 's/ remove / remove  /;s/ purge / purge   /'"
+                " | grep \"^\""), &output);
             break;
-        }
-        default: { // Other log files
-            QListWidgetItem *item = ui->listInfo->item(row);
-            assert (item != nullptr);
+        case PacmanHistory:
+            execrc = shell(QStringLiteral("grep -E ' installed | upgraded | removed ' /var/log/pacman.log"
+                " | sort -r | sed 's/\\[.*\\] \\[.*\\] //;s/ installed / installed  /;s/ upgraded / upgraded  /;s/ removed / removed   /'"
+                " | grep \"^\""), &output);
+            break;
+        case LogFile: {
             QFileInfo qfi("/var/log/" + item->data(Qt::UserRole).toString());
             if (qfi.permission(QFile::ReadOther)){
                 QFile file(qfi.absoluteFilePath());
