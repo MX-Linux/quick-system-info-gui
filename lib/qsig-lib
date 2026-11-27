@@ -1,78 +1,79 @@
-#!/bin/bash
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Fcntl qw(O_RDONLY O_DIRECTORY O_NOFOLLOW O_NONBLOCK);
+use Errno qw(EACCES ENOENT);
 
-#root level functions requiring password for quick-system-info-gui
-
-
-readadminfile(){
-
-    local -a numbered_rotations=() dated_rotations=() rotations=()
-
-    # Each rotated file contains entries oldest-first. Numbered rotations are
-    # named newest-first (.1, .2.gz, ...), while dateext rotations use ascending
-    # dates (-20260829, -20260830.gz, ...).
-    shopt -s nullglob
-    numbered_rotations=("$FILE".[0-9]*)
-    dated_rotations=("$FILE"-[0-9]*)
-    shopt -u nullglob
-
-    if ((${#numbered_rotations[@]} && ${#dated_rotations[@]})); then
-        # A logrotate configuration can change schemes while older rotations
-        # remain. Modification time gives one chronological order across both.
-        mapfile -d '' -t rotations < <(
-            for file in "${numbered_rotations[@]}" "${dated_rotations[@]}"; do
-                find "$file" -maxdepth 0 -printf '%T@ %p\0'
-            done | sort --zero-terminated --numeric-sort
-        )
-        for i in "${!rotations[@]}"; do
-            rotations[i]=${rotations[i]#* }
-        done
-    elif ((${#numbered_rotations[@]})); then
-        mapfile -d '' -t rotations < <(
-            printf '%s\0' "${numbered_rotations[@]}" |
-                sort --zero-terminated --version-sort --reverse
-        )
-    elif ((${#dated_rotations[@]})); then
-        mapfile -d '' -t rotations < <(
-            printf '%s\0' "${dated_rotations[@]}" |
-                sort --zero-terminated --version-sort
-        )
-    fi
-
-    zcat --force -- "${rotations[@]}" "$FILE"
-
+sub journal_report {
+    shift if @_ && $_[0] eq 'journalctl';  # Compatibility with older GUIs
+    my @query;
+    if (join(' ', @_) eq '--list-boots --no-pager -q -r' && @_ == 4) {
+        @query = qw(--list-boots --no-pager -q -r);
+    } else {
+        my ($boot, $scope, $priority, $pager, $quiet, $unit, $case) = @_;
+        return 2 unless (@_ == 5 || @_ == 7)
+            && $boot =~ /\A--boot(?:=[0-9a-fA-F]{32})?\z/
+            && $scope eq '--system' && $priority =~ /\A--priority=[0-7]\z/
+            && $pager eq '--no-pager' && $quiet eq '-q';
+        @query = ($boot, '--system', $priority, '--no-pager', '-q');
+        if (@_ == 7) {
+            return 2 unless $unit =~ /\A--unit=.+\z/s && $case eq '--case-sensitive=false';
+            push @query, $unit, $case;
+        }
+    }
+    exec '/usr/bin/journalctl', @query or die "journalctl: $!\n";
 }
 
-journalctl_command(){
-    # Older packaged GUIs supplied the executable name as the first argument.
-    if [[ ${1:-} == journalctl ]]; then shift; fi
-    if [[ $# == 4 && $1 == --list-boots && $2 == --no-pager && $3 == -q && $4 == -r ]]; then
-        exec /usr/bin/journalctl --list-boots --no-pager -q -r
-    fi
-    [[ $# == 5 || $# == 7 ]] || return 2
-    [[ $1 == --boot || $1 =~ ^--boot=[[:xdigit:]]{32}$ ]] || return 2
-    [[ $2 == --system && $3 =~ ^--priority=[0-7]$ && $4 == --no-pager && $5 == -q ]] || return 2
-    local args=("$1" --system "$3" --no-pager -q)
-    if [[ $# == 7 ]]; then
-        [[ $6 == --unit=?* && $7 == --case-sensitive=false ]] || return 2
-        args+=("$6" --case-sensitive=false)
-    fi
-    exec /usr/bin/journalctl "${args[@]}"
+sub read_log {
+    my ($path) = @_;
+    return 2 unless @_ == 1 && $path =~ s{\A/var/log/}{};
+    my @parts = split m{/}, $path, -1;
+    return 2 if grep { $_ eq '' || $_ eq '.' || $_ eq '..' } @parts;
+    my $base = pop @parts;
+    return 2 unless $base =~ /log\z/ && $base ne 'lastlog';
+
+    # Pin each directory before opening a child relative to it.
+    for my $dir ('/var/log', @parts) {
+        sysopen(my $handle, $dir, O_RDONLY | O_DIRECTORY | O_NOFOLLOW)
+            or die "Cannot open directory $dir: $!\n";
+        chdir $handle or die "Cannot enter directory $dir: $!\n";
+    }
+    opendir(my $dir, '.') or die "Cannot list log directory: $!\n";
+    my (@numbered, @dated);
+    for my $name (readdir $dir) {
+        if ($name =~ /\A\Q$base\E\.(\d+)(?:\.gz)?\z/) {
+            push @numbered, [$name, $1];
+        } elsif ($name =~ /\A\Q$base\E-(\d[\d-]*)(?:\.gz)?\z/) {
+            push @dated, [$name, $1];
+        }
+    }
+    closedir $dir;
+    my @names;
+    if (@numbered && @dated) {
+        my %mtime;
+        for my $entry (@numbered, @dated) {
+            my @stat = lstat $entry->[0];
+            $mtime{$entry->[0]} = $stat[9] if @stat;
+        }
+        @names = sort { $mtime{$a} <=> $mtime{$b} || $a cmp $b } keys %mtime;
+    } else {
+        @names = map { $_->[0] } sort { $b->[1] <=> $a->[1] } @numbered;
+        push @names, map { $_->[0] } sort { $a->[1] cmp $b->[1] } @dated;
+    }
+    for my $name (@names, $base) {
+        my $log;
+        unless (sysopen($log, $name, O_RDONLY | O_NOFOLLOW | O_NONBLOCK)) {
+            next if $name ne $base && ($! == ENOENT || ($> != 0 && $! == EACCES));
+            die "Cannot open $name: $!\n";
+        }
+        die "Expected a regular file: $name\n" unless -f $log;
+        open(STDIN, '<&', $log) or die "Cannot read $name: $!\n";
+        system('/usr/bin/gzip', '-cdf') == 0 or die "Could not read $name\n";
+    }
+    return 0;
 }
 
-main()
-{
-
-case $1 in
-    readadminfile)  ACTION=("$1")
-                    FILE="$2"
-    ;;
-    journalctl_command) ACTION=("$@")
-    ;;
-    *) exit 1
-    ;;
-esac
-
-"${ACTION[@]}"
-}
-
-main "$@"
+my $action = shift // '';
+exit journal_report(@ARGV) if $action eq 'journalctl_command';
+exit read_log(@ARGV) if $action eq 'readadminfile';
+exit 2;
