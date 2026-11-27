@@ -242,8 +242,12 @@ void MainWindow::pushSave_clicked() noexcept
 {
     QFileDialog dialog(this, tr("Save System Information"));
     dialog.setAcceptMode(QFileDialog::AcceptSave);
-    const QStringList filters({"application/zip", "application/gzip", "application/octet-stream"});
-    dialog.setMimeTypeFilters(filters); // Segmentation fault when using init list directory.
+    const QString zipFilter = tr("ZIP archive (*.zip)");
+    const QString tarFilter = tr("Gzip-compressed tar archive (*.tar.gz)");
+    dialog.setNameFilters({zipFilter, tarFilter, tr("All files (*)")});
+    connect(&dialog, &QFileDialog::filterSelected, &dialog, [&dialog, tarFilter](const QString &filter) {
+        dialog.setDefaultSuffix(filter == tarFilter ? "tar.gz" : "zip");
+    });
     dialog.setDefaultSuffix("zip");
     dialog.setDirectory(getenv("HOME")); // Must be done before selectFile()
     dialog.selectFile("sysinfo.zip");
